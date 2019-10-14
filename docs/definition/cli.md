@@ -1,7 +1,7 @@
-# Introduction
+# CLI
 
-# Adding blocks/pages
+## Adding blocks/pages
 
-# Renaming blocks/pages
+## Renaming blocks/pages
 
-# Adding states
+## Adding states

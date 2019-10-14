@@ -8,6 +8,10 @@ for(var i = 0, len = arr.length; i < len; i++) {
 };
 ```
 
+?> Hint/more info
+
+!> Warning
+
 # H1
 ## H2
 ### H3

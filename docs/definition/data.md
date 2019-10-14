@@ -1,11 +1,11 @@
-# Introduction
+# Data/States
 
-# What is a state?
+## What is a state?
 
-# Sub-blocks
+## Sub-blocks
 
-# Inline vs in a block
+## Inline vs in a block
 
-# Enums
+## Enums
 
-# Data Structures
+## Data Structures

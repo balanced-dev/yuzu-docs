@@ -1,6 +1,6 @@
-# Introduction
+# Dynamic Blocks
 
-# ofType
+## ofType
 
 ## Grid
 

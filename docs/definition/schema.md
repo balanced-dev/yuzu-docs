@@ -1,7 +1,7 @@
-# Introduction
+# Schema
 
-# File type
+## File type
 
-# Sub-blocks
+## Sub-blocks
 
-# Inline vs Sub-block
+## Inline vs Sub-block
