@@ -1,6 +1,6 @@
 # Markup
 
-## Handlebars Basics
+# Handlebars Basics
 As previously discussed, we choose to use and recommend Handlebars for all our projects purely because of its speed and simplicity, both to implement, use and learn.
 
 It also allows additional helpers to quickly and easily be added and used (however if you choose to add your own you'll need to replicate the functionality for server-side rendering and we will not be covering it in this documentation).
@@ -9,10 +9,10 @@ The best place to start may be the [Handlebars Docs](https://handlebarsjs.com/ "
 
 ?> If you want to follow along with the examples in the basic section of this guide yourself or just play around in Handlebars, [tryhandlebarsjs.com](http://tryhandlebarsjs.com/) is a fantastic resource
 
-### Basic Expressions
+## Basic Expressions
 Handlebars expressions are contents wrapped in double curly braces `{{}}` (apart from when not escaping HTML).
 
-#### Render properties
+### Render properties
 To render a property from the current context:
 ``` json
 {
@@ -28,7 +28,7 @@ To render a property from the current context:
 <h1>John Doe</h1>
 ```
 
-#### Render nested properties
+### Render nested properties
 To render a property from the current context, nested in an object:
 ``` json
 {
@@ -46,7 +46,7 @@ To render a property from the current context, nested in an object:
 <h1>John Doe</h1>
 ```
 
-#### Render property without HTML escaping
+### Render property without HTML escaping
 If you don't want Handlebars to escape a value, you must use triple braces `{{{}}}`. This is very useful for outputting values from RTEs (Rich Text Editors) as illustrated below (double vs triple braces).
 ``` json
 {
@@ -66,7 +66,7 @@ vs
 <div><p>A bit about me!</p></div>
 ```
 
-#### Escaping Handlebars expressions
+### Escaping Handlebars expressions
 If you don't want to run a Handlebars expression then either add a leading '\\'so:
 
 ``` handlebars
@@ -81,19 +81,19 @@ or wrap it in a "raw" block, which also prevents the processing of mustache bloc
 
 This is especially useful when using a Javascript framework such as Angular.js which also uses braces without them conflicting.
 
-#### Comments
+### Comments
 For if you want to document your templates:
 ``` handlebars
 {{!-- This is a comment and will not be included in the HTML output --}}
 ```
 
 
-## Handlebars Helpers
+# Handlebars Helpers
 
-### Block helpers
+## Block helpers
 ?> Both the `#each` and `#with` helper change the scope/context for a section of the template
 
-#### #each (iterator)
+### #each (iterator)
 Mostly used to loop over arrays, but can also be used with objects.
 
 ```json
@@ -168,7 +168,7 @@ Mostly used to loop over arrays, but can also be used with objects.
 ?> There are several built-in properties that you can use within an #each block, but for simplicity's sake we've omitted them from this section.
 To learn more about these properties, and to read about iterating over objects, read the [advanced handlebars section](definition/markup?id=block-helpers-advanced)
 
-#### #with (context)
+### #with (context)
 Althought the `#with` helper shouldn't be needed in the majority of projects (properties shouldn't really be nested within more than 2 or 3 objects, unbroken by arrays, in most cases), it may come in handy with deeply nested properties, as it shifts the current context.
 
 ```json
@@ -197,10 +197,10 @@ Althought the `#with` helper shouldn't be needed in the majority of projects (pr
     <p>Antony Edward Stark</p>
 ```
 
-### Conditionals
+## Conditionals
 Use #if, #unless, and else to conditionally render sections of your templates
 
-#### #if
+### #if
 The #if helper renders its contents if the argument is truthy (not equal to false, undefined, null, "", 0, or []).
 ```json
 {
@@ -234,7 +234,7 @@ The #if helper renders its contents if the argument is truthy (not equal to fals
 ```
 
 
-#### #unless
+### #unless
 The #unless helper renders its contents if the argument is falsy (equal to false, undefined, null, "", 0, or []), in other words the opposite of the #if helper.
 
 ```json
@@ -272,7 +272,7 @@ The #unless helper renders its contents if the argument is falsy (equal to false
     <p>undefinedVal is falsy!</p>
 ```
 
-#### else
+### else
 When writing an `#if` or `#unless`, often you will want to output a section of your template if the condition evaluates to false, without writing another using the inverse helper (an `#unless` paired with an `#if` and vice versa). 
 
 Handlebars deals with this case by providing `else` functionality, which can also be chained with the conditionals to create `else if`s or `else unless`es.
@@ -325,7 +325,7 @@ Handlebars deals with this case by providing `else` functionality, which can als
 
 ?> More complex conditions are possible with Yuzu's #ifCond helper (see the [Yuzu's handlebars helpers](definition/markup?id=ifCond) section for more).
 
-#### Partials
+### Partials
 
 Using partials is a fundemental part of the way Yuzu works: it allows for templates to be used within other templates- in other words blocking!
 
@@ -363,11 +363,11 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
 <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/Indiana_Jones_in_Raiders_of_the_Lost_Ark.jpg" alt="Archeologist at work"/>
 ```
 
-## Advanced Handlebars
+# Advanced Handlebars
 You should by now have got to grips with the basics of Handlebars and are prepared to delve a little deeper, learning a bit more about rendering properties than in the basics, including values which Handlebars exposes to you in helpers.
 
-### Rendering properties
-#### Ancestor properties
+## Rendering properties
+### Ancestor properties
 There will be situations where you will want to access values outside your current context within helpers which alter the scope (`#each`, `#with` etc.).
 
 This can be achieved by simply prefixing the expression with a `../` segment for every level you want to traverse up the tree from your current context.
@@ -443,7 +443,7 @@ For example:
 </ul>
 ```
 !> When trying to access ancestor `@data` values ([discussed here](definition/markup?id=data-values) ) found within `#each` helpers. When nesting iterating over nested arrays/objects, you need to prefix the entire path with `@` e.g. `@../../index` NOT `../../@index` when accessing the `@data` values of outer loops.
-#### Literal segments
+### Literal segments
 To use a property that is not a valid identifier, segment-literal notation can be used.
 
 This allows for the rendering of specific array indexes and property identifiers that, while valid in JSON, may cause problems when Handlebars attempts to process it.
@@ -499,8 +499,8 @@ This allows for the rendering of specific array indexes and property identifiers
 
 ```
 
-### Block helpers (advanced)
-#### Using else with block helpers
+## Block helpers (advanced)
+### Using else with block helpers
 Although `else` is usually seen paired with an `#if` or `#unless` it is also possible to use it in conjunction with other helpers such as `#each`, to conditionally render a fallback to empty arrays.
 
 ```json
@@ -534,7 +534,7 @@ Although `else` is usually seen paired with an `#if` or `#unless` it is also pos
     <p>No student image uploaded</p>
 ```
 
-#### Using else vs #if with an #each
+### Using else vs #if with an #each
 Although using `else` within an `#each` is a clean way of conditionally rendering a section of your template for when your array is empty (e.g. a fallback message) it is not always an ideal choice.
 
 For example, what if you wanted to conditionally render an element which wraps the `#each`? 
@@ -563,7 +563,7 @@ What we have found works is using an `#if` to check for the presence of the firs
     <p>Nothing is on your to-do list!</p>
 ```
 
-#### #each - iterating over objects
+### #each - iterating over objects
 Although in our opinion this is rarely useful, the `#each` helper is capable of looping through objects, like so:
 ```json
 {
@@ -590,7 +590,7 @@ Although in our opinion this is rarely useful, the `#each` helper is capable of 
 ```
 ?> Read on into the @data values section to learn how to render the object key
 
-#### @data values
+### @data values
 Handlebars has plenty of little properties crammed into the `#each` helper which help solve common problems:
 - `@index` - a zero-based index for the current step
 - `@key` - the name of the key when looping over objects
@@ -731,7 +731,7 @@ Here's an example of them all used at once (not perfect, but gets the point acro
 
 ```
 
-#### Block parameters
+### Block parameters
 If you thought that the example in the previous example was messy (@data values) then you'd be correct! You'd also be right in thinking there must be a better, more understandable and readable way of achieving the same output: Handlebars actually supports block parameters in `#each`. 
 
 It allows for named references to be used anywhere within the helper, reducing the need for utilising `../` to gain access to `@data` values of outer loops. It can also be used to name "this", potentially making your code understandable.
@@ -764,14 +764,14 @@ Using the [@data values](definition/markup?id=data-values) example, here is an i
 {{/each}}
 ```
 
-## Yuzu's Handlebars Helpers
+# Yuzu's Handlebars Helpers
 Most markup in a project can be achieved without touching any of these helpers, which is what we aimed for. We strive to make Yuzu as accessible as possible to newcomers and that meant trying to lean on vanilla Handlebars.js as much as possible, as adding a whole raft of helpers just means there's more to learn and adds complexity to the project.
 
 Repeating markup patterns? Add another block! Need a calculated value, like an array count, a value in multiple formats or to resolve a complex condition? Request it from the delivery (backend) side of the project by adding it to the block's schema and JSON: e.g. `arrCount` integer for the array length, separate values for multiple formats, or a boolean flag for complex conditions.
 
 That said, we have sprinkled some very basic helpers, that add some quality of life functionality, solve some issues which are definition (front-end) specific and, in the case of `pictureSource` helper, reduce the amount of complexity/bloat within blocks.
 
-### Yuzu '_' properties
+## Yuzu '_' properties
 Before we get into looking at the helpers, there are automatically added data properties attached to all blocks specifically when using Yuzu which you should be aware of.
 
 These are purely appended so that they do not clutter the JSON/Schema files in a block as they are likely to be useful in several instances in larger projects. By not relying on the data contained within the block also has the added benefit of both standardising the property names and decoupling the definition and delivery sides of the projects; desirable in this case as the properties we have added are to fix issues which are purely concerns of the front-end.
@@ -783,7 +783,7 @@ These properties are used in a select few of the following helpers and will be d
 | `_ref`        | `dynPartial`  | `string`          | Contains block reference for the block e.g. `parLink`                                                                         |
 | `_modifiers`  | `modPartial`  | `array[string]`   | An array of class names passed down to the block, from the parent Handlebars template, thereby allowing contextual styling    |
 
-### #ifCond
+## #ifCond
 This helper basically just adds a wider range of possibilites for conditional rendering. Where `#if` and `#unless` fall down is that you can only evaluate a singular value and not a condition.
 
 It's limited to 3 parameters to form the most simple of condtions, `value1`, `operator`, `value2` in that order.
@@ -887,7 +887,7 @@ Rarely would such a complex set of conditions be used like in the example though
 
 In this way `#ifCond` is actually perfect- it does as much as it reasonably can within the constraints of Handlebars, while encouraging the more complex logic to be kept out of the the templates, thus making them easier to understand.
 
-### dynPartial
+## dynPartial
 To explain the need for `dynPartial` (dynamic partial) it is best to describe the problem we were experiencing.
 
 When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement, using a string parameter, with all the blocks available to be rendered in a rows/column, bloating the markup code and making it difficult to maintain.
@@ -996,7 +996,7 @@ This makes the example even cleaner:
 {{/each}}
 ```
 
-### modPartial
+## modPartial
 Again, this may be easier to describe the problem first, both making it easier to justify the reason behind the helper and understand.
 
 
@@ -1004,7 +1004,7 @@ Imagine you have a header block (`parSectionHeading`) which when in different co
 
 If you want to skip a lot of explanation behind how we decided on this solution and why it's needed [skip ahead to modPartial usage](definition/markup?id=modpartial-usage).
 
-#### The scenario
+### The scenario
 Let's begin by outlining some markup to set the scene. Say this block `parSectionHeading` is used in two places:
 
 `parBlog.hbs`
@@ -1132,7 +1132,7 @@ But the issue with all of these solutions is that not one so far is without a pr
 
 The answer: Yuzu "\_" property `_modifiers`  and the `modPartial` helper.
 
-#### modPartial Usage
+### modPartial Usage
 `modPartial` in simply uses an array called `_modifiers` automatically added to each block by Yuzu. `modPartials` allows for the adding of modifier classes to the sub-block. By using this value in a block's markup, we can cleanly add contextual styles through inserting modifier classes to the root of the sub-block markup.
 
 To use `modPartial` simply call pass the name of the partial as a string, the context and then as many modifiers as you want as string parameters to the end of the helper like so:
@@ -1169,7 +1169,7 @@ This enables us to clearly separate styling as much as possible, without having 
 
 ?> The eagle-eyed among you may have realised that there is very little difference between the two helpers `dynPartial` and `modPartial`: after all they both take a string parameter of the name of the partial they render, the data context and return the compiled template in HTML. While it's true that they basically do the same thing (apart from `modPartial` pushing classes into the `_modifiers` property) and could be easily combined, we believe that having two separate helpers is better: it better illustrates intent, with one being purely for rendering the correct partial given a context (`dynPartial`) while the other should just be used when adding contextual classes to the partial (`modPartial`).
 
-### pictureSource
+## pictureSource
 !> Only designed to work with [ImageProcessor](https://imageprocessor.org/)
 
 The `pictureSource` helper was borne out of frustration of maintaining `<picture>` element contents.
@@ -1208,17 +1208,6 @@ So for each breakpoint we have:
 So imagine if multiple tweaks needed to be made after the initial version had been built. Calculating double widths and height values, making sure you've updated both the WebP and non-WebP version etc. was getting very tedious!
 
 Meanwhile with `pictureSource` the above example can be boiled down to:
-
-
-        quality: 80,                        // Quality of non-webP image
-        createWebP: true,                   // Flag to toggle creation of webP source
-        webPQuality: 85,                    // Quality of webP image
-        createHighDensityDisplay: true,     // Flag to toggle creation of higher resolution source for pixel dense displays (both webP and non-webP)
-        highDensityDisplayDensity: '1.5x',  // Pixel dense display selector
-        highDensityDimensionMultiplier: 2,  // Factor by which image dimensions are increased by for pixel dense displays
-        highDensityQuality: 50,             // Quality of non-webP images on pixel dense displays
-        highDensityWebPQuality: 60          // Quality of webP images on pixel dense displays
-
 ```handlebars
 <picture>
     {{{ pictureSource 'min-width: 1367px' image.src width=794 height=640 mode='crop'}}}
@@ -1253,9 +1242,9 @@ So for example, you can mix and match as many ImageProcessor/pictureSource hash 
 or
 {{{ pictureSource 'max-width: 600px' image.src quality=10 contrast=25 createWebP=false}}}
 ```
-### toString
+## toString
 
-## Layouts
+# Layouts
 Layouts are basically a wrapper around pages, generally just containing common things which are included within the HTML document but not in the main page contents. This can range from just including things like links to stylesheets and Javascript files to including common 'layout' blocks which appear on multiple pages: for example the site header/footer, cookie messages, modals etc.
 
 It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included.
@@ -1300,4 +1289,4 @@ Below is a simple page layout illustrating what we've discussed so far:
 }
 ```
 
-## Best Practices
+# Best Practices
