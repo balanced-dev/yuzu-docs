@@ -1,13 +1,12 @@
 
 # Overview
-## Introduction
 One of Yuzu's core aims is to make creating websites as simple and therefore as maintainable as possible and effects the majority of decisions made while developing the "Definition" side of Yuzu. 
 
 It has organically grown and been refined over years of daily use while trying not to become a prescriptive, all-encompassing solution. This documentation will outline what we have found works for us and keeps headaches to a minimum when building anything from the humblest and most basic of CMS sites, to large, complex e-commerce websites.
 
 Having only fully concentrated on Yuzu for a few short months (it's mainly taken a backseat to client work), with a tiny team, it definitely isn't perfect and there are still things we are learning and improving. There will be situations which we haven't accounted for and subtleties we haven't discovered but, in the main, we believe this is a fantastic way of working and hope you do too!
 
-## Basics of a Block
+# Basics of a Block
 We find dividing sites up into components, which we call "blocks", really help to keep our solutions as small, scalable and simple as possible. By identifying repeating elements and data from wireframes/designs and producing a list of named blocks you can often condense a seemingly complex, sprawling website down to a very manageable selection of blocks.
 
 Each block is made up of 4 key components:
@@ -106,7 +105,7 @@ Each block is made up of 4 key components:
 	</div>
 	```
 
-### Block files
+## Block files
 The anatomy of a typical block:
 ```
 person
@@ -119,7 +118,7 @@ person
 └── parPerson.schema    
 ```
 
-## Directory Structures
+# Directory Structures
 At the root of the project folder we have two directories `definition.src` and `delivery.src`. Of course we'll be purely concentrating within the definition folder for now.
 
 ```
@@ -205,12 +204,12 @@ project-root
 			
 ``` 
 
-## Block Areas
+# Block Areas
 
 
-## Modules Overview
+# Modules Overview
 
-### Yuzu Modules
+## Yuzu Modules
 
 | Yuzu Module      				| Purpose 			|
 | ----------------------------- | -----------------	|
@@ -219,7 +218,7 @@ project-root
 | yuzu-definition-hbs-helpers 	| 					|
 | yuzu-definition-ui 			| 					|
 
-### Other modules
+## Other modules
 
 | Module        				| Purpose 			|
 | ----------------------------- | -----------------	|
@@ -241,7 +240,7 @@ project-root
 | path 							| 					|
 | prettyjson 					| 					|
 
-## Gulp tasks
+# Gulp tasks
 
 | Command			| Alias				| Description 			|
 | -----------------	| ----------------- | ---------------------	|
@@ -250,16 +249,16 @@ project-root
 | gulp dist			| npm run dist		|						|
 | gulp showPaths	| 					|						|
 
-## When to block?
+# When to block?
 
-## Overlay
+# Overlay
 
-### Blocks
+## Blocks
 
-### States
+## States
 
-### Data
+## Data
 
-### Editing state
+## Editing state
 
-### Saving state
+## Saving state

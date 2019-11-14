@@ -1,9 +1,9 @@
 # Style
-As with most things people have their preferred way of thinking and operating and like to stick to their methods, with anything that deviates away from that being unpopular: changing the way you work can be uncomfortable and frankly fruitless exercise if the end result is slower/less understandable/yields no other benefits. That's fine- if you've got an efficient way of working that outweighs its downsides, then feel free to keep using it! We're just going to present our favoured way, using BEM (Block Element Modifier), which we've found gives us the cleanest output possible and which aligns nicely with our Yuzu ethos while not noticeably slowing our output.
+As with most things, people have their preferred way of thinking and operating and like to stick to their methods. Anything that deviates from that is often unpopular: changing the way you work can be uncomfortable and frankly fruitless exercise if the end result is slower, less understandable or yields no additional benefits. That's fine- if you've got an efficient way of working that outweighs its downsides, then feel free to keep using it! We're just going to present all our favoured ways of working, using BEM (Block Element Modifier), which we've found gives us the cleanest output possible and which aligns nicely with our Yuzu ethos while not noticeably slowing our rate of output.
 
-We have built sites using CSS frameworks like Bootstrap, using decorator classes etc. but always seemed to run into issues which would detract from the great starting point they provide. They are not without merit and definitely have a time and a place to be used however, when building bespoke sites, once a good way into the project we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). It was because of these problems and general feeling of restriction which drove us to trying BEM and really liking how it felt to use. It also felt that using helper classes "splits" the actual styling between the markup and stylesheets- you need both to know how it is going to look. A single class per element (ignoring modifiers), a single SCSS file per block, a single point of truth.
+In the past we have built sites using CSS frameworks like Bootstrap, which often rely on using decorator classes. We  always seemed to run into issues however, which would detract from the great inital starting point they provide. They are not without merit and definitely have a time and a place to be used but, when building bespoke sites and once a good way into the project, we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). It was because of these problems and general feeling of restriction which drove us to trying BEM and really liking how it felt to use. It also felt that using helper classes "splits" the actual styling between the markup and stylesheets- you need both to know how it is going to look. A single class per element (ignoring modifiers), a single SCSS file per block, a single point of truth.
 
-While not perfect, it worked well with our "block" structure and helped shape the way we work in general! As we have were "componentising" our markup, doing the sense with our styling made sense: a SCSS stylesheet for each block or page, with a unique class name for every element, whilst following a pattern for each meant we could modularise our code, leading to little to no specificity issues, unexpected cascading styles etc. It just makes sense as markup and styles for a block are intrinsically linked- knowing that a block's styling is centralised and won't be being applied anywhere but in its stylesheet greatly reduces confusion.
+While not perfect, it works well with our "block" structure and helped shape the way we work in general! As we have were "componentising" our markup, doing the sense with our styling made sense: a SCSS stylesheet for each block or page, with a unique class name for every element, whilst following a pattern for each meant we could modularise our code, leading to little to no specificity issues, unexpected cascading styles etc. It just makes sense as markup and styles for a block are intrinsically linked- knowing that a block's styling is centralised and won't be being applied anywhere but in its stylesheet greatly reduces confusion.
 
 It's also simple, easy to learn/understand and gives our stylesheets a common structure and layout, which makes going between working on stylesheets not only within a project, but across projects, far easier. Not only that but it makes lifting blocks from other projects and customising them to fit into the current site very easy.
 
@@ -51,9 +51,9 @@ Within the global SCSS styles (`/definition.src/_dev/_source/scss`) we personall
 -	backoffice.scss:<br>
 	Basically the same as frontend.scss but nests the imports in the class `.yuzu-back-office` to be used to style the previews in the Umbraco backoffice
 	
-How you go on from this starting point of is totally up to you as everyone has their preferences. As a team, we personally like putting project-agnostic SCSS files into a library folder, containing all the common tools, utilities and patterns we've found to work whilst building sites. Things like CSS resets, setting `box-sizing: border-box;` globally, providing media-query, visually hide, clearfix and font sizing mixins, "remification" functions etc. These all belong here in our projects.
+How you go on from this starting point of is totally up to you as everyone has their preferences. As a team, we personally like putting project-agnostic SCSS files into a library folder, containing all the common tools, utilities and patterns we've found to work whilst building sites. Things like CSS resets (setting `box-sizing: border-box;` globally etc.), common mixins (media queries, visually hide, clearfix and font sizing etc.) and functions (remification, sizing etc.). These all belong here in our projects, within the "library" directory.
 
-We then have another directory called "project" which unsurprisingly contains all mixins, variables etc. for the current project specifically which will be used throughout the "local" stylesheets.
+We then have another directory called "project" which unsurprisingly contains all mixins, variables etc. relevant to the current project specifically which will be used throughout the "local" stylesheets.
 
 It works for us, but none of this is provided as every team has their own favourite way of tackling each of these problems and organising their main SCSS setup files.
 
@@ -89,23 +89,30 @@ Import order (first to last)
 4.	Utilities:<br>
 	Contain helper mixins (which would usually be utility/helper classes in other frameworks). Things like clearfix, visually hide etc.
 
-	e.g. `_utility.visually-hide.scss`
+	e.g. `_utility.visually-hide.scss`.
+
+	To differentiate these mixins from tool mixins, our preference is to prefix them with a "u" e.g. `@mixin u-visually-hide`
 5.	Objects:<br>
 	Mixins used for specific repeating styling instances: for example a specific button/link style, an arrow made out of ::before & ::after, a specific list style etc.
 
 	It's basically a place for common styling patterns, used across multiple blocks, that cannot be its own block.
 
+	These often take parameters so that they can be flexible and customised where used throughout the project.
+
 	e.g. `_object.arrow-icon.scss`
+
+	Our preference is to prefix object mixins with with a "o" e.g. `@mixin o-arrow-icon`
 
 
 
 ## Use of @mixins
-We believe in the use of `@mixin` over helper classes and even `%placeholders` really. We find the potential repeating code throughout the project to be acceptable because:
-1.	Decorator classes are often bundled into sites' CSS, regardless of whether they are used or not, and we find we rarely generate large mixin files. Mixins are also rarely included into more than a handful of blocks each, so the bloat really isn't too bad. If not used `@mixins`, like `%placeholders`, aren't included in the CSS output.
-2.	Unlike `%placeholder`s you know exactly where the SCSS will place that selector in the CSS output, removing an potential specificity issues due to order of styles
-3.	`@mixins` allow for greater flexibility as they allow parameters to be passed, where you'd have to create a new class/placeholder
+We believe in the use of `@mixin` over helper classes and even `%placeholders` really. We find the potential for repeating code throughout the project to be acceptable because:
+1.	Decorator classes are often bundled into sites' CSS, regardless of whether they are used or not, and we find we rarely generate large mixin files. Mixins are also rarely included into more than a handful of blocks each, so the bloat really isn't too bad. If they are not used `@mixins` and `%placeholders` aren't included in the CSS output.
+2.	Unlike `%placeholder`s you know exactly where the SCSS will place that selector in the CSS output, removing an potential issues due to order of styles
+3.	`@mixins` allow for greater flexibility as they allow parameters to be passed, where you'd otherwise have to create a new class/placeholder
+4.	Mixins can be nested in media-queries, whereas placeholders cannot. This means that you either have to create breakpoint specific placeholders or you have to override styles (which can lead to all sorts of issues)
 
-To us the peace-of-mind and adaptability that `@mixins` afford outweigh the potential fkr CSS bloat that comes with it.
+To us the peace-of-mind and adaptability that `@mixins` afford outweigh the potential for CSS bloat that comes with it.
 
 ## Alphabetised styles
 This is just a team preference but, just so that we have an easy-to-follow order to our styles, we adopted ordering our styles alphabetically. It took some time to sink in, but now it's just second nature and speeds up looking through CSS for a specific declarations. Our selectors never seem to contain enough code for grouping our styles to be beneficial and it was harder to adhere to as everybody had their own way of doing it, which isn't an issue when alphabetising.
@@ -152,11 +159,25 @@ Rather than separating it like:
 
 .block__header {
 
+}
+
+.block__header__title {
+
+}
+```
+or
+```scss
+// Not ideal!
+.block {
+
+}
+
+.block__header {
+
 	&__title {
 
 	}
 }
-...
 ```
 
 Repetition of the block's base class is pointless and just adds more places it needs to be updated if the class name changes. The same line of thinking applies to nesting the other selectors: why repeat youreself and not nest, as it helps to understand the markup better?
@@ -181,8 +202,138 @@ This also works for modifiers:
 }
 ```
 ## Modifiers at end of stylesheet
-As a rule we always put our modifiers at the end of the stylesheet as they will likely be overriding things in previous lines above it within the stylesheet
+As a rule we always put our modifiers at the end of the stylesheet/selector as they will likely be overriding things in previous lines above it within the stylesheet
 
 # Style Modifiers
-- use of `$this: &;`
-- only really applied at root of block markup
+When using modifiers we tend to apply them as soon as possible in the markup. In practice this means that most modifiers are applied at the root element of blocks, with the exceptions being when using iterators are used and a modifier is needed on that item.
+
+For example:
+```json
+{
+	"theme": "dark",
+	"roundedCorners": true,
+	"listItems": [
+		{
+			"isImporant": false,
+			"text": "List item 1"
+		},
+		{
+			"isImporant": true,
+			"text": "List item 2"
+		},
+		{
+			"isImporant": false,
+			"text": "List item 3"
+		}
+	]
+}
+```
+```handlebars
+<ul class="list list--{{theme}}-theme {{#if roundedCorners}}list--rounded{{/if}}">
+	{{#each listItems}}
+		<li class="list__item {{#if isImporant}}list__item--important{{/if}}">
+			{{text}}
+		</li>
+	{{/each}}
+</ul>
+```
+This standardises the markup and SCSS: the markup is not littered with conditions for classes save for where absolutely necessary and it means that most modifiers should be at the same place in the stylesheets (both root and nested modifiers are placed at the end of their selectors so that they override previous styles. Root modifiers are nested one level deep within the base class selector, hence making up the final section of the stylesheet).
+
+For the above example with some basic styles would look something like this:
+```scss
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 25px;
+	
+	&__item {
+        padding: 10px 5px;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+		// Apply styles to important list items
+		&--important {
+			display: block;
+            font-weight: 700;
+			text-transform: uppercase;
+		}
+	}
+
+	&--light-theme {
+        background-color: #cccccc;
+	}
+
+	&--dark-theme {
+        background-color: #111111;
+	}
+
+	&--rounded {
+        border-radius: 10px;
+	}
+}
+```
+We were able to style the important list items easily enough, but how do we make the necessary style changes to nested elements from wthin the root modifier selectors, like the colour themes? Easy: by storing the root class name in a variable, like so:
+```scss
+.list {
+	// Store root class in variable
+    $this: '.list';
+
+    list-style: none;
+    margin: 0;
+    padding: 25px;
+	
+	&__item {
+        padding: 10px 5px;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+		&--important {
+			display: block;
+            font-weight: 700;
+			text-transform: uppercase;
+		}
+	}
+
+	&--light-theme {
+        background-color: #cccccc;
+
+		#{$this} {
+			&__item {
+                background-color: #ffffff;
+                color: #333333;
+			}
+		}
+	}
+
+	&--dark-theme {
+        background-color: #111111;
+        
+        #{$this} {
+            &__item {
+                background-color: #333333;
+                color: #cccccc;
+			}
+		}
+	}
+
+	&--rounded {
+        border-radius: 10px;
+
+		#{$this} {
+			&__item {
+                border-radius: 5px;
+			}
+		}
+	}
+}
+```
+
+?> 	**Note**: you can actually use the ampersand trick to avoid having to manually assign the class name to `$this`, like so: <br>
+	`.list {
+	$this: &; // Will contain '.list'
+}`<br>
+	However won't work on the backoffice in the previews if you are wrapping all your styles in a class as '&' will equal something like `.yuzu-back-office .list` and thus won't work as expected, hence the hardcoding of the class instead.

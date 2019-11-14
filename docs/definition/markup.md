@@ -1,16 +1,19 @@
 # Markup
-
-# Handlebars Basics
-As previously discussed, we choose to use and recommend Handlebars for all our projects purely because of its speed and simplicity, both to implement, use and learn.
+As previously discussed, we choose to use and recommend Handlebars for all our projects purely because of its speed and simplicity to implement, use and learn.
 
 It also allows additional helpers to quickly and easily be added and used (however if you choose to add your own you'll need to replicate the functionality for server-side rendering and we will not be covering it in this documentation).
 
-The best place to start may be the [Handlebars Docs](https://handlebarsjs.com/ "Read official Handlebars documentation"), although they are not (in our opinion) the best and seem to overcomplicate/not fully explain its features, so this will be a quick get-started guide. You should rarely have any real reason to refer to anything but this in most cases, but the Handlebars Documentation is improving ([new draft docs at time of writing](https://handlebars-draft.knappi.org/guide/ "Read new draft Handlebars documentation")) and will dive deeper than this guide will.
+---
 
-?> If you want to follow along with the examples in the basic section of this guide yourself or just play around in Handlebars, [tryhandlebarsjs.com](http://tryhandlebarsjs.com/) is a fantastic resource
+# Handlebars Basics
+The best place to start may be the official [Handlebars Docs](https://handlebarsjs.com/ "Read official Handlebars documentation"), but they are not (in our opinion) the best and seem to overcomplicate/not fully explain its features, so this will be a quick get-started guide. 
+
+You should rarely have any real reason to refer to anything but this documentation in most cases, but the Handlebars Documentation is improving ([new draft docs at time of writing](https://handlebars-draft.knappi.org/guide/ "Read new draft Handlebars documentation")) and will dive deeper than this guide will.
+
+?> If you want to quickly try out the examples in this guide yourself or just play around in Handlebars, [tryhandlebarsjs.com](http://tryhandlebarsjs.com/) is a fantastic resource (just note that the Yuzu helpers obviously will not work).
 
 ## Basic Expressions
-Handlebars expressions are contents wrapped in double curly braces `{{}}` (apart from when not escaping HTML).
+Handlebars expressions are contents wrapped in double curly braces `{{}}` (apart from when not escaping HTML, as double braces escape by default).
 
 ### Render properties
 To render a property from the current context:
@@ -87,6 +90,7 @@ For if you want to document your templates:
 {{!-- This is a comment and will not be included in the HTML output --}}
 ```
 
+---
 
 # Handlebars Helpers
 
@@ -165,11 +169,13 @@ Mostly used to loop over arrays, but can also be used with objects.
         </li>
 </ul>
 ```
-?> There are several built-in properties that you can use within an #each block, but for simplicity's sake we've omitted them from this section.
+?> There are several built-in properties that you can use within an `#each` block, but for simplicity's sake we've omitted them from this section.
 To learn more about these properties, and to read about iterating over objects, read the [advanced handlebars section](definition/markup?id=block-helpers-advanced)
 
 ### #with (context)
-Althought the `#with` helper shouldn't be needed in the majority of projects (properties shouldn't really be nested within more than 2 or 3 objects, unbroken by arrays, in most cases), it may come in handy with deeply nested properties, as it shifts the current context.
+Although we personally haven't had much need for it, the `#with` helper may be useful in some situations. It shifts the current context (similar to the `#each`).
+
+The reason we rarely use it is that we find the way we structure data infrequently leads us to nest properties in more than 2 consecutive objects, uninterrupted by an array. An array will almost certainly lead to an each being employed to iterate over it, which already changes the context.
 
 ```json
 {
@@ -198,10 +204,10 @@ Althought the `#with` helper shouldn't be needed in the majority of projects (pr
 ```
 
 ## Conditionals
-Use #if, #unless, and else to conditionally render sections of your templates
+Use `#if`, `#unless`, and `else` to conditionally render sections of your templates
 
 ### #if
-The #if helper renders its contents if the argument is truthy (not equal to false, undefined, null, "", 0, or []).
+The `#if` helper renders its contents if the argument is truthy (not equal to `false`, `undefined`, `null`, `""`, `0`, or `[]`).
 ```json
 {
     "boolVal": true,
@@ -235,7 +241,7 @@ The #if helper renders its contents if the argument is truthy (not equal to fals
 
 
 ### #unless
-The #unless helper renders its contents if the argument is falsy (equal to false, undefined, null, "", 0, or []), in other words the opposite of the #if helper.
+The `#unless` helper renders its contents if the argument is falsy (equal to `false`, `undefined`, `null`, `""`, `0`, or `[]`), in other words the opposite of the `#if` helper.
 
 ```json
 {
@@ -275,7 +281,7 @@ The #unless helper renders its contents if the argument is falsy (equal to false
 ### else
 When writing an `#if` or `#unless`, often you will want to output a section of your template if the condition evaluates to false, without writing another using the inverse helper (an `#unless` paired with an `#if` and vice versa). 
 
-Handlebars deals with this case by providing `else` functionality, which can also be chained with the conditionals to create `else if`s or `else unless`es.
+Handlebars deals with this case by providing `else` functionality, which can also be chained with the conditionals to create `else if` or `else unless`.
 
 !> Elses are not limited to being paired with `#if` and `#unless`. Read the [block helpers advanced](definition/markup?id=block-helpers-advanced) section for more.
 
@@ -323,9 +329,9 @@ Handlebars deals with this case by providing `else` functionality, which can als
 </p>
 ```
 
-?> More complex conditions are possible with Yuzu's #ifCond helper (see the [Yuzu's handlebars helpers](definition/markup?id=ifCond) section for more).
+?> More complex conditions are possible with Yuzu's `#ifCond` helper (see the [Yuzu's handlebars helpers](definition/markup?id=ifCond) section for more).
 
-### Partials
+## Partials
 
 Using partials is a fundemental part of the way Yuzu works: it allows for templates to be used within other templates- in other words blocking!
 
@@ -364,11 +370,11 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
 ```
 
 # Advanced Handlebars
-You should by now have got to grips with the basics of Handlebars and are prepared to delve a little deeper, learning a bit more about rendering properties than in the basics, including values which Handlebars exposes to you in helpers.
+You should by now have got to grips with the basics of Handlebars and are prepared to delve a little deeper, learning a bit more about rendering properties than in the basics- including values which Handlebars exposes to you in helpers.
 
 ## Rendering properties
 ### Ancestor properties
-There will be situations where you will want to access values outside your current context within helpers which alter the scope (`#each`, `#with` etc.).
+There will be situations where you will want to access values outside your current context within helpers which alter the context (`#each`, `#with` etc.).
 
 This can be achieved by simply prefixing the expression with a `../` segment for every level you want to traverse up the tree from your current context.
 
@@ -737,11 +743,11 @@ If you thought that the example in the previous example was messy (@data values)
 It allows for named references to be used anywhere within the helper, reducing the need for utilising `../` to gain access to `@data` values of outer loops. It can also be used to name "this", potentially making your code understandable.
 
 For example:
-- `#each arr as |{context-name-here}|` allows you to name the context within the `#each`
-- `#each arr as |{context-name-here} {index-name-here}|` allows you to not only name the context and the index
-- `#each obj as |{context-name-here} {key-name-here}|` similarly allows the naming of the context and they key
+- `#each {array-value-here} as |{context-name-here}|` allows you to name the context within the `#each`
+- `#each {array-value-here} as |{context-name-here} {index-name-here}|` allows you to not only name the context and the index
+- `#each {object-value-here} as |{context-name-here} {key-name-here}|` similarly allows the naming of the context and they key
 
-Basically it allows aliases for the `@key`, `@index` and `this` values within `#each` and, so long as there are no naming clashes, enables the removal of `../`.
+Basically it allows aliases for the `@key`, `@index` and `this` values within `#each` and, so long as there are no naming clashes, removes the need for using `../` to access ancestor properties.
 
 Using the [@data values](definition/markup?id=data-values) example, here is an improved handlebars file, achieving identical html output:
 ```handlebars
@@ -765,16 +771,16 @@ Using the [@data values](definition/markup?id=data-values) example, here is an i
 ```
 
 # Yuzu's Handlebars Helpers
-Most markup in a project can be achieved without touching any of these helpers, which is what we aimed for. We strive to make Yuzu as accessible as possible to newcomers and that meant trying to lean on vanilla Handlebars.js as much as possible, as adding a whole raft of helpers just means there's more to learn and adds complexity to the project.
+Most markup in a project can be achieved without touching any of these helpers, which is what we aimed for. We strive to make Yuzu as accessible as possible to newcomers and that meant trying to lean on vanilla Handlebars.js as much as possible. Adding a whole raft of helpers just means there's more to learn and adds complexity to the project.
 
-Repeating markup patterns? Add another block! Need a calculated value, like an array count, a value in multiple formats or to resolve a complex condition? Request it from the delivery (backend) side of the project by adding it to the block's schema and JSON: e.g. `arrCount` integer for the array length, separate values for multiple formats, or a boolean flag for complex conditions.
+Repeating markup patterns? Add another block! Need a calculated value (e.g. an array count, a value in multiple formats like a date etc.) or you can't easily solve a condition using the helpers? Request it from the delivery (back-end) side of the project by adding it to the block's schema and JSON: e.g. `arrCount` integer for the array length, separate values for multiple formats, or a boolean flag for complex conditions.
 
-That said, we have sprinkled some very basic helpers, that add some quality of life functionality, solve some issues which are definition (front-end) specific and, in the case of `pictureSource` helper, reduce the amount of complexity/bloat within blocks.
+That said, we have sprinkled some very basic helpers that add some quality of life functionality, solve some issues which are definition (front-end) specific and, in the case of `pictureSource` helper, reduce the amount of complexity/bloat within blocks.
 
 ## Yuzu '_' properties
 Before we get into looking at the helpers, there are automatically added data properties attached to all blocks specifically when using Yuzu which you should be aware of.
 
-These are purely appended so that they do not clutter the JSON/Schema files in a block as they are likely to be useful in several instances in larger projects. By not relying on the data contained within the block also has the added benefit of both standardising the property names and decoupling the definition and delivery sides of the projects; desirable in this case as the properties we have added are to fix issues which are purely concerns of the front-end.
+These are purely appended so that they do not clutter the JSON/Schema files in a block as they are likely to be useful in several situations in larger projects. By not relying on the data contained within the block also has the added benefit of both standardising the property names and decoupling the definition and delivery sides of the projects. This is desirable as the properties we have added are to fix issues which are purely concerns of the front-end.
 
 These properties are used in a select few of the following helpers and will be described further in their respective section.
 
@@ -786,7 +792,7 @@ These properties are used in a select few of the following helpers and will be d
 ## #ifCond
 This helper basically just adds a wider range of possibilites for conditional rendering. Where `#if` and `#unless` fall down is that you can only evaluate a singular value and not a condition.
 
-It's limited to 3 parameters to form the most simple of condtions, `value1`, `operator`, `value2` in that order.
+It's limited to 3 parameters to form the most simple of condtions, `value-1`, `operator`, `value-2` in that order.
 
 The values can be a variable or just a string, integer etc. while the operator is limited to a string representation of a collection of comparison/logical operators listed below:
 
@@ -883,14 +889,14 @@ As with `#if` and `#unless` they can be paired with an `else` or even joined to 
 ```
 `#ifCond`, although not perfect, can solve some more complex issues than purely using `#if` or `#unless` (namely when dealing with numerical values- `<`, `>`, etc. and string values `===`). It is flawed in the sense that you cannot invert boolean values in the condition (e.g. `{{#ifCond !value1 '&&' !value2}}`), it's also impossible to do complex conditions like `{{#ifCond value1 '&&' (value2 '||' value3)}}` etc. and have to resort to using nested conditions (as with the above example) to achieve the desired output.
 
-Rarely would such a complex set of conditions be used like in the example though when looping over the engineeringProblems - the logic this was a proper project should be moved over to the delivery (back-end) side of the project, with a string property being passed instead of a series of boolean values. It would either contain what type of message should be rendered (by using a series of `#ifCond`, `else ifCond`s to effectively form a switch statement) or just pass the message itself.
+Rarely would such a complex set of conditions be used in the way they were when looping over the `engineeringProblems` array- if this was a proper project, the logic should be moved over to the delivery (back-end) side of the project with a string property being passed instead of a series of boolean values. This would either contain what type of message should be rendered (by using a series of `#ifCond`, `else ifCond`s to effectively form a switch statement) or just pass the actual message itself.
 
-In this way `#ifCond` is actually perfect- it does as much as it reasonably can within the constraints of Handlebars, while encouraging the more complex logic to be kept out of the the templates, thus making them easier to understand.
+In this way `#ifCond` is actually perfect- it does as much as it reasonably can within the constraints of Handlebars, while encouraging the more complex logic to be kept out of the the templates, thus making them easier to understand. It also allows the front-end team to concentrate on what actually matters: good markup, styling and Javascript interactions.
 
 ## dynPartial
 To explain the need for `dynPartial` (dynamic partial) it is best to describe the problem we were experiencing.
 
-When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement, using a string parameter, with all the blocks available to be rendered in a rows/column, bloating the markup code and making it difficult to maintain.
+When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement (using a string parameter and `#ifCond` & `else ifCond`) with all the blocks available to be rendered in a rows/column. If there were many options, it could quickly bloat the Handlebars file making it difficult to maintain. 
 
 For example:
 ```json
@@ -966,7 +972,9 @@ Already that's a huge improvement!
 
 Now you may notice that we had to change the `blockName` property from containing any string value to render the correct block through the conditions to the name of the Handlebars partial (e.g. sectionHeading block will have a `parSectionHeading.hbs` file, so the string has to equal `parSectionHeading`) so it can use the correct one.
 
-Because this ties the delivery and definition sides of the project together (renaming a block on the definition side could cause it not to render using `dynPartial` if the change wasn't reflected in the data being sent from the delivery side) we decided to add a property called `_ref` which is automatically added to the data before it's rendered. It holds the string representaiton of its block name (e.g. `parImage`).
+This however creates an issue: it ties the delivery and definition sides of the project together as renaming a block on the definition side could cause it not to render using `dynPartial` if the change wasn't reflected in the data being sent from the delivery side. 
+
+To remidy this we decided to add a property called `_ref` which is automatically added to the data before it's rendered. It holds the string representaiton of its block name (e.g. `parImage`), removing this link between the two sides of the project and cleaning up the JSON simultaneously.
 
 This makes the example even cleaner:
 ```json
@@ -999,8 +1007,7 @@ This makes the example even cleaner:
 ## modPartial
 Again, this may be easier to describe the problem first, both making it easier to justify the reason behind the helper and understand.
 
-
-Imagine you have a header block (`parSectionHeading`) which when in different contexts needs to change its appearance, an easy example would be changing colours depending on what the background colour of the parent block. How would you tackle this problem?
+Imagine you have a header block (`parSectionHeading`) which, when in different contexts, needs to change its appearance. An easy example would be changing colours depending on what the background colour of the parent block. How would you tackle this problem?
 
 If you want to skip a lot of explanation behind how we decided on this solution and why it's needed [skip ahead to modPartial usage](definition/markup?id=modpartial-usage).
 
@@ -1059,15 +1066,25 @@ With the risk of this turning into a delve into an explanation of cascading styl
         }        
     }
     ```
+    Which would compile to:
+    ```css
+    .blog .section-heading {
+        color: #FFFFFF
+    }
+    .article .section-heading {
+        color: #000000
+    }
+    ```
 
-So we have two ways of effecting the colour of the text, which to their credit would work perfectly well. Well, why are you continuing to babble on and why do we even need `modPartial` then I hear you ask! The problem is they are not at all clean and have inherent problems.
 
-Take solution 1- what happens if we want the headings in `parSectionHeading` to not be one single text colour? Say the title needs to be white and the subtitle a light grey when used in blog and a black title and dark subtitle when on a white background in article. This fix instantly falls down when there is greater control needed.
+So we have two ways of effecting the colour of the text, which to their credit would work perfectly well. If they work why do we even need `modPartial` then I hear you ask! The problem is they are not at all clean and have inherent problems.
 
-Solution 2 however is viable even with styling title independently and can succeeds where solution 1 fails:
+Take solution 1- what happens if we want the headings in `parSectionHeading` to not be one single text colour? For arguments sake, say the title needs to be white and the subtitle a light grey when used in blog, whereas when used in the article block (which uses a white background) the title should be black and have a dark grey subtitle. This fix instantly falls down when there is greater control needed.
+
+Solution 2 however is viable even when styling the titles independently, succeeding where solution 1 fails:
 ```scss
 .section-heading {
-    $this: &;
+    $this: '.section-heading';
 
     .blog & {
         #{$this} {
@@ -1108,13 +1125,13 @@ Solution 2 however is viable even with styling title independently and can succe
   color: #3F3F3F;
 }
 ```
-?> Confused by the `.scss` file? Head on over to the "Definition Style" section to learn more
+?> Confused by/want to know more about the `.scss` file? Head on over to the ["Style"](definition/style) section to learn more
 
 But again this solution is not without its issues. What happens when another block (say `parPersonProfile`) is added which also needs to use `parSectionHeading` and it too has a dark background like `parBlog`. Do you change the selector within the sectionHeading SCSS file to `.person-profile &, .blog &`?
 
-Perhaps now you may evolve it to be more of a generic class and move away from using the outer blocks' classes to style within. Something like `.black-background` or maybe to cover both instances to avoid having to add to a selector everytime a block needs to use `parSectionHeading`.
+Perhaps now you may evolve it to be more of a generic class and move away from using the outer blocks' classes as selectors within the `_parSectionHeading` stylesheet. Something like `.black-background` or maybe to cover both instances to avoid having to add to a selector everytime a block needs to use `parSectionHeading`.
 
-But where would you put it? At the root of the parent block? Introduce a new tag just to wrap `parSectionHeading` like so:
+But where would you put it? At the root of the parent block? No, that wouldn't make sense as it purely relates to `parSectionHeading`. Introducing a new element to wrap `parSectionHeading` like so would surely be cleanest?:
 ```handlebars
 <section class="blog">
     <div class="black-background">
@@ -1126,16 +1143,16 @@ But where would you put it? At the root of the parent block? Introduce a new tag
 But the issue with all of these solutions is that not one so far is without a problem:
 - Relying on inherited styles is very limited and should be relied upon as little as possible as it's very fragile and is very easily overwritten by mistake
 - All styles relating to a block should be kept within the block itself, not relying on styles from outside of its directory stylesheet or classes in markup outside of its own handlebars file
-- Block names should not be used: adding the parent block class into the sub-block stylesheet (e.g. `.blog` in this example) is messy and creates a link between them which needs updating if the blog block or `.blog` is renamed
-- You shouldn't be having to add classes/wrapping tags with classes around partial helpers purely to apply contextual styles to the sub-block. This extra markup or classes just pollutes your code and may not have clear intent to somebody looking at your code
-- None are adhereing of BEM's modifier convention, but modifier classes require both the knowledge of the sub-block's root class name (e.g. `.section-heading` to create the modifier class `.section-heading--black-background`, which again creates a link which needs updating if the class name is renamed) and we need access to the root of the sub-block markup to add this class (which do not have).
+- Block names should not be used: adding the parent block class into the sub-block stylesheet (e.g. `.blog` in above examples) is messy and creates a link between them which needs updating if the blog block or `.blog` is renamed
+- You shouldn't need to add classes/wrapping elements with classes around partial helpers purely to apply contextual styles to the sub-block. This extra markup or classes just pollutes your code and may not have clear intent to somebody looking at it for the first time
+- None are using BEM's modifier convention, but modifier classes require both the knowledge of the sub-block's root class name (e.g. `.section-heading` to create the modifier class `.section-heading--black-background`, which again creates a link which needs updating if the class name is renamed) and we need access to the root of the sub-block markup to add this class (which do not have from the parent).
 
-The answer: Yuzu "\_" property `_modifiers`  and the `modPartial` helper.
+The answer: Yuzu's "\_" property `_modifiers` and the `modPartial` helper.
 
 ### modPartial Usage
-`modPartial` in simply uses an array called `_modifiers` automatically added to each block by Yuzu. `modPartials` allows for the adding of modifier classes to the sub-block. By using this value in a block's markup, we can cleanly add contextual styles through inserting modifier classes to the root of the sub-block markup.
+`modPartial` simply uses an array called `_modifiers` which is automatically added to each block by Yuzu. `modPartial` allows for the addition of modifier classes to the sub-block, without knowing the block's base class. By using this value in a block's markup, we can cleanly add contextual styles through inserting modifier classes to the root of the sub-block markup.
 
-To use `modPartial` simply call pass the name of the partial as a string, the context and then as many modifiers as you want as string parameters to the end of the helper like so:
+To use `modPartial` simply call pass the name of the partial (as a string), the context and then as many modifiers as you want as string parameters to the end of the helper like so:
 
 `parBlog.hbs`
 ```handlebars
@@ -1146,7 +1163,7 @@ To use `modPartial` simply call pass the name of the partial as a string, the co
 ```
 
 
-Then in the sub-block we can add these modifiers held in `_modifiers` like so:
+Then in the sub-block we can add these modifiers held in `_modifiers` like this:
 
 `parSectionHeading.hbs`
 ```handlebars
@@ -1163,7 +1180,7 @@ Then in the sub-block we can add these modifiers held in `_modifiers` like so:
     ...
 </section>
 ```
-This enables us to clearly separate styling as much as possible, without having to know the root class the block is using from the parent block, doesn't require extra markup, doesn't require the delivery side to pass us properties so that the block knows its context and uses BEM's modifier concept. This all makes for the best solution we could envisage and works very well for us!
+This enables us to cleanly separate styling as much as possible, without having to know the root class the block is using from the parent block, it doesn't require extra markup, doesn't need the delivery side to pass us properties so that the block knows its context, and uses BEM's modifier concept. This all makes for the best solution we could envisage and works very well for us!
 
 ?> Please note that as `modPartial` returns HTML it is necessary to not escape the helper's output (i.e. use triple braces: `{{{}}}`)
 
@@ -1176,10 +1193,10 @@ The `pictureSource` helper was borne out of frustration of maintaining `<picture
 
 While building sites we'd often try to optimise our images for all screen sizes, using the picture element and source tags in combination with ImageProcessor. We started using only the basic functionality of ImageProcessor and the `<picture>` element until we started getting comfortable with both and digging deeper and finding more strategies and patterns we could take advantage of to really reduce the file sizes of image-heavy pages:
 - media queries to serve different sized images for different devices
-- requesting double sized images at lower quality for higher density displays (e.g. retina) with no percieved quality loss
-- using WebP with a fallback source if unsupported
+- requesting double sized images at a lower quality for higher density displays (e.g. retina), which produced smaller file sizes, with no percieved quality loss
+- using WebP with a fallback source for those browsers where WebP is unsupported
 
-However this came at a cost of maintainabilty, yes we could drastically increase the page load speed by serving images of smaller file sizes (especially with WebP) but we'd keep making errors or forgetting to change a value when making tweaks. This meant little issues would creep into blocks using picture elements and go unnoticed for a while as it would only effect a certain screen density at a certain screen size.
+However this came at a cost of maintainabilty. Yes, we could drastically increase the page load speed by serving images of smaller file sizes (especially with WebP), but we'd have to wrestle with unsightly code and we'd keep making mistakes like forgetting to change a value when making tweaks. This meant little issues would creep into blocks using picture elements and go unnoticed for a while as it would only effect a certain screen density at a certain screen size.
 
 Take a look below at an example from one of our projects:
 ```handlebars
@@ -1205,7 +1222,7 @@ So for each breakpoint we have:
 - 2 sources (one for WebP, one for a fallback- uses whatever type the image is already): notice the `&format=webp` URL parameter and `type="image/webp"` attribute
 - For each source (both WebP and non-WebP) we have a normal density crop using `width=[width]&height=[height]&mode=crop` URL parameters and a higher density version using `width=[width * 2]&height=[height * 2]&mode=crop`. Also notice the `1.5x` at the end of the higher density version.
 
-So imagine if multiple tweaks needed to be made after the initial version had been built. Calculating double widths and height values, making sure you've updated both the WebP and non-WebP version etc. was getting very tedious!
+So imagine if multiple tweaks needed to be made after the initial version had been built. Calculating double widths and height values, making sure you've updated both the WebP and non-WebP version etc. became very tedious, especially with multiple `picture` elements throughout the project.
 
 Meanwhile with `pictureSource` the above example can be boiled down to:
 ```handlebars
@@ -1219,7 +1236,7 @@ Meanwhile with `pictureSource` the above example can be boiled down to:
 </picture>
 ```
 
-Which is much simpler and makes it far easier to understand what is going on. No more multiple sources for the same breakpoint, no long string of parameters and no calculations required.
+Which is much simpler and makes it far easier to understand what is going on. No more multiple sources for the same breakpoint, no long, difficult to read string of parameters, and no calculations required.
 
 Simply by passing the necessary initial 2 required parameters: `{{{ pictureSource [media query string] [image url] }}}` we can begin to use the `pictureSource` helper.
 
@@ -1242,10 +1259,12 @@ So for example, you can mix and match as many ImageProcessor/pictureSource hash 
 or
 {{{ pictureSource 'max-width: 600px' image.src quality=10 contrast=25 createWebP=false}}}
 ```
+
+Further ImageProcessor options can be found [here](https://imageprocessor.org/imageprocessor-web/imageprocessingmodule/) under 'methods'
 ## toString
 
 # Layouts
-Layouts are basically a wrapper around pages, generally just containing common things which are included within the HTML document but not in the main page contents. This can range from just including things like links to stylesheets and Javascript files to including common 'layout' blocks which appear on multiple pages: for example the site header/footer, cookie messages, modals etc.
+A layout is basically a wrapper around pages, generally containing common components which are included within the HTML document outside of the main page contents. This can range from just including things like links to stylesheets and Javascript files, to including common 'layout' blocks which appear on multiple pages: for example the site header/footer, cookie messages, modals etc.
 
 It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included.
 
