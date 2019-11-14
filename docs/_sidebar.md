@@ -1,8 +1,9 @@
-- Yuzu
+- Introduction
+  - [Simple Solution](/overview/simple-solution.md)
   - [Definition vs Delivery](/overview/definitionVsDelivery.md)
-  - [Bodyless Websites](/overview/bodyless.md)
   - [Markup and Style Focused](/overview/focus.md)
   - [Blocking Meeting](/overview/meeting.md)
+  - [Bodyless Websites](/overview/bodyless.md)
 
 - Definition
   - [Overview](/definition/overview.md)
