@@ -1,9 +1,9 @@
 - Introduction
-  - [Definition vs Delivery](/overview/definitionVsDelivery.md)
+  - [Definition and Delivery](/overview/definitionVsDelivery.md)
   - [Simple Solution](/overview/simple-solution.md)
-  - [Further Tools](/overview/further-tools.md)
-  - [Umbraco](/overview/meeting.md)
-  - [Automation](/overview/bodyless.md)
+  - [Tools](/overview/tools.md)
+  - [Umbraco](/overview/umbraco.md)
+  - [Automation](/overview/automation.md)
 
 - Definition
   - [Overview](/definition/overview.md)

@@ -1,8 +1,8 @@
 # A Simple Solution
 
-at its heart Yuzu is a simple solution to the complex problem of integration caused by the separation of frontend and backend developers. There are many different cogs to Yuzu but most of these are tools we have created to make the process of creating sites the Yuzu way as painless as possible.
+at its heart Yuzu is a simple solution to the complex problem of integration caused by the separation of defintion and devlivery developers. We have created many ancilliary services and tools for Yuzu that make the process easier and pave the way for automation.
 
-The first main differece is that there are two separate production environments for UI definition and delivery. The base structures for each are outlined below.
+Yuzu is actually two separate production environments, one for each of definition and delivery. The basic rules and processes for each are outlined below.
 
 #### Definition
 
@@ -15,16 +15,25 @@ The first main differece is that there are two separate production environments 
 - previews are created for each block on change
 - UI definition is released to Delivery as a collection of template and schema files
 
-NPM package - source [yuzu-definition-core](https://github.com/balanced-dev/yuzu-definition-core)
+    ```
+    npm install yuzu-definition-core
+    ```
+    [docs]() - 
+    [source](https://github.com/balanced-dev/yuzu-definition-core)
 
 #### Delivery
 
+- CMS agnostic
 - templates are loaded and precompiled
 - template schemas are used to define viewmodels
 - model data is mapped to viewmodel objects
 - template files are rendered natively at runtime by the delivery solution using hydrated viewmodela
 
-CMS agnostic Nuget module - source [yuzudelivery-core](https://github.com/balanced-dev/yuzudelivery.core)  
+    ```
+    PM> Install-Package YuzuDelivery.Core
+    ```
+    [docs]() - 
+    [source](https://github.com/balanced-dev/yuzu-definition-core)
 
 In conclusion this solution allows UI Definition developers to work in isolation creating self-contained, interlinking blocks whilst generating a managed interface that is synonymous to the DNA of the content led site.
 
