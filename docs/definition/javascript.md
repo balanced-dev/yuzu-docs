@@ -1,11 +1,20 @@
 # Javascript Interactions
 
-## API
 
-## AJAX Partials
+---
 
-## Examples
+# API
 
-### Stimulus
 
-### Vue.js
+---
+
+# AJAX Partials
+
+
+---
+
+# Examples
+
+## Stimulus
+
+## Vue.js

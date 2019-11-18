@@ -369,6 +369,8 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
 <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/Indiana_Jones_in_Raiders_of_the_Lost_Ark.jpg" alt="Archeologist at work"/>
 ```
 
+---
+
 # Advanced Handlebars
 You should by now have got to grips with the basics of Handlebars and are prepared to delve a little deeper, learning a bit more about rendering properties than in the basics- including values which Handlebars exposes to you in helpers.
 
@@ -769,6 +771,8 @@ Using the [@data values](definition/markup?id=data-values) example, here is an i
     {{/unless}}
 {{/each}}
 ```
+
+---
 
 # Yuzu's Handlebars Helpers
 Most markup in a project can be achieved without touching any of these helpers, which is what we aimed for. We strive to make Yuzu as accessible as possible to newcomers and that meant trying to lean on vanilla Handlebars.js as much as possible. Adding a whole raft of helpers just means there's more to learn and adds complexity to the project.
@@ -1263,6 +1267,8 @@ or
 Further ImageProcessor options can be found [here](https://imageprocessor.org/imageprocessor-web/imageprocessingmodule/) under 'methods'
 ## toString
 
+---
+
 # Layouts
 A layout is basically a wrapper around pages, generally containing common components which are included within the HTML document outside of the main page contents. This can range from just including things like links to stylesheets and Javascript files, to including common 'layout' blocks which appear on multiple pages: for example the site header/footer, cookie messages, modals etc.
 
@@ -1307,5 +1313,7 @@ Below is a simple page layout illustrating what we've discussed so far:
     }
 }
 ```
+
+---
 
 # Best Practices

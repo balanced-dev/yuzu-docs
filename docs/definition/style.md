@@ -1,13 +1,17 @@
 # Style
-As with most things, people have their preferred way of thinking and operating and like to stick to their methods. Anything that deviates from that is often unpopular: changing the way you work can be uncomfortable and frankly fruitless exercise if the end result is slower, less understandable or yields no additional benefits. That's fine- if you've got an efficient way of working that outweighs its downsides, then feel free to keep using it! We're just going to present all our favoured ways of working, using BEM (Block Element Modifier), which we've found gives us the cleanest output possible and which aligns nicely with our Yuzu ethos while not noticeably slowing our rate of output.
+As with most things, people have their preferred way of thinking and operating and like to stick to their methods. Anything that deviates from that often is met with at least some resistance: changing the way you work can be uncomfortable and frankly fruitless exercise if the end result is slower, less understandable or yields no additional benefits even after getting used to it. That's fine- if you've got an efficient way of working that outweighs its downsides, then feel free to keep using it! We're just going to present all our favoured approach, using BEM (Block Element Modifier), which we've found gives us the cleanest output possible and which aligns nicely with our Yuzu ethos while not noticeably slowing our rate of output.
 
-In the past we have built sites using CSS frameworks like Bootstrap, which often rely on using decorator classes. We  always seemed to run into issues however, which would detract from the great inital starting point they provide. They are not without merit and definitely have a time and a place to be used but, when building bespoke sites and once a good way into the project, we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). It was because of these problems and general feeling of restriction which drove us to trying BEM and really liking how it felt to use. It also felt that using helper classes "splits" the actual styling between the markup and stylesheets- you need both to know how it is going to look. A single class per element (ignoring modifiers), a single SCSS file per block, a single point of truth.
+In the past we have built sites using CSS frameworks like Bootstrap, which often rely on using decorator classes. We  always seemed to run into issues however, which would detract from the great inital starting point they provide. They are not without merit and definitely have a time and a place to be used but, when building bespoke sites and once a good way into the project, we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). 
+
+It was because of these problems and general feeling of restriction which drove us to trying BEM and really liking how it felt to use. We found it helped to remove the feeling of, when using helper classes, the actual styling between the markup and stylesheets- you need both to know how it is going to look. A single class per element (ignoring modifiers), a single SCSS file per block, a single point of truth.
 
 While not perfect, it works well with our "block" structure and helped shape the way we work in general! As we have were "componentising" our markup, doing the sense with our styling made sense: a SCSS stylesheet for each block or page, with a unique class name for every element, whilst following a pattern for each meant we could modularise our code, leading to little to no specificity issues, unexpected cascading styles etc. It just makes sense as markup and styles for a block are intrinsically linked- knowing that a block's styling is centralised and won't be being applied anywhere but in its stylesheet greatly reduces confusion.
 
 It's also simple, easy to learn/understand and gives our stylesheets a common structure and layout, which makes going between working on stylesheets not only within a project, but across projects, far easier. Not only that but it makes lifting blocks from other projects and customising them to fit into the current site very easy.
 
 We'll also delve into some of our other preferences, such as how we name & organise our global SCSS files, how we like to write our block stylesheets
+
+---
 
 # Directory Structure
 Stylesheets should basically only be stored in 2 main folders:
@@ -57,6 +61,8 @@ We then have another directory called "project" which unsurprisingly contains al
 
 It works for us, but none of this is provided as every team has their own favourite way of tackling each of these problems and organising their main SCSS setup files.
 
+---
+
 # Gulp Processes
 As just discussed, in our build we use `gulp-sass-glob` to mass-import all block and page styling. We do this for a couple of reasons:
 - The order of which the SCSS is compiled, shouldn't matter with blocks and pages ("local stylesheets"): none of them should be reliant on each other. The only thing they should be depending on is the global SCSS files for the project which are imported before the local stylesheets.
@@ -64,10 +70,14 @@ As just discussed, in our build we use `gulp-sass-glob` to mass-import all block
 
 We also use an auto-prefixer (`gulp-autoprefixer`), purely to remove the need for the majority of vendor-prefixed styles, thereby culling a lot of code from stylesheets.
 
+---
+
 # Global vs Local
 Basically the philosophy we prescribe to is is that everything outside of the project setup should be kept within the block/page (local) unless it is re-used and becomes a common pattern i.e. the global directory should be as light as possible. 
 
 Code shouldn't preemptively be put into the global- wait until it is needed in multiple places, then create a new mixin/function in global.
+
+---
 
 # Our preferences
 ## Global SCSS strucutre/naming convention
@@ -204,6 +214,8 @@ This also works for modifiers:
 ## Modifiers at end of stylesheet
 As a rule we always put our modifiers at the end of the stylesheet/selector as they will likely be overriding things in previous lines above it within the stylesheet
 
+---
+
 # Style Modifiers
 When using modifiers we tend to apply them as soon as possible in the markup. In practice this means that most modifiers are applied at the root element of blocks, with the exceptions being when using iterators are used and a modifier is needed on that item.
 
@@ -337,3 +349,5 @@ We were able to style the important list items easily enough, but how do we make
 	$this: &; // Will contain '.list'
 }`<br>
 	However won't work on the backoffice in the previews if you are wrapping all your styles in a class as '&' will equal something like `.yuzu-back-office .list` and thus won't work as expected, hence the hardcoding of the class instead.
+
+?> **For further reading about modifiers**: See the [modPartial markup section](definition/markup?id=modPartial)

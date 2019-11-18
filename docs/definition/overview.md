@@ -48,7 +48,7 @@ Each block is made up of 4 key components:
 
 	This allows for potential issues that data could create in the design to be raised and worked-around prior to integration.
 
-	**`parPerson__no-photos.json`**
+	**`parPerson_no-photos.json`**
 	``` json
 	{
 		"name": "Guy Incognito",
@@ -56,7 +56,7 @@ Each block is made up of 4 key components:
 	}
 	```
 
-	**`parPerson__long-name.json`**
+	**`parPerson_long-name.json`**
 	``` json
 	{
 		"name": "Charles Philip Arthur George Mountbatten-Windsor",
@@ -111,12 +111,13 @@ The anatomy of a typical block:
 person
 ├── data
 │   ├── parPerson.json
-│   ├── parPerson__no-photos.json
-│   └── parPerson__long-name.json
+│   ├── parPerson_no-photos.json
+│   └── parPerson_long-name.json
 ├── _parPerson.scss
 ├── parPerson.hbs    
 └── parPerson.schema    
 ```
+---
 
 # Directory Structures
 At the root of the project folder we have two directories `definition.src` and `delivery.src`. Of course we'll be purely concentrating within the definition folder for now.
@@ -204,8 +205,12 @@ project-root
 			
 ``` 
 
+---
+
 # Block Areas
 
+
+---
 
 # Modules Overview
 
@@ -240,6 +245,8 @@ project-root
 | path 							| 					|
 | prettyjson 					| 					|
 
+---
+
 # Gulp tasks
 
 | Command			| Alias				| Description 			|
@@ -249,7 +256,11 @@ project-root
 | gulp dist			| npm run dist		|						|
 | gulp showPaths	| 					|						|
 
+---
+
 # When to block?
+
+---
 
 # Overlay
 
