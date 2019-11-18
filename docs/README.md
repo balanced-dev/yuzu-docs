@@ -12,10 +12,10 @@ closely integrated with the Umbraco CMS but the same principles will work for an
 
 ## why
 
-we felt that the current stack of design systems based upon client side frameworks (Storybook) was overly complicated
+we felt that the current stack of design systems based upon client side frameworks (e.g storybook) was overly complicated and required an understanding of coding
 
 by using the UI schema (or DNA) of content led sites we are able to use simpler technologies to get the same results from systems that are easier to understand 
 
-because we focus on the HTML and CSS we free up the javascript layer to implement one of more progressive framework (vue/stimulus/svete etc)
+because we focus on the HTML and CSS we free up the javascript layer to be implemented from one of the progressive framework (angular/vue/stimulus/svete etc)
 
-opens up other possibilities (Bodyless websites) that would not be available using other solutions  
+this opens up other possibilities i.e Bodyless websites that would not be available using any other solutions  

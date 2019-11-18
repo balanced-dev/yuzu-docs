@@ -1,9 +1,9 @@
 - Introduction
+  - [Definition and Delivery](/overview/definitionVsDelivery.md)
   - [Simple Solution](/overview/simple-solution.md)
-  - [Definition vs Delivery](/overview/definitionVsDelivery.md)
-  - [Markup and Style Focused](/overview/focus.md)
-  - [Blocking Meeting](/overview/meeting.md)
-  - [Bodyless Websites](/overview/bodyless.md)
+  - [Tools](/overview/tools.md)
+  - [Umbraco](/overview/umbraco.md)
+  - [Automation](/overview/automation.md)
 
 - Definition
   - [Overview](/definition/overview.md)
