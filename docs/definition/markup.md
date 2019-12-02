@@ -17,22 +17,36 @@ Handlebars expressions are contents wrapped in double curly braces `{{}}` (apart
 
 ### Render properties
 To render a property from the current context:
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
 ``` json
 {
     "name": "John Doe"
 }
 ```
 
+#### ** Handlebars **
+
 ``` handlebars
 <h1>{{name}}</h1>
 ```
 
+#### ** HTML Output **
+
 ``` html
 <h1>John Doe</h1>
 ```
+<!-- tabs:end -->
+
 
 ### Render nested properties
 To render a property from the current context, nested in an object:
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
 ``` json
 {
     "person": {
@@ -41,21 +55,32 @@ To render a property from the current context, nested in an object:
 }
 ```
 
+#### ** Handlebars **
+
 ``` handlebars
 <h1>{{person.name}}</h1>
 ```
 
+#### ** HTML Output **
+
 ``` html
 <h1>John Doe</h1>
 ```
+<!-- tabs:end -->
 
 ### Render property without HTML escaping
 If you don't want Handlebars to escape a value, you must use triple braces `{{{}}}`. This is very useful for outputting values from RTEs (Rich Text Editors) as illustrated below (double vs triple braces).
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
 ``` json
 {
     "personBio": "<p>A bit about me!</p>"
 }
 ```
+
+#### ** Handlebars **
 
 ``` handlebars
 <div>{{personBio}}</div>
@@ -63,11 +88,14 @@ vs
 <div>{{{personBio}}}</div>
 ```
 
+#### ** HTML Output **
+
 ``` html
 <div>&lt;p&gt;A bit about me!&lt;/p&gt;</div>
 vs
 <div><p>A bit about me!</p></div>
 ```
+<!-- tabs:end -->
 
 ### Escaping Handlebars expressions
 If you don't want to run a Handlebars expression then either add a leading '\\'so:
@@ -100,6 +128,9 @@ For if you want to document your templates:
 ### #each (iterator)
 Mostly used to loop over arrays, but can also be used with objects.
 
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "people": [
@@ -120,7 +151,7 @@ Mostly used to loop over arrays, but can also be used with objects.
     ]
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 <h2>People:</h2>
 <ul>
@@ -141,7 +172,7 @@ Mostly used to loop over arrays, but can also be used with objects.
     {{/each}}
 </ul>
 ```
-
+#### ** HTML Output **
 ```html
 <h2>People:</h2>
 <ul>
@@ -169,6 +200,8 @@ Mostly used to loop over arrays, but can also be used with objects.
         </li>
 </ul>
 ```
+<!-- tabs:end -->
+
 ?> There are several built-in properties that you can use within an `#each` block, but for simplicity's sake we've omitted them from this section.
 To learn more about these properties, and to read about iterating over objects, read the [advanced handlebars section](definition/markup?id=block-helpers-advanced)
 
@@ -177,6 +210,8 @@ Although we personally haven't had much need for it, the `#with` helper may be u
 
 The reason we rarely use it is that we find the way we structure data infrequently leads us to nest properties in more than 2 consecutive objects, uninterrupted by an array. An array will almost certainly lead to an each being employed to iterate over it, which already changes the context.
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "person": {
@@ -188,7 +223,7 @@ The reason we rarely use it is that we find the way we structure data infrequent
     }
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 {{!-- 
     Instead of:
@@ -198,16 +233,20 @@ The reason we rarely use it is that we find the way we structure data infrequent
     <p>{{first}} {{middle}} {{last}}</p>
 {{/with}}
 ```
-
+#### ** HTML Output **
 ```html
     <p>Antony Edward Stark</p>
 ```
+<!-- tabs:end -->
 
 ## Conditionals
 Use `#if`, `#unless`, and `else` to conditionally render sections of your templates
 
 ### #if
 The `#if` helper renders its contents if the argument is truthy (not equal to `false`, `undefined`, `null`, `""`, `0`, or `[]`).
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "boolVal": true,
@@ -216,7 +255,7 @@ The `#if` helper renders its contents if the argument is truthy (not equal to `f
     "arrVal": ["value"]
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 {{#if boolVal}}
     <p>boolVal is truthy!</p>
@@ -231,18 +270,20 @@ The `#if` helper renders its contents if the argument is truthy (not equal to `f
     <p>arrVal is truthy!</p>
 {{/if}}
 ```
-
+#### ** HTML Output **
 ```html
     <p>boolVal is truthy!</p>
     <p>stringVal is truthy!</p>
     <p>intVal is truthy!</p>
     <p>arrVal is truthy!</p>
 ```
-
+<!-- tabs:end -->
 
 ### #unless
 The `#unless` helper renders its contents if the argument is falsy (equal to `false`, `undefined`, `null`, `""`, `0`, or `[]`), in other words the opposite of the `#if` helper.
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "boolVal": false,
@@ -251,7 +292,7 @@ The `#unless` helper renders its contents if the argument is falsy (equal to `fa
     "arrVal": []
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 {{#unless boolVal}}
     <p>boolVal is falsy!</p>
@@ -269,7 +310,7 @@ The `#unless` helper renders its contents if the argument is falsy (equal to `fa
     <p>undefinedVal is falsy!</p>
 {{/unless}}
 ```
-
+#### ** HTML Output **
 ```html
     <p>boolVal is falsy!</p>
     <p>stringVal is falsy!</p>
@@ -277,6 +318,7 @@ The `#unless` helper renders its contents if the argument is falsy (equal to `fa
     <p>arrVal is falsy!</p>
     <p>undefinedVal is falsy!</p>
 ```
+<!-- tabs:end -->
 
 ### else
 When writing an `#if` or `#unless`, often you will want to output a section of your template if the condition evaluates to false, without writing another using the inverse helper (an `#unless` paired with an `#if` and vice versa). 
@@ -285,14 +327,15 @@ Handlebars deals with this case by providing `else` functionality, which can als
 
 !> Elses are not limited to being paired with `#if` and `#unless`. Read the [block helpers advanced](definition/markup?id=block-helpers-advanced) section for more.
 
-
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "trueVal": true,
     "falseVal": false
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 {{#if falseVal}}
     <p>falseVal = true</p>
@@ -317,7 +360,7 @@ Handlebars deals with this case by providing `else` functionality, which can als
 {{/if}}
 </p>
 ```
-
+#### ** HTML Output **
 ```html
     <p>falseVal = false</p>
 
@@ -328,6 +371,7 @@ Handlebars deals with this case by providing `else` functionality, which can als
     No errors!
 </p>
 ```
+<!-- tabs:end -->
 
 ?> More complex conditions are possible with Yuzu's `#ifCond` helper (see the [Yuzu's handlebars helpers](definition/markup?id=ifCond) section for more).
 
@@ -341,7 +385,8 @@ In basic terms you pass a section of data and delegate its rendering to another 
 
 For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to include `parHeadshot` within `parPerson`. The code would look something like this:
 
-`parPerson.json`:
+<!-- tabs:start -->
+#### ** parPerson.json **
 ```json
 {
     "name": "Henry Jones Jr.",
@@ -351,24 +396,23 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
     }
 }
 ```
-
-`parPerson.hbs`
+#### ** parPerson.hbs **
 ```handlebars
 <h1>{{name}}</h1>
 {{> parHeadshot image }}
 ```
-
-`parHeadshot.hbs`
+#### ** parHeadshot.hbs **
 ```handlebars
 <img src="{{src}}" alt="{{alt}}"/>
 ```
 
-`html`
+#### ** parPerson.html **
 ```html
 <h1>Henry Jones Jr.</h1>
 <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/Indiana_Jones_in_Raiders_of_the_Lost_Ark.jpg" alt="Archeologist at work"/>
 ```
 
+<!-- tabs:end -->
 ---
 
 # Advanced Handlebars
@@ -379,6 +423,15 @@ You should by now have got to grips with the basics of Handlebars and are prepar
 There will be situations where you will want to access values outside your current context within helpers which alter the context (`#each`, `#with` etc.).
 
 This can be achieved by simply prefixing the expression with a `../` segment for every level you want to traverse up the tree from your current context.
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 
 For example:
 ```json
@@ -458,6 +511,15 @@ This allows for the rendering of specific array indexes and property identifiers
 
 !> We rarely need to use segment-literal notation in our experience. The below example is an extreme example with horribly named properties. However the ability to target a specific index of an array can be very useful, as explained in the [advanced #each section](definition/markup?id=block-helpers-advanced) 
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
+
 ```json
 {
     "availableClasses": [
@@ -511,6 +573,15 @@ This allows for the rendering of specific array indexes and property identifiers
 ### Using else with block helpers
 Although `else` is usually seen paired with an `#if` or `#unless` it is also possible to use it in conjunction with other helpers such as `#each`, to conditionally render a fallback to empty arrays.
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
+
 ```json
 {
     "subjects": [],
@@ -550,6 +621,15 @@ For example, what if you wanted to conditionally render an element which wraps t
 The prime example would be in a `<ul>` or `<ol>` which contains `<li>`s. Perhaps you don't want to render the list element at all if the array is empty and would prefer to just render a message instead. This is not possible using `else` within the `#each` approach outline above.
 
 What we have found works is using an `#if` to check for the presence of the first element in the array (i.e. not empty) via segment-literal notation.
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 
 ```json
 {
@@ -606,6 +686,15 @@ Handlebars has plenty of little properties crammed into the `#each` helper which
 - `@last` - boolean value, set to true on the last step of the `#each`
 
 Here's an example of them all used at once (not perfect, but gets the point across!):
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 ```json
 {
     "timesTables": {
@@ -814,6 +903,15 @@ The values can be a variable or just a string, integer etc. while the operator i
 
 As with `#if` and `#unless` they can be paired with an `else` or even joined to create a `else ifCond`. It can even be mixed with `#if` and `#unless` and thus can create fairly complex chains of conditions:
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
+
 ```json
 {
     "engineeringProblemCount": 4,
@@ -902,6 +1000,15 @@ To explain the need for `dynPartial` (dynamic partial) it is best to describe th
 
 When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement (using a string parameter and `#ifCond` & `else ifCond`) with all the blocks available to be rendered in a rows/column. If there were many options, it could quickly bloat the Handlebars file making it difficult to maintain. 
 
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
+
 For example:
 ```json
 {
@@ -941,6 +1048,15 @@ For example:
 As you can imagine, templates (such as grids) where we needed to conditionally render blocks depending on which block was represented in the data was a fairly common occurance and so we created dynamic partial helper to solve this, where a parameter could be a string variable.
 
 This allowed for the previous example to become:
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 ```json
 {
     "rows": [
@@ -981,6 +1097,15 @@ This however creates an issue: it ties the delivery and definition sides of the 
 To remidy this we decided to add a property called `_ref` which is automatically added to the data before it's rendered. It holds the string representaiton of its block name (e.g. `parImage`), removing this link between the two sides of the project and cleaning up the JSON simultaneously.
 
 This makes the example even cleaner:
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 ```json
 {
     "rows": [
@@ -1017,6 +1142,15 @@ If you want to skip a lot of explanation behind how we decided on this solution 
 
 ### The scenario
 Let's begin by outlining some markup to set the scene. Say this block `parSectionHeading` is used in two places:
+
+<!-- tabs:start -->
+#### ** Data (JSON) **
+
+#### ** Handlebars **
+
+#### ** HTML Output **
+
+<!-- tabs:end -->
 
 `parBlog.hbs`
 ```handlebars

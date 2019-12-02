@@ -1,4 +1,3 @@
-
 # Overview
 One of Yuzu's core aims is to make creating websites as simple and therefore as maintainable as possible and effects the majority of decisions made while developing the "Definition" side of Yuzu. 
 

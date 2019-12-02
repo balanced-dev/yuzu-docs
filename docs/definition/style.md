@@ -135,8 +135,8 @@ We keep everything nested within a single selector: the block's base class. All 
 For example, say you had the following classes from the markup:
 -	`block`
 -	`block__header`
--	`block__header__title`
--	`block__header__subtitle`
+-	`block__header-title`
+-	`block__header-subtitle`
 
 The stylesheet would look something like this:
 ```scss
@@ -145,14 +145,14 @@ The stylesheet would look something like this:
 
 	&__header {
 
-		&__title {
+		&-title {
 			@include font-size($font-size-large);
 			@include bold-font;
 			color: $colour-grey-xlight;
 			text-transform: uppercase;
 		}
 
-		&__subtitle {
+		&-subtitle {
 			@include font-size($font-size-large);
 			@include light-font;
 		}
@@ -171,7 +171,7 @@ Rather than separating it like:
 
 }
 
-.block__header__title {
+.block__header-title {
 
 }
 ```
@@ -184,7 +184,7 @@ or
 
 .block__header {
 
-	&__title {
+	&-title {
 
 	}
 }
@@ -197,11 +197,11 @@ This also works for modifiers:
 .block {
 	&__header {
 
-		&__title {
+		&-title {
 
 		}
 
-		&__subtitle {
+		&-subtitle {
 
 		}
 	}
@@ -220,6 +220,8 @@ As a rule we always put our modifiers at the end of the stylesheet/selector as t
 When using modifiers we tend to apply them as soon as possible in the markup. In practice this means that most modifiers are applied at the root element of blocks, with the exceptions being when using iterators are used and a modifier is needed on that item.
 
 For example:
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
 	"theme": "dark",
@@ -240,6 +242,7 @@ For example:
 	]
 }
 ```
+#### ** Handlebars **
 ```handlebars
 <ul class="list list--{{theme}}-theme {{#if roundedCorners}}list--rounded{{/if}}">
 	{{#each listItems}}
@@ -249,6 +252,22 @@ For example:
 	{{/each}}
 </ul>
 ```
+#### ** HTML Output **
+```html
+<ul class="list list--dark-theme list--rounded">
+		<li class="list__item ">
+			List item 1
+		</li>
+		<li class="list__item list__item--important">
+			List item 2
+		</li>
+		<li class="list__item ">
+			List item 3
+		</li>
+</ul>
+```
+<!-- tabs:end -->
+
 This standardises the markup and SCSS: the markup is not littered with conditions for classes save for where absolutely necessary and it means that most modifiers should be at the same place in the stylesheets (both root and nested modifiers are placed at the end of their selectors so that they override previous styles. Root modifiers are nested one level deep within the base class selector, hence making up the final section of the stylesheet).
 
 For the above example with some basic styles would look something like this:
