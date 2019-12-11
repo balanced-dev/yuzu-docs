@@ -13,7 +13,8 @@ Each block is made up of 4 key components:
 1. [**Schema-** ](definition/schema "Read more about schemas")<br>
 	The "blueprint" for the block's data, outlining all the properties and variations a block can contain. It's arguably the most important component as it's the contract between the front-end and the back-end of a site.
 
-	**`parPerson.schema`**
+	<!-- tabs:start -->
+	#### ** parPerson.schema **
 	``` json
 	{
 		"id": "/parPerson",		
@@ -40,14 +41,15 @@ Each block is made up of 4 key components:
 		}
 	}
 	```
-
+	<!-- tabs:end -->
 
 2.  [**Data (JSON)-** ](definition/data "Read more about data")<br>
 	Contained in JSON files, data allows the creation of states, enabling blocks to be tested with different/extreme data situations (e.g. the absence of a property, a long string in a property, different numbers of items in an array) without a backend solution. 
 
 	This allows for potential issues that data could create in the design to be raised and worked-around prior to integration.
 
-	**`parPerson_no-photos.json`**
+	<!-- tabs:start -->
+	#### ** parPerson_no-photos.json**
 	``` json
 	{
 		"name": "Guy Incognito",
@@ -55,7 +57,7 @@ Each block is made up of 4 key components:
 	}
 	```
 
-	**`parPerson_long-name.json`**
+	#### ** parPerson_long-name.json**
 	``` json
 	{
 		"name": "Charles Philip Arthur George Mountbatten-Windsor",
@@ -67,12 +69,14 @@ Each block is made up of 4 key components:
 		]
 	}
 	```
+	<!-- tabs:end -->
 
 
 3. [**Styling (SCSS)-** ](definition/style "Read more about styling")<br>
 	We personally like to use BEM and use a stylesheet per block, thereby effectively scoping our styles via the block name, reducing both CSS bleed and the need for the dreaded `!important`.
 
-	**`_parPerson.scss`**
+	<!-- tabs:start -->
+	#### **_parPerson.scss**
 	``` scss
 	.person {
 
@@ -85,6 +89,7 @@ Each block is made up of 4 key components:
 		}
 	}
 	```
+	<!-- tabs:end -->
 
 
 4. [**Markup (Handlebars)-** ](definition/markup "Read more about markup")<br>
@@ -92,7 +97,8 @@ Each block is made up of 4 key components:
 
 	One of our beliefs is that the front-end to projects should be as lightweight as possible and shouldn't doing any heavy-lifting. Handlebars is purely for rendering data and should not be seen as anything more. By not being "intellegent" (unable to do calculations, complex conditions etc.) it forces the markup to be simple and easy for even fledgling developers to understand and follow!
 
-	**`parPerson.hbs`**
+	<!-- tabs:start -->
+	#### **parPerson.hbs**
 	``` handlebars
 	<div class="person">
 		{{#if name}}
@@ -103,6 +109,7 @@ Each block is made up of 4 key components:
 		{{/each}}
 	</div>
 	```
+	<!-- tabs:end -->
 
 ## Block files
 The anatomy of a typical block:

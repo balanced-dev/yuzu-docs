@@ -3,6 +3,8 @@ As previously discussed, we choose to use and recommend Handlebars for all our p
 
 It also allows additional helpers to quickly and easily be added and used (however if you choose to add your own you'll need to replicate the functionality for server-side rendering and we will not be covering it in this documentation).
 
+Another benefit of using Handlebars is that it already has a .NET implementation of Handlebars ([Handlebars.net](https://github.com/rexm/Handlebars.Net)), allowing the partials created on the definition side to be rendered on the server. This is quick, due to the simplicity of Handlebars and because it allows the templates to be compiled into memory at application startup. Any AJAX requests required can also return a rendered Handlebars partial's HTML.
+
 ---
 
 # Handlebars Basics
@@ -424,16 +426,9 @@ There will be situations where you will want to access values outside your curre
 
 This can be achieved by simply prefixing the expression with a `../` segment for every level you want to traverse up the tree from your current context.
 
+For example:
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
-For example:
 ```json
 {
     "names": {
@@ -464,7 +459,7 @@ For example:
     }
 }
 ```
-
+#### ** Handlebars **
 ```handlebars
 <nav>
     {{#each links}}
@@ -482,7 +477,7 @@ For example:
 {{/with}}
 </ul>
 ```
-
+#### ** HTML Output **
 ```html
 <nav>
         <a href="www.madeuplink.com/photos">
@@ -503,7 +498,10 @@ For example:
         <li>Terry loves referring to himself in 3rd person</li>
 </ul>
 ```
+<!-- tabs:end -->
+
 !> When trying to access ancestor `@data` values ([discussed here](definition/markup?id=data-values) ) found within `#each` helpers. When nesting iterating over nested arrays/objects, you need to prefix the entire path with `@` e.g. `@../../index` NOT `../../@index` when accessing the `@data` values of outer loops.
+
 ### Literal segments
 To use a property that is not a valid identifier, segment-literal notation can be used.
 
@@ -513,13 +511,6 @@ This allows for the rendering of specific array indexes and property identifiers
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
 ```json
 {
     "availableClasses": [
@@ -541,6 +532,7 @@ This allows for the rendering of specific array indexes and property identifiers
 }
 ```
 
+#### ** Handlebars **
 ```handlebars
 <p>
     First available class:
@@ -554,6 +546,7 @@ This allows for the rendering of specific array indexes and property identifiers
 {{/each}}
 ```
 
+#### ** HTML Output **
 ```html
 <p>
     First available class:
@@ -569,25 +562,22 @@ This allows for the rendering of specific array indexes and property identifiers
 
 ```
 
+<!-- tabs:end -->
+
 ## Block helpers (advanced)
 ### Using else with block helpers
 Although `else` is usually seen paired with an `#if` or `#unless` it is also possible to use it in conjunction with other helpers such as `#each`, to conditionally render a fallback to empty arrays.
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
 ```json
 {
     "subjects": [],
     "student": {}
 }
 ```
+
+#### ** Handlebars **
 ```handlebars
 <h2>Your subjects:</h2>
 <p>
@@ -604,6 +594,8 @@ Although `else` is usually seen paired with an `#if` or `#unless` it is also pos
     <p>No student image uploaded</p>
 {{/with}}
 ```
+
+#### ** HTML Output **
 ```html
 <h2>Your subjects:</h2>
 <p>
@@ -612,6 +604,8 @@ Although `else` is usually seen paired with an `#if` or `#unless` it is also pos
 
     <p>No student image uploaded</p>
 ```
+
+<!-- tabs:end -->
 
 ### Using else vs #if with an #each
 Although using `else` within an `#each` is a clean way of conditionally rendering a section of your template for when your array is empty (e.g. a fallback message) it is not always an ideal choice.
@@ -624,18 +618,13 @@ What we have found works is using an `#if` to check for the presence of the firs
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
 ```json
 {
     "toDo": []
 }
 ```
+
+#### ** Handlebars **
 ```handlebars
 {{#if toDo.[0]}}
     <ol>
@@ -647,12 +636,18 @@ What we have found works is using an `#if` to check for the presence of the firs
     <p>Nothing is on your to-do list!</p>
 {{/if}}
 ```
+
+#### ** HTML Output **
 ```html
     <p>Nothing is on your to-do list!</p>
 ```
 
+<!-- tabs:end -->
+
 ### #each - iterating over objects
 Although in our opinion this is rarely useful, the `#each` helper is capable of looping through objects, like so:
+<!-- tabs:start -->
+#### ** Data (JSON) **
 ```json
 {
     "obj": {
@@ -662,6 +657,8 @@ Although in our opinion this is rarely useful, the `#each` helper is capable of 
     }
 }
 ```
+
+#### ** Handlebars **
 ```handlebars
 <ul>
 {{#each obj}}
@@ -669,6 +666,8 @@ Although in our opinion this is rarely useful, the `#each` helper is capable of 
 {{/each}}
 </ul>
 ```
+
+#### ** HTML Output **
 ```html
 <ul>
     <li>A</li>
@@ -676,6 +675,8 @@ Although in our opinion this is rarely useful, the `#each` helper is capable of 
     <li>C</li>
 </ul>
 ```
+<!-- tabs:end -->
+
 ?> Read on into the @data values section to learn how to render the object key
 
 ### @data values
@@ -689,12 +690,6 @@ Here's an example of them all used at once (not perfect, but gets the point acro
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
 ```json
 {
     "timesTables": {
@@ -704,6 +699,7 @@ Here's an example of them all used at once (not perfect, but gets the point acro
     }
 }
 ```
+#### ** Handlebars **
 ```handlebars
 {{#each timesTables}}
     <h2>{{@key}} times table</h2>
@@ -723,6 +719,7 @@ Here's an example of them all used at once (not perfect, but gets the point acro
     {{/unless}}
 {{/each}}
 ```
+#### ** HTML Output **
 ```html
  <h2>1 times table</h2>
     <ul>
@@ -827,6 +824,8 @@ Here's an example of them all used at once (not perfect, but gets the point acro
     </ul>
 
 ```
+<!-- tabs:end -->
+
 
 ### Block parameters
 If you thought that the example in the previous example was messy (@data values) then you'd be correct! You'd also be right in thinking there must be a better, more understandable and readable way of achieving the same output: Handlebars actually supports block parameters in `#each`. 
@@ -841,6 +840,9 @@ For example:
 Basically it allows aliases for the `@key`, `@index` and `this` values within `#each` and, so long as there are no naming clashes, removes the need for using `../` to access ancestor properties.
 
 Using the [@data values](definition/markup?id=data-values) example, here is an improved handlebars file, achieving identical html output:
+
+<!-- tabs:start -->
+#### ** Handlebars **
 ```handlebars
 {{#each timesTables as |table tableNo|}}
     <h2>{{tableNo}} times table</h2>
@@ -860,6 +862,7 @@ Using the [@data values](definition/markup?id=data-values) example, here is an i
     {{/unless}}
 {{/each}}
 ```
+<!-- tabs:end -->
 
 ---
 
@@ -905,13 +908,6 @@ As with `#if` and `#unless` they can be paired with an `else` or even joined to 
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
 ```json
 {
     "engineeringProblemCount": 4,
@@ -935,6 +931,7 @@ As with `#if` and `#unless` they can be paired with an `else` or even joined to 
     ]
 }
 ```
+#### ** Handlebars **
 ```handlebars
 <p>
     {{#unless engineeringProblemCount}}
@@ -966,6 +963,8 @@ As with `#if` and `#unless` they can be paired with an `else` or even joined to 
     {{/each}}
 </ul>
 ```
+
+#### ** HTML Output **
 ```html
 <p>
         Wow! A lot of questions!
@@ -989,6 +988,9 @@ As with `#if` and `#unless` they can be paired with an `else` or even joined to 
         </li>
 </ul>
 ```
+
+<!-- tabs:end -->
+
 `#ifCond`, although not perfect, can solve some more complex issues than purely using `#if` or `#unless` (namely when dealing with numerical values- `<`, `>`, etc. and string values `===`). It is flawed in the sense that you cannot invert boolean values in the condition (e.g. `{{#ifCond !value1 '&&' !value2}}`), it's also impossible to do complex conditions like `{{#ifCond value1 '&&' (value2 '||' value3)}}` etc. and have to resort to using nested conditions (as with the above example) to achieve the desired output.
 
 Rarely would such a complex set of conditions be used in the way they were when looping over the `engineeringProblems` array- if this was a proper project, the logic should be moved over to the delivery (back-end) side of the project with a string property being passed instead of a series of boolean values. This would either contain what type of message should be rendered (by using a series of `#ifCond`, `else ifCond`s to effectively form a switch statement) or just pass the actual message itself.
@@ -1000,16 +1002,9 @@ To explain the need for `dynPartial` (dynamic partial) it is best to describe th
 
 When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement (using a string parameter and `#ifCond` & `else ifCond`) with all the blocks available to be rendered in a rows/column. If there were many options, it could quickly bloat the Handlebars file making it difficult to maintain. 
 
+For example:
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
-For example:
 ```json
 {
     "rows": [
@@ -1034,6 +1029,7 @@ For example:
     ]
 }
 ```
+#### ** Handlebars **
 ```handlebars
 {{#each rows}}
     {{#ifCond blockName '===' 'image'}}
@@ -1045,18 +1041,14 @@ For example:
     {{/ifCond}}
 {{/each}}
 ```
+<!-- tabs:end -->
+
 As you can imagine, templates (such as grids) where we needed to conditionally render blocks depending on which block was represented in the data was a fairly common occurance and so we created dynamic partial helper to solve this, where a parameter could be a string variable.
 
 This allowed for the previous example to become:
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
 ```json
 {
     "rows": [
@@ -1081,11 +1073,15 @@ This allowed for the previous example to become:
     ]
 }
 ```
+#### ** Handlebars **
 ```handlebars
 {{#each rows}
     {{{ dynPartial blockName data}}}
 {{/each}}
 ```
+
+<!-- tabs:end -->
+
 ?> Please note that as `dynPartial` returns HTML it is necessary to not escape the helper's output (i.e. use triple braces: `{{{}}}`)
 
 Already that's a huge improvement!
@@ -1094,18 +1090,12 @@ Now you may notice that we had to change the `blockName` property from containin
 
 This however creates an issue: it ties the delivery and definition sides of the project together as renaming a block on the definition side could cause it not to render using `dynPartial` if the change wasn't reflected in the data being sent from the delivery side. 
 
-To remidy this we decided to add a property called `_ref` which is automatically added to the data before it's rendered. It holds the string representaiton of its block name (e.g. `parImage`), removing this link between the two sides of the project and cleaning up the JSON simultaneously.
+To remedy this we decided to add a property called `_ref` which is automatically added to the data before it's rendered. It holds the string representaiton of its block name (e.g. `parImage`), removing this link between the two sides of the project and cleaning up the JSON simultaneously.
 
 This makes the example even cleaner:
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
 ```json
 {
     "rows": [
@@ -1127,11 +1117,13 @@ This makes the example even cleaner:
     ]
 }
 ```
+#### ** Handlebars **
 ```handlebars
 {{#each rows}
     {{{ dynPartial data._ref data}}}
 {{/each}}
 ```
+<!-- tabs:end -->
 
 ## modPartial
 Again, this may be easier to describe the problem first, both making it easier to justify the reason behind the helper and understand.
@@ -1144,15 +1136,7 @@ If you want to skip a lot of explanation behind how we decided on this solution 
 Let's begin by outlining some markup to set the scene. Say this block `parSectionHeading` is used in two places:
 
 <!-- tabs:start -->
-#### ** Data (JSON) **
-
-#### ** Handlebars **
-
-#### ** HTML Output **
-
-<!-- tabs:end -->
-
-`parBlog.hbs`
+#### **parBlog.hbs **
 ```handlebars
 {{!-- Blog has a black background --}}
 <section class="blog">
@@ -1160,7 +1144,7 @@ Let's begin by outlining some markup to set the scene. Say this block `parSectio
     ...
 </section>
 ```
-`parArticle.hbs`
+#### **parArticle.hbs **
 ```handlebars
 {{!-- Article has a white background --}}
 <section class="article">
@@ -1168,7 +1152,7 @@ Let's begin by outlining some markup to set the scene. Say this block `parSectio
     ...
 </section>
 ```
-`parSectionHeading.hbs`
+#### **parSectionHeading.hbs **
 ```handlebars
 <header class="section-heading">
     {{#if title}}
@@ -1179,19 +1163,28 @@ Let's begin by outlining some markup to set the scene. Say this block `parSectio
     {{/if}}
 </header>
 ```
+<!-- tabs:end -->
+
 Pretty basic stuff right?
 
 Not so much when we try and style the `parSectionHeading` in different ways depending on whether it is contained in the `blog` block or the `article` block.
 
 With the risk of this turning into a delve into an explanation of cascading styles, let's say we have 2 options:
 1.  We could simply inherit the `color` CSS property from the `.blog` and `.article` classes in their respective stylesheets e.g.
+    <!-- tabs:start -->
+    #### **_parBlog.scss **
     ```scss
     .blog {
         background-color: #000000;
         color: #FFFFFF; // This would be inherited by the sectionHeading block (so long as it doesn't overwrite it)
     }
     ```
+    <!-- tabs:end -->
+
 2.  We could use the SCSS parent selector (`&`) to create styles when the `.section-heading` class is nested within either `.article` or `.article` like so:
+
+    <!-- tabs:start -->
+    #### **_parSectionHeading.scss **
     ```scss
     .section-heading {
 
@@ -1204,6 +1197,8 @@ With the risk of this turning into a delve into an explanation of cascading styl
         }        
     }
     ```
+    <!-- tabs:end -->
+    
     Which would compile to:
     ```css
     .blog .section-heading {
@@ -1220,6 +1215,8 @@ So we have two ways of effecting the colour of the text, which to their credit w
 Take solution 1- what happens if we want the headings in `parSectionHeading` to not be one single text colour? For arguments sake, say the title needs to be white and the subtitle a light grey when used in blog, whereas when used in the article block (which uses a white background) the title should be black and have a dark grey subtitle. This fix instantly falls down when there is greater control needed.
 
 Solution 2 however is viable even when styling the titles independently, succeeding where solution 1 fails:
+<!-- tabs:start -->
+#### **_parSectionHeading.scss **
 ```scss
 .section-heading {
     $this: '.section-heading';
@@ -1249,6 +1246,7 @@ Solution 2 however is viable even when styling the titles independently, succeed
     }        
 }
 ```
+<!-- tabs:end -->
 ```css
 .blog .section-heading .section-heading__title {
   color: #FFFFFF;
@@ -1270,6 +1268,8 @@ But again this solution is not without its issues. What happens when another blo
 Perhaps now you may evolve it to be more of a generic class and move away from using the outer blocks' classes as selectors within the `_parSectionHeading` stylesheet. Something like `.black-background` or maybe to cover both instances to avoid having to add to a selector everytime a block needs to use `parSectionHeading`.
 
 But where would you put it? At the root of the parent block? No, that wouldn't make sense as it purely relates to `parSectionHeading`. Introducing a new element to wrap `parSectionHeading` like so would surely be cleanest?:
+<!-- tabs:start -->
+#### **parBlog.hbs **
 ```handlebars
 <section class="blog">
     <div class="black-background">
@@ -1278,6 +1278,7 @@ But where would you put it? At the root of the parent block? No, that wouldn't m
     ...
 </section>
 ```
+<!-- tabs:end -->
 But the issue with all of these solutions is that not one so far is without a problem:
 - Relying on inherited styles is very limited and should be relied upon as little as possible as it's very fragile and is very easily overwritten by mistake
 - All styles relating to a block should be kept within the block itself, not relying on styles from outside of its directory stylesheet or classes in markup outside of its own handlebars file
@@ -1292,24 +1293,27 @@ The answer: Yuzu's "\_" property `_modifiers` and the `modPartial` helper.
 
 To use `modPartial` simply call pass the name of the partial (as a string), the context and then as many modifiers as you want as string parameters to the end of the helper like so:
 
-`parBlog.hbs`
+<!-- tabs:start -->
+#### **parBlog.hbs **
 ```handlebars
 <section class="blog">
     {{{ modPartial 'parSectionHeading' heading 'dark-background' 'larger-title' }}}
     ...
 </section>
 ```
+<!-- tabs:end -->
 
 
 Then in the sub-block we can add these modifiers held in `_modifiers` like this:
 
-`parSectionHeading.hbs`
+<!-- tabs:start -->
+#### **parSectionHeading.hbs **
 ```handlebars
 <header class="section-heading {{#each _modifiers}} section-heading--{{this}} {{/each}}">
     ...
 </header>
 ```
-`parBlog` html output
+#### **parBlog html output **
 ```html
 <section class="blog">
     <header class="section-heading  section-heading--dark-background  section-heading--larger-title ">
@@ -1318,6 +1322,7 @@ Then in the sub-block we can add these modifiers held in `_modifiers` like this:
     ...
 </section>
 ```
+<!-- tabs:end -->
 This enables us to cleanly separate styling as much as possible, without having to know the root class the block is using from the parent block, it doesn't require extra markup, doesn't need the delivery side to pass us properties so that the block knows its context, and uses BEM's modifier concept. This all makes for the best solution we could envisage and works very well for us!
 
 ?> Please note that as `modPartial` returns HTML it is necessary to not escape the helper's output (i.e. use triple braces: `{{{}}}`)
@@ -1398,23 +1403,93 @@ or
 {{{ pictureSource 'max-width: 600px' image.src quality=10 contrast=25 createWebP=false}}}
 ```
 
-Further ImageProcessor options can be found [here](https://imageprocessor.org/imageprocessor-web/imageprocessingmodule/) under 'methods'
+?> Further ImageProcessor options can be found [here](https://imageprocessor.org/imageprocessor-web/imageprocessingmodule/) under 'methods'
+
 ## toString
+
+## enum
+Although this helper is not actually needed on the definition side of projects when using enum values (see the [schema enum section](definition/schema?id=enums)) it is required for the delivery side to correctly process enum values.
+
+Basically, instead of rendering an enum property in the usual way, you need to use the helper like so:
+
+<!-- tabs:start -->
+#### **parSocialLinks.hbs **
+```handlebars
+<div class="social-links">
+    {{#each links}}
+        <a class="social-links__link" href="{{link.href}}" title="{{link.title}}">
+            {{#if icon}}
+                <span class="social-links__link-icon icon icon-{{enum icon}}"></span>
+                {{!-- 
+                    NOT:
+                    <span class="social-links__link-icon icon icon-{{icon}}"></span>
+                --}}
+            {{/if}}
+            <span class="social-links__link-text">{{link.label}}</span>
+        </a>
+    {{/each}}
+</div>
+```
+#### **parSocialLinks.schema **
+```json
+{
+    "id": "/parSocialLinks",
+    "$schema": "http://json-schema.org/schema#",
+	"type": "object",
+	"additionalProperties": false,
+    "properties": {
+        "links": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "icon": {
+                        "type": "string",
+                        "enum": ["facebook","twitter","linkedin"]
+                    },
+                    "link": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "href": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "label": {
+                                "type": "string"
+                            }
+                        }                        
+                    }
+                }
+            }
+        } 
+    },
+    "additionalProperties": false
+}
+```
+<!-- tabs:end -->
 
 ---
 
 # Layouts
 A layout is basically a wrapper around pages, generally containing common components which are included within the HTML document outside of the main page contents. This can range from just including things like links to stylesheets and Javascript files, to including common 'layout' blocks which appear on multiple pages: for example the site header/footer, cookie messages, modals etc.
 
-It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included.
+It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included. As these are obviously purely for developers when working on the definition side, they can be removed on the delivery side so it's not included in the final output.
+
+Within your project you should have at the very least two layouts, one for blocks (`_block.hbs`) and one for pages (`_page.hbs`), contained within (`_dev/_templates/src/_layouts` directory). `_block.hbs` and `_page.hbs` are the default layout for blocks and pages respectively (unsurprisingly!).
 
 Below is a simple page layout illustrating what we've discussed so far:
+<!-- tabs:start -->
+#### **_page.hbs **
 ```handlebars
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
         
         {{!-- Further meta/stylesheets here --}}
@@ -1437,6 +1512,7 @@ Below is a simple page layout illustrating what we've discussed so far:
 	</body>
 </html>
 ```
+#### **_page.json **
 ```json
 {
     "header": {
@@ -1447,6 +1523,50 @@ Below is a simple page layout illustrating what we've discussed so far:
     }
 }
 ```
+<!-- tabs:end -->
+
+## Using a specific layout/layout state on a page
+Many websites will only have one real layout, but definition developers may want to have different layout states if there are sub-blocks within the layout partial, to test different data conditions. 
+
+Similarly there may be multiple layouts, with different markup required. How do you switch between states/layouts? Simply by overriding a hidden object property added dynamically to all pages: `_layout`.
+
+By default this is added:
+```json
+"_layout": {
+    "name": "_page",
+    "data": "_page"
+}
+```
+-   `name` relates to the name of the layout (by default `_page`)
+-   `data` relates to the name of the layout state- i.e. it's JSON file name (by default `_page`)
+
+So for example, say if you had a state from the previous `_page` example called `_page_empty-header` as it uses `/parSiteHeader_empty`. To use this layout state on a specific page (e.g. `homepage`), the files would be setup like so:
+
+<!-- tabs:start -->
+#### **_page_empty-header.json **
+```json
+{
+    "header": {
+        "$ref": "/parSiteHeader_empty"
+    },
+    "footer": {
+        "$ref": "/parSiteFooter"
+    }
+}
+```
+#### **homepage.json **
+```json
+{
+    "heroCarousel": {
+        "$ref": "/parCarousel"
+    },
+    "_layout": {
+        "name": "_page",
+        "data": "_page_empty-header"
+    }
+}
+```
+<!-- tabs:end -->
 
 ---
 
