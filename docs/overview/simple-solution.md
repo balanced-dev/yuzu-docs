@@ -1,16 +1,16 @@
 # A Simple Solution
 
-at its heart Yuzu is a simple solution to the complex problem of integration caused by the separation of defintion and devlivery developers. We have created many ancilliary services and tools for Yuzu that make the process easier and pave the way for automation.
+at its heart Yuzu is a simple solution to the complex problem of integration that is always caused by the separation of defintion and devlivery. We have created ancilliary services and tools for Yuzu that make the process easier and pave the way to automation.
 
 Yuzu is actually two separate production environments, one for each of definition and delivery. The basic rules and processes for each are outlined below.
 
 #### Definition
 
-- UI is split in descrete UI components called blocks
+- UI is split into descrete UI components called blocks
 - each block is self contained
 - each block contains a minumum of template, style, schema and data examples
-- block schemas describe all the data posibilities and acts as a interface to the block so that it can be rendered without any inner understanding of the template
-- block schema, data and templates can reference any other block schema, data and templates
+- block schemas describe the block dynamicity and act as a interface so that it can be rendered without any inner understanding
+- block data, schema and templates can reference any other block schema, data and templates
 - block references between schema, data and template needn't be in sync, a schema can reference a sub schema but the data can be inline
 - previews are created for each block on change
 - UI definition is released to Delivery as a collection of template and schema files
@@ -25,9 +25,9 @@ Yuzu is actually two separate production environments, one for each of definitio
 
 - CMS agnostic
 - templates are loaded and precompiled
-- template schemas are used to define viewmodels
-- model data is mapped to viewmodel objects
-- template files are rendered natively at runtime by the delivery solution using hydrated viewmodela
+- template schemas are used to generate viewmodels
+- model data is (auto)mapped to viewmodel objects
+- template files are rendered natively at runtime by a delivery solution using viewmodels hydrated from model data
 
     ```
     PM> Install-Package YuzuDelivery.Core

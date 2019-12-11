@@ -1,10 +1,12 @@
 # Umbraco Integration
 
-Although the core of Yuzu is delivery application (CMS) agnostic we have released a series of modules that integrate strongly into the Umbraco CMS. They show how a CMS can be integrated at the core level and with specific editors that CMS's uses to define common UI structures.
+Although the core of Yuzu is delivery application (CMS) agnostic we have released a series of modules that integrate with the Umbraco CMS. They show how a CMS can be integrated at the core level and with specific editors that CMS's uses to define common UI structures.
 
 Below is an introduction to each module that integrates with Umbraco
 
-- core umbraco - an umbraco specific wrapper for yuzu.definition.core. Bootstraps Yuzu by registering components in the IOC container and adding the hbs helpers. Contains the default viewmodels for Links and Images and their mapping. 
+## Core umbraco
+
+umbraco specific wrapper for yuzu.definition.core. Bootstraps Yuzu by registering components in the IOC container and adding hbs helpers. Also contains the default viewmodels for Links and Images and their mapping. 
 
 ```
 PM> Install-Package YuzuDelivery.Umbraco.Blocks
@@ -12,7 +14,9 @@ PM> Install-Package YuzuDelivery.Umbraco.Blocks
 [docs]() - 
 [source](https://github.com/balanced-dev/yuzudelivery.umbraco.blocks)
 
-- grids - integration and mapping tools for working with the Grid Layout property type in Umbraco
+## Grids
+
+integration and mapping tools for working with the Grid Layout property type in Umbraco
 
 ```
 PM> Install-Package YuzuDelivery.Umbraco.Grids
@@ -20,10 +24,22 @@ PM> Install-Package YuzuDelivery.Umbraco.Grids
 [docs]() - 
 [source](https://github.com/balanced-dev/yuzudelivery.umbraco.grids)
 
-- forms - integration and mapping tools for working with Umbraco Forms.
+## Forms 
+
+integration and mapping tools for working with Umbraco Forms.
 
 ```
 PM> Install-Package YuzuDelivery.Umbraco.Forms
 ```
 [docs]() - 
 [source](https://github.com/balanced-dev/yuzudelivery.umbraco.forms)
+
+## Members 
+
+integration and controllers for working with Umbraco Membership, extending core Umbraco functionallity. Easily add simpple Login, Forgotten Password, Register, Change Password and Change name/email
+
+```
+PM> Install-Package YuzuDelivery.Umbraco.Members
+```
+[docs]() - 
+[source](https://github.com/balanced-dev/yuzudelivery.umbraco.members)
