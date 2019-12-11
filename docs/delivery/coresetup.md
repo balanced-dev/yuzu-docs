@@ -1,44 +1,77 @@
-# Markup and Style Focused
+# Core setup and config
 
-> An awesome project 2.
+We recommend that you install Yuzu in a separate class library outside of the web application. This will make it easy to manage the code and generate Models and Viewmodels. 
 
-```javascript
-for(var i = 0, len = arr.length; i < len; i++) {
-    console.log(i);
-};
 ```
-?> Hint/more info
+npm install yuzu-definition-core
+```
 
-!> Warning
+Yuzu is initialised using a configuration object as follows (not a complete example)
 
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+``` c#
+Yuzu.Initialize(new YuzuConfiguration()
+{
+    ViewModelAssemblies = new Assembly[] { localAssembly, gridAssembly },
+    TemplateLocations = new List<ITemplateLocation>()
+    {
+        new TemplateLocation()
+        {
+            Name = "Pages",
+            Path = Server.MapPath(pagesLocation),
+            Schema = Server.MapPath(pagesLocation.Replace("src", "schema")),
+            RegisterAllAsPartials = false,
+            SearchSubDirectories = false
+        }
+    },
+}
+```
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+## Configuration Properties
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Properties in bold are required
 
-Combined emphasis with **asterisks and _underscores_**.
+| Property    			    	| Purpose 			                        | Default Value             |
+| ----------------------------- | ------------------------------------------|---------------------------|
+| **ViewModelAssemblies**		| Assemblies that contain viewmodels        |                           |
+| **TemplateLocations**			| Locations for hbs templates               |                           |
+| **SchemaMetaLocations**     	| Locations for schema meta files           |                           |
+| BlockPrefix               	| Block prefix for generated viewmodels     | vmBlock_                  |
+| SubPrefix                 	| SubBlock prefix for generated viewmodels  | vmSub_                    |
+| PagePrefix                	| Page prefix for generated viewmodels      | vmPage_                   |
+| BlockRefPrefix                | how blocks are defined in definition      | /par_                     |
+| TemplateFileExtension       	| file extension used                       | .hbs                      |
+| **GetTemplatesCache** 		| function to get cached complied templates |                           |
+| **SetTemplatesCache** 	    | function to set cached compiled templates |                           |
+| **GetRenderedHtmlCache**  	| function to get cached rendered content   |                           |
+| **SetRenderedHtmlCache**		| function to set cached rendered content   |                           |
 
-Strikethrough uses two tildes. ~~Scratch this.~~
+#### Templates locations
 
-1. First ordered list item
-2. Another item
- * Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
- 1. Ordered sub-list
-4. And another item.
+| Property    			    	| Purpose 			                                        |
+| ----------------------------- | ----------------------------------------------------------|
+| Name 			                |                                                           |
+| Path 			                | The **absolute** path to the templates directory          |
+| Schema        	            | The **absolute** path to the template schema directory    |
+| RegisterAllAsPartials         | If these templates are also registered as partial         |
+| SearchSubDirectories         	| Searches further sub directories for templates            |
 
-   You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+#### Schema meta locations
 
-   To have a line break without a paragraph, you will need to use two trailing spaces.  
-   Note that this line is separate, but within the same paragraph.  
-   (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+| Property    			    	| Purpose 			                                        |
+| ----------------------------- | ----------------------------------------------------------|
+| Name 			                |                                                           |
+| Path 			                | The **absolute** path to the schema meta directory        |
 
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
+## Caching setup
+
+The core setup to Yuzu allows you to specify how and where caching takes place. We have done this to give you full control of how this works and to make the core implementation CMS agnostic. 
+
+### Compiled definition templates
+
+On startup the Yuzu will reads all the templates from the specified locations, pre-compiles and stores them in a cache. This slightly affects bootup speed but significantly improves the speed of pages at runtime. 
+
+The location and expiry length of that cache is down to you. 
+
+### Html cache
+
+As part of the rendering process we have a simple caching mechanism setup to cache rendered HTML. This allows you to define where and how that data is cached.

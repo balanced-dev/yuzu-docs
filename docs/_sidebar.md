@@ -1,6 +1,6 @@
 - Introduction
   - [Definition and Delivery](/overview/definitionVsDelivery.md)
-  - [Simple Solution](/overview/simple-solution.md)
+  - [Core](/overview/core.md)
   - [Tools](/overview/tools.md)
   - [Umbraco](/overview/umbraco.md)
   - [Automation](/overview/automation.md)
@@ -18,8 +18,11 @@
 
 - Delivery
   - [Overview](/delivery/overview.md)
-  - [Definition Release Structure](/delivery/definitionRelease.md)
   - [Core Setup](/delivery/coresetup.md)
+  - [Viewmodel Generation](/delivery/viewmodelGeneration.md)
+  - [Mapping Strategies](/delivery/mapping.md)
+  - [Rendering Templates](/delivery/rendering.md)
+  - [Definition Release Structure](/delivery/definitionRelease.md)
   - Umbraco
     - [Core](/delivery/coresetup.md)
     - [Grid](/delivery/grids.md)
