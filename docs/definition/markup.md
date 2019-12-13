@@ -1406,6 +1406,9 @@ or
 ?> Further ImageProcessor options can be found [here](https://imageprocessor.org/imageprocessor-web/imageprocessingmodule/) under 'methods'
 
 ## toString
+Simply used to "stringify" a property. Useful for piping a state/part of a state into a markup data attribute to be used by Javascript.
+
+?> See the Javascript section's [Vue example](definition/javascript?id=vuejs) to see it in use
 
 ## enum
 Although this helper is not actually needed on the definition side of projects when using enum values (see the [schema enum section](definition/schema?id=enums)) it is required for the delivery side to correctly process enum values.

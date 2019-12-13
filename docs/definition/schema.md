@@ -291,11 +291,14 @@ You can then reference `parDataLink` from the parent block's/page's schema. For 
 ```
 <!-- tabs:end -->
 
+One of the huge advantages of doing this is for the delivery side: if multiple blocks reply on a single, centralised data structure schema then it means that automated processes can occur.
+
+For example, we've used a link in the above example. But, imagine we've centralised all images instead with all other schemas relying on `parDataImage` when an image is required. It allows us to automatically set the data type in Umbraco of images within blocks to be a media picker becuase of the standardisation we've achieved by using this data structure concept.
 
 ---
 
 # File type
-All of our example schemas so far have been of the the `object` type at their root, so you would be forgiven in thinking that this is the only valid option for them. However this is not the case (although the majority of the time your schemas are likely to be `objects`): the second most used type of schema in our projects for example is `array`.
+All of our example schemas thus far have been of the the `object` type at their root, so you would be forgiven in thinking that this is the only valid option for them. However this is not the case (although the majority of the time your schemas are likely to be `objects`): the second most used type of schema in our projects for example is `array`.
 
 <!-- tabs:start -->
 #### **parContentPage.schema **
