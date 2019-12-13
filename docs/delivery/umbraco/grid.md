@@ -1,44 +1,38 @@
-# Markup and Style Focused
+# Umbraco Grids
 
-> An awesome project 2.
+This package brings together Umbraco Grid, [Doc Type Grid Editor](https://our.umbraco.com/packages/backoffice-extensions/doc-type-grid-editor/), [SkyBrud Umbraco GridData](https://github.com/skybrud/Skybrud.Umbraco.GridData) and Yuzu to create a powerful out of the box, config ready grid solution. It the quickest and simplest way that we have found to implement the grid in Umbraco. 
 
-```javascript
-for(var i = 0, len = arr.length; i < len; i++) {
-    console.log(i);
-};
+Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks available to content editors, including live preview within the Umbraco back office. 
+
+All mapping happens through our grid item mapping service that pulls together a collection of grid aware block. This service can be overridden in the contains to implement your own mapping instance.
+
+Couple with out Umbraco Imports package we can automate the generation of Grid document types, including the creation of Doc Type Grid Editor config. We've even included config setting defined within the pattern library that are automatically copied over and implemented in Grid editor config.
+
+## Config
+
+There is no config for this package.
+
+## Mapping
+
+There are two standard data structures for grid, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns. The first is for row only grid and the second is for grids with rows and columns. Both rows and columns can include config object, but they are not mandatory.
+
+### Grids
+
+We have created some mapping wrapper classes that make it easier to work with grids in Yuzu. Which one used is dependant on how the other properties in the same Viewmodel are mapped.
+
+When only adding grid mapping to a viewmodel the command is very simple
+
+```c#
+cfg.AddGridWithRows<SectionGridPage, vmPage_SectionGridPage>(src => src.Grid, dest => dest.Grid);
 ```
-?> Hint/more info
 
-!> Warning
+When manual mapping on other viewmodel properties is required then it gets a little more complex.
 
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
+```c#
+CreateMap<HomePage, vmPage_HomePage>()
+    .ForMember(x => x.Content, opt => opt.MapFrom<GridRowConvertor<HomePage, vmPage_HomePage, vmBlock_GridConfig>, GridDataModel>(y => y.Content));
+```
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+### Grid Items
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
-1. First ordered list item
-2. Another item
- * Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
- 1. Ordered sub-list
-4. And another item.
-
-   You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
-
-   To have a line break without a paragraph, you will need to use two trailing spaces.  
-   Note that this line is separate, but within the same paragraph.  
-   (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
-
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
+## Grid setting manipulation

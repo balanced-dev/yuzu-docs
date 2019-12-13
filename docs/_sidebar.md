@@ -24,10 +24,10 @@
   - [Rendering Templates](/delivery/rendering.md)
   - [Definition Release Structure](/delivery/definitionRelease.md)
   - Umbraco
-    - [Core](/delivery/coresetup.md)
-    - [Grid](/delivery/grids.md)
-    - [Forms](/delivery/forms.md)
-    - [Members](/delivery/members.md)
+    - [Core](/delivery/umbraco/core.md)
+    - [Grid](/delivery/umbraco/grid.md)
+    - [Forms](/delivery/umbraco/forms.md)
+    - [Members](/delivery/umbraco/members.md)
   - Umbraco Automation
     - [Viewmodel mapping]()
     - [Schema Creation]()
