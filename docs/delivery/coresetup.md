@@ -45,6 +45,8 @@ Properties in bold are required
 | **GetRenderedHtmlCache**  	| function to get cached rendered content   |                           |
 | **SetRenderedHtmlCache**		| function to set cached rendered content   |                           |
 
+?> We have added the ability to change the prefix values for viewmodel naming but we really wouldn't advise this is done yet!
+
 #### Templates locations
 
 | Property    			    	| Purpose 			                                        |
