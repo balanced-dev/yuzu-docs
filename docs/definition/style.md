@@ -1,7 +1,7 @@
 # Style
 As with most things, people have their preferred way of thinking and operating and like to stick to their methods. Anything that deviates from that often is met with at least some resistance: changing the way you work can be uncomfortable and frankly fruitless exercise if the end result is slower, less understandable or yields no additional benefits even after getting used to it. That's fine- if you've got an efficient way of working that outweighs its downsides, then feel free to keep using it! We're just going to present all our favoured approach, using BEM (Block Element Modifier), which we've found gives us the cleanest output possible and which aligns nicely with our Yuzu ethos while not noticeably slowing our rate of output.
 
-In the past we have built sites using CSS frameworks like Bootstrap, which often rely on using decorator classes. We  always seemed to run into issues however, which would detract from the great inital starting point they provide. They are not without merit and definitely have a time and a place to be used but, when building bespoke sites and once a good way into the project, we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). 
+In the past we have built sites using CSS frameworks like Bootstrap, which often rely on using decorator classes. We  always seemed to run into issues however, which would detract from the great initial starting point they provide. They are not without merit and definitely have a time and a place to be used but, when building bespoke sites and once a good way into the project, we would seem to run into specificity clashes (requiring the dreaded `!important` in some cases) and/or muddied markup from the sprinkling of decorator classes tacked onto most elements (with additional classes for custom styles). 
 
 It was because of these problems and general feeling of restriction which drove us to trying BEM and really liking how it felt to use. We found it helped to remove the feeling of, when using helper classes, the actual styling between the markup and stylesheets- you need both to know how it is going to look. A single class per element (ignoring modifiers), a single SCSS file per block, a single point of truth.
 
@@ -367,6 +367,6 @@ We were able to style the important list items easily enough, but how do we make
 	`.list {
 	$this: &; // Will contain '.list'
 }`<br>
-	However won't work on the backoffice in the previews if you are wrapping all your styles in a class as '&' will equal something like `.yuzu-back-office .list` and thus won't work as expected, hence the hardcoding of the class instead.
+	However, this won't work on the backoffice in the previews if you are wrapping all your styles in a class as '&' will equal something like `.yuzu-back-office .list` and thus won't give the expected result, hence the hardcoding of the class instead.
 
 ?> **For further reading about modifiers**: See the [modPartial markup section](definition/markup?id=modPartial)

@@ -1076,7 +1076,7 @@ This allowed for the previous example to become:
 #### ** Handlebars **
 ```handlebars
 {{#each rows}
-    {{{ dynPartial blockName data}}}
+    {{{ dynPartial blockName data }}}
 {{/each}}
 ```
 
@@ -1120,7 +1120,7 @@ This makes the example even cleaner:
 #### ** Handlebars **
 ```handlebars
 {{#each rows}
-    {{{ dynPartial data._ref data}}}
+    {{{ dynPartial data._ref data }}}
 {{/each}}
 ```
 <!-- tabs:end -->

@@ -95,7 +95,7 @@ Each block is made up of 4 key components:
 4. [**Markup (Handlebars)-** ](definition/markup "Read more about markup")<br>
 	We use Handlebars as it uses simple syntax to render our data and covers most of the scenarios we've encountered. Where we have found it wanting we've added a very small selection of helpers to help bridge the gap.
 
-	One of our beliefs is that the front-end to projects should be as lightweight as possible and shouldn't doing any heavy-lifting. Handlebars is purely for rendering data and should not be seen as anything more. By not being "intellegent" (unable to do calculations, complex conditions etc.) it forces the markup to be simple and easy for even fledgling developers to understand and follow!
+	One of our beliefs is that the front-end to projects should be as lightweight as possible and shouldn't doing any heavy-lifting. Handlebars is purely for rendering data and should not be seen as anything more. By not being "intelligent" (unable to do calculations, complex conditions etc.) it forces the markup to be simple and easy for even fledgling developers to understand and follow!
 
 	<!-- tabs:start -->
 	#### **parPerson.hbs**

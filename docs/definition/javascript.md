@@ -3,7 +3,7 @@ Javascript is the area in which Yuzu is the least prescriptive- it's often where
 
 For example, many brochure sites don't require much in the way of JS- maybe some very basic, framework-less scripts to just toggle some classes will suffice. Perhaps no Javascript is needed at all or maybe, despite it being considered 'outdated' by many, jQuery would be best so you can leverage some of the vast array of plugins available (e.g. a carousel).
 
-We are not against using Angular, Vue or any other framework as we have occassionally used them on some sites to fufil specific roles in specific areas. It's about choosing the right tool for the job.
+We are not against using Angular, Vue or any other framework as we have occasionally used them on some sites to fulfil specific roles in specific areas. It's about choosing the right tool for the job.
 
 Despite this, we have a basic API and have provided a few examples of a few ways of writing JS in a Yuzu environment to help you get stated 
 
