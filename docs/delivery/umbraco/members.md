@@ -1,8 +1,8 @@
 # Membership
 
-Simple membership solutions are hard to get right, there are so many moving parts and getting it wrong could least to a security hole or UX issues. We intend to solve this problem by creating a simple, adaptable solution for adding membership funationality to Yuzu enabled Umbraco sites. Defintion have complete control of the UI and delivery can change the content of the viewmodels prerender and can define when and where forms are rendered.
+Simple membership solutions are hard to get right, there are so many elements and getting one wrong could lead have security implications or cause UX issues. We intend to solve this problem by creating a simple, adaptable solution for adding membership funationality to Yuzu enabled Umbraco sites. In this solution defintion have complete control of the UI and delivery can change the Viewmodels data before render and also choose when and where forms are rendered.
 
-This  is not intended to be the solution to creating membership forms on all sites, but as a quick solution for smaller sites that don't need overly complex solutions. It also gives an example of how we work with Yuzu, by separating out the UI and CMS integration we can create packages that are very adaptable.
+It's is not intended to be the solution to creating membership forms on all sites, but as a quick solution for smaller sites that don't need overly complex solutions it works well. It also demonstrates how we are working with Yuzu; by separating out the UI and CMS integration we can create packages that are very adaptable with minimum code implementation.
 
 The following forms are included
 
