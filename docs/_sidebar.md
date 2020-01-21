@@ -1,3 +1,4 @@
+- [Quickstart](/_quickstart.md)
 - Introduction
   - [Definition and Delivery](/overview/definitionVsDelivery.md)
   - [Core](/overview/core.md)
