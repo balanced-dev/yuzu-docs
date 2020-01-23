@@ -243,7 +243,7 @@ Although this is a bit of a contrived/abstract example, it quite nicely illustra
 
 In the example we haven't even touched on `parDairy`, `parPoultry`, `parMeat`, `parArable` farms which would all have their own, different "generic" schemas to `parMixed`, all using their own markup. These different versions allow for flexible use of a common data structure across projects, with potentially multiple implementations within the same project.
 
-We find this to be usefuly when dealing with grids and forms.
+We find this to be useful when dealing with grids and forms.
 
 ---
 

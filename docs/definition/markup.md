@@ -8,9 +8,7 @@ Another benefit of using Handlebars is that it already has a .NET implementation
 ---
 
 # Handlebars Basics
-The best place to start may be the official [Handlebars Docs](https://handlebarsjs.com/ "Read official Handlebars documentation"), but they are not (in our opinion) the best and seem to overcomplicate/not fully explain its features, so this will be a quick get-started guide. 
-
-You should rarely have any real reason to refer to anything but this documentation in most cases, but the Handlebars Documentation is improving ([new draft docs at time of writing](https://handlebars-draft.knappi.org/guide/ "Read new draft Handlebars documentation")) and will dive deeper than this guide will.
+The best place to start may be the official [Handlebars Docs](https://handlebarsjs.com/ "Read official Handlebars documentation"), but we'll give a simplified version here for quick references or just to ease you into using Handlebars.
 
 ?> If you want to quickly try out the examples in this guide yourself or just play around in Handlebars, [tryhandlebarsjs.com](http://tryhandlebarsjs.com/) is a fantastic resource (just note that the Yuzu helpers obviously will not work).
 
