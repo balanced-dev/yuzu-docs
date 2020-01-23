@@ -1,12 +1,12 @@
 # Umbraco Grids
 
-This package brings together Umbraco Grid, [Doc Type Grid Editor](https://our.umbraco.com/packages/backoffice-extensions/doc-type-grid-editor/), [SkyBrud Umbraco GridData](https://github.com/skybrud/Skybrud.Umbraco.GridData) and Yuzu to create a powerful out of the box, config ready grid solution. It the quickest and simplest way that we have found to implement the grid in Umbraco. 
+This package brings together Umbraco Grid, [Doc Type Grid Editor](https://our.umbraco.com/packages/backoffice-extensions/doc-type-grid-editor/), [SkyBrud Umbraco GridData](https://github.com/skybrud/Skybrud.Umbraco.GridData) and Yuzu to create a powerful out of the box, config ready grid solution. It's the quickest and simplest way that we have found to implement the grid in Umbraco. 
 
-Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks available to content editors, including live preview within the Umbraco back office. 
+Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks for content editors to add to grids and control live previews within the Umbraco back office. 
 
-All mapping happens through our grid item mapping service that pulls together a collection of grid aware block. This service can be overridden in the contains to implement your own mapping instance.
+All mapping is routed through our GridItemMapping service that utilizes data structures specific to the grid. This service can be overridden in the container to implement your own mapping instance.
 
-Couple with out Umbraco Imports package we can automate the generation of Grid document types, including the creation of Doc Type Grid Editor config. We've even included config setting defined within the pattern library that are automatically copied over and implemented in Grid editor config.
+Coupled with our Umbraco Import package we automate the creation of Umbraco Grid data types, including the creation of items in the Doc Type Grid Editor config file. We can also import grid config settings defined within the pattern library into the Grid property editor definition.
 
 ## Config
 
@@ -16,19 +16,19 @@ Couple with out Umbraco Imports package we can automate the generation of Grid d
 
 ## Mapping
 
-There are two data structures for grid, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns. The first is for row only grids and the second is for grids with rows and columns. Both structures can include config objects for both rows and columns, but they are not mandatory.
+There are two data structures for grids, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns (row only grids and grids with rows and columns). Both structures can include config objects for both rows and columns, but they are not mandatory.
 
 ### Grids
 
-We have created some mapping wrapper classes that make it easier to work with grids in Yuzu. Which one used is dependant on how the other properties in the same Viewmodel are mapped.
+We have created some mapping wrapper classes that make it easier to work with grids in Yuzu. Which one is used depends on how the other properties in the same Viewmodel are mapped.
 
-When only adding grid mapping to a viewmodel the command is very simple
+When only the grid mapping is needed for a viewmodel the command is very simple
 
 ```c#
 cfg.AddGridWithRows<HomePage, vmPage_HomePage>(src => src.GridContent, dest => dest.GridContent);
 ```
 
-When manual mapping on other viewmodel properties is required then it gets a little more complex.
+When other viewmodel properties require manual mapping then it's a little more complex.
 
 ```c#
 CreateMap<HomePage, vmPage_HomePage>()
@@ -37,15 +37,15 @@ CreateMap<HomePage, vmPage_HomePage>()
 
 ### Grid Items
 
-Upon startup all block Viewmodels that can be directly mapped to a Umbraco Models (on name) are added as possible grid items using a generic class called `DefaultGridItem`. These generic implementations are added to a collection in the IOC container and are chosen using a strategy pattern when grid viewmodels are hydrated. 
+On startup all block Viewmodels that can be directly mapped to a Umbraco Models (matched on name) are added as grid items using a generic class called `DefaultGridItem`. These generic implementations are used in the Yuzu grid builder to map Umbraco Models to the Viewmodels and fill the grid.
 
-The `DefaultGridItem` class has three method
+This `DefaultGridItem` class has three method
 
-- `IsValid` : picks the grid item by matching the grid docy type alias to the document type alias
-- `CreateVM` : hydrates the viewmodel from the model using Automapper. Used in the Umbraco back office to generate the preview grid items. 
-- `Apply` : Used in the strategy pattern to get the model data and then call the CreateVM above
+- `IsValid` : tests on the document type alias in the grid
+- `CreateVM` : hydrates the viewmodel from the model using Automapper. Also used to generate the Umbraco back office preview. 
+- `Apply` : Used by the grid builder in production to get the data from the grid and run the CreateVM above
 
-There are many situations where this generic class is not suitable and it possible to either inherit from this class overriding methods or implement your own class that implements the IGridItem interface. When doing so, it's important to follow the pattern above where Apply calls the CreateVm method, previews in the backoffice will then reflect the production site.
+There are many situations where the direct nature of generic class is not suitable. To add bespoke logic it is possible to either inherit this class and override its methods or implement your own class that implements the IGridItem interface. When doing so, it's important to follow the pattern above where Apply calls the CreateVm method, previews in the backoffice will then reflect the production site.
 
 here's an example taken from our One School demo site
 
@@ -119,13 +119,20 @@ public class YuzuGridComposer : IUserComposer
 
 ## Grid Item Previews
 
-Because Yuzu is just a collections of blocks it makes working with the grid in the back office easy. For each cell added we swap out the rebdering engine of DTGE to render the specific template for the viewmodel using the preview data. a very simple and elegant solution.
+Because Yuzu is just a collections of blocks working with the grid in the back office is easier. For each cell added we have swapped out the rendering engine of DTGE to render the Yuzu template for the viewmodel using the preview data from the grid. A very simple and elegant solution.
 
-To add styling we create a backoffice stylesheet during the definition dist process. This stylesheet is crated from the core and blocks styles. We apply an all: initial; pointer-events: none; style tags the block preview wrapper div. This removes all Umbraco styles and prevents any pointer event from the block from affecting interaction. 
+To add styling we create a backoffice stylesheet during the definition dist process. This stylesheet is created from core and blocks styles only. In the DTGE preview renderer above we apply the css styles
+
+``` css
+ all: initial; 
+ pointer-events: none; 
+``` 
+ 
+ to the preview wrapper div. This removes all Umbraco styles and prevents any pointer event from the block from affecting interaction. 
 
 ## Grid manipulation
 
-Occasionally there needs to be an extra level of control to change how a setting or config item are applied to a cell or row in the grid. Below are a few exmaples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
+Occasionally we have found we need an extra level of control changing how a setting or config item are applied to a cell or row in the grid. Below are a few exmaples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
 
 ```c#
 public class BackgroundRowImageGridConfig : IAutomaticGridConfig
@@ -197,3 +204,5 @@ There are a few static helper methods we use to make working with AutomaticGridC
 | IsEditor               		| Is this sell item of editor type                    |
 | HasContentType (DTGE)     	| Does the current cell item use the content type     |
 | IsContentType (DTGE)        	| Is this cell items of content type                  |
+
+AutomaticGridConfig is just one of the ways that we manipulate viewmodel data as it moves through the system. By understanding where we can make these changes and creating extrenal services to implement only the required change then we can easily create complex or specifc updates to the ViewModel data whilst upholding Single Responsibility.  
