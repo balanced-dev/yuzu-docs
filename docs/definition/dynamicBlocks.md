@@ -252,7 +252,7 @@ A pattern of creating grid layouts became apparent over the course of building m
 
 Usually we have two different versions within our projects: one where it is just a "row-based" grid, where there are no columns and each row is just a block, and we have another version which includes columns which contain the blocks.
 
-If you want to get into the detail of how to build/use a "ofType" grid [see the "Building a grid examples" ](definition/examples?id=building-a-grid)
+If you want to get into the detail of how to build/use a "ofType" grid see the ["Building a grid examples" ](definition/examples?id=building-a-grid)
 
 ---
 
