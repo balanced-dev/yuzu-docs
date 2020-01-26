@@ -30,7 +30,8 @@
     - [Forms](/delivery/umbraco/forms.md)
     - [Members](/delivery/umbraco/members.md)
   - Umbraco Automation
-    - [Viewmodel mapping]()
-    - [Schema Creation]()
-    - [Content Creation]()
-    - [Bespoke Mapping]()
+    - [Introduction](/delivery/umbracoAutomation/introduction.md)
+    - [Viewmodel mapping](/delivery/umbracoAutomation/viewmodelmapping.md)
+    - [Schema Creation](/delivery/umbracoAutomation/schemaCreation.md)
+    - [Content Creation](/delivery/umbracoAutomation/contentCreation.md)
+    - [Bespoke Mapping](/delivery/umbracoAutomation/bespokeMapping.md)
