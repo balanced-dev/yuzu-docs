@@ -7,9 +7,9 @@ It was because of these problems and general feeling of restriction which drove 
 
 While not perfect, it works well with our "block" structure and helped shape the way we work in general! As we have were "componentising" our markup, doing the sense with our styling made sense: a SCSS stylesheet for each block or page, with a unique class name for every element, whilst following a pattern for each meant we could modularise our code, leading to little to no specificity issues, unexpected cascading styles etc. It just makes sense as markup and styles for a block are intrinsically linked- knowing that a block's styling is centralised and won't be being applied anywhere but in its stylesheet greatly reduces confusion.
 
-It's also simple, easy to learn/understand and gives our stylesheets a common structure and layout, which makes going between working on stylesheets not only within a project, but across projects, far easier. Not only that but it makes lifting blocks from other projects and customising them to fit into the current site very easy.
+It's also simple, easy to learn/understand and gives our stylesheets a common structure and layout, which makes going between working on stylesheets not only within a project, but across projects, far easier. Moreover, it makes lifting blocks from other projects and customising them to fit into the current site very easy.
 
-We'll also delve into some of our other preferences, such as how we name & organise our global SCSS files, how we like to write our block stylesheets
+We'll also delve into some of our other preferences, such as how we name & organise our global SCSS files, how we like to write our block stylesheets, and why we value `@mixin` over `%placeholder` or decorator classes the majority of the time.
 
 ---
 
@@ -125,7 +125,7 @@ We believe in the use of `@mixin` over helper classes and even `%placeholders` r
 To us the peace-of-mind and adaptability that `@mixins` afford outweigh the potential for CSS bloat that comes with it.
 
 ## Alphabetised styles
-This is just a team preference but, just so that we have an easy-to-follow order to our styles, we adopted ordering our styles alphabetically. It took some time to sink in, but now it's just second nature and speeds up looking through CSS for a specific declarations. Our selectors never seem to contain enough code for grouping our styles to be beneficial and it was harder to adhere to as everybody had their own way of doing it, which isn't an issue when alphabetising.
+This is just a team preference but, just so that we have an easy-to-follow order to our styles, we adopted ordering our styles alphabetically. It took some time to sink in, but now it's just second nature and speeds up looking through CSS for a specific declaration. Our selectors never seem to contain enough code for grouping our styles to be beneficial and it was harder to adhere to as everybody had their own way of doing it, which isn't an issue when alphabetising.
 
 `@mixins` however take priority over all the styles within a selector and come first.
 
@@ -305,7 +305,7 @@ For the above example with some basic styles would look something like this:
 	}
 }
 ```
-We were able to style the important list items easily enough, but how do we make the necessary style changes to nested elements from wthin the root modifier selectors, like the colour themes? Easy: by storing the root class name in a variable, like so:
+We were able to style the important list items easily enough, but how do we make the necessary style changes to nested elements from within the root modifier selectors, like the colour themes? Easy: by storing the root class name in a variable, like so:
 ```scss
 .list {
 	// Store root class in variable
