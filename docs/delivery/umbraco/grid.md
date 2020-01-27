@@ -14,6 +14,10 @@ Coupled with our Umbraco Import package we automate the creation of Umbraco Grid
 | ----------------------------- | ------------------------------------------|
 | **UmbracoModelsAssembly**		| Assemblies that contain Umbraco Models    |
 
+## Umbraco Import Config
+
+Ignore the DataGridRows and DataGridRowsColumns from IgnoreViewmodels.
+
 ## Mapping
 
 There are two data structures for grids, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns (row only grids and grids with rows and columns). Both structures can include config objects for both rows and columns, but they are not mandatory.

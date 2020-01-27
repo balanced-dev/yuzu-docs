@@ -31,6 +31,7 @@
     - [Members](/delivery/umbraco/members.md)
   - Umbraco Automation
     - [Introduction](/delivery/umbracoAutomation/introduction.md)
+    - [Licensing](/delivery/umbracoAutomation/licensing.md)
     - [Viewmodel mapping](/delivery/umbracoAutomation/viewmodelmapping.md)
     - [Schema Creation](/delivery/umbracoAutomation/schemaCreation.md)
     - [Content Creation](/delivery/umbracoAutomation/contentCreation.md)

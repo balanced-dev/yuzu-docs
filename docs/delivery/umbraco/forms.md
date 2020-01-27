@@ -12,6 +12,13 @@ Integration into Umbraco using a standardised package allows developers to autom
 | ----------------------------- | ----------------------------------------------------------------------|
 | **FormElementAssemblies**		| Assemblies that contaion bespoke field types mappers or preprocessors |
 
+
+## Umbraco Import Config
+
+Ignore the form, form builder and all form elements from IgnoreViewmodels and ExcludeViewmodelsAtGeneration.
+
+Also globally ignores all properties named Form and FormElement.
+
 ## Mapping
 
 There are two data structures for forms, vmBlock_DataForm and vmBlock_DataFormBuilder. 
