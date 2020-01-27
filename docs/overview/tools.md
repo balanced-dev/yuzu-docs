@@ -11,7 +11,7 @@ on top of this simple interface we have created a collection of CMS agnostic too
 ```
 npm install yuzu-definition-ui
 ```
-[docs]() - 
+[docs](/definition/overview?id=overlay) - 
 [source](https://github.com/balanced-dev/yuzu-definition-api)
 
 - CLI - a simple command line interface to add new blocks, rename blocks or add new states.  
@@ -19,7 +19,7 @@ npm install yuzu-definition-ui
 ```
 npm install -g yuzu-definition-cli
 ```
-[docs]() - 
+[docs](/definition/cli) - 
 [source](https://github.com/balanced-dev/yuzu-definition-cli)
 
 ## Delivery
@@ -30,5 +30,5 @@ npm install -g yuzu-definition-cli
 
 Search in Visual Studio Extensions under 'yuzu delivery viewmodel generator' in VS 2019/7 extensions or 
 
-[vs marketplace](https://marketplace.visualstudio.com/items?itemName=BalancedDev.yuzudeliveryviewmodelgenerator) - [docs]() - 
+[vs marketplace](https://marketplace.visualstudio.com/items?itemName=BalancedDev.yuzudeliveryviewmodelgenerator) - [docs](/delivery/viewmodelGeneration) - 
 [source](https://github.com/balanced-dev/yuzudelivery.viewmodelgenerator)

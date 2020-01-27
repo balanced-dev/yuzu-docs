@@ -36,4 +36,4 @@ Automates the creation of Umbraco schema and content.
 ```
 PM> Install-Package YuzuDelivery.Umbraco.Import
 ```
-[docs]() - 
+[docs](/delivery/umbracoAutomation/introduction) - 
