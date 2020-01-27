@@ -1,0 +1,56 @@
+# Schema creation
+
+Using the viewmodel definition to generate all the document types and datatypes required to store the content for the specific UI. Yuzu Import uses the standard Umbraco api's to do this, it's no different from manually creating document types and data types. It's just far quicker and the result is standardised. 
+
+## How does it work
+
+Starting with a viewmodel the schema creation engine finds / creates a document types with the same name and iterates through the viewmodel properties adding new peoperties to the document type. 
+
+If a property references another viemodel it runs the process above for the context viewmodel. It also generated a Nested Content instance for this child viewmodel and uses it as the property types in the parent document type. 
+
+Whilst spidering through the tree each document type and property is only created if it doesn't exist. We use this to add anything new without affecting the existing document type structure. 
+
+This process can be run from any point in the viewmodel structure. Our favourite button is the Map All Viewmodels which generates all viewmdoels. 
+
+## Standardisation
+
+Every type of element is always added in exactly the same way. Inline child property types such as Nested Content has given us great possibilities but is also open to different interpretation over time or by different developers. By removing this human element we have found that we have improved the quality of our Umbraco sites by standardising how everything is created.
+
+## Mappings
+
+Json schema property types are mapped to the following Umbraco data types
+
+| ViewModel DataType	    	| Umbraco DataType            |
+| ----------------------------- |-----------------------------|
+| string    		            | Textstring                  |
+| integer / double   		    | Number                      |
+| boolean    		            | True / False                |
+| string array   		        | Umbraco.MultipleTextstring  |
+| enum             		        | Umbraco.DropDown.Flexible   |
+| object (inline / ref)         | Umbraco.NestedContent (single)   |
+| object array (inline / ref)   | Umbraco.NestedContent (multiple) |
+
+For object and oject array sub blocks, when content is stored globally the Umbraco data type is changed to a  Umbraco.MultiNodeTreePicker.
+
+Yuzu
+
+| Data structures   	    	| Umbraco DataType            |
+| ----------------------------- |-----------------------------|
+| vmBlock_DataImage    		    | Media Picker                |
+| vmBlock_DataLink (single)     | Content Picker              |
+| vmBlock_DataLink (array)      | Multi URL Picker            |
+| vmBlock_DataGridRows	        | Umbraco.Grid                |
+
+### Grid 
+
+When grid schemas contain Config settings at row or column level we convert these to the config json file on the Umbraco grid property type. 
+
+We use Our.Umbraco.DocTypeGridEditor to define the blocks that are allowing in the grid adding a new editor type to the grid_editors.config file for each grid in the schema.
+
+## Extending behaviour
+
+As part of our roadmap this year we want to add the ability for developers to swap out or add their own schema mappers. We want organisations to define and standardise how they want to create Document Types and Data Types as they way we have decided on here will not be whate everyone wants.
+
+All objects in Yuzu Umbraco Import have been added to the Umbraco IOC controller and can be swapped out for your own implementation.
+
+
