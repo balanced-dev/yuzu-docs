@@ -294,7 +294,7 @@ We begin with 2 data structures:
 }
 ```
 <!-- tabs:end -->
-`parDataForm` is a very simple block used as a "switch", with two properties: `testForm` is just standard sub-block JSON (properties, objects, arrays etc.) whereas `liveForm` will only contain raw HTML. This is because Umbraco requires direct control of the `<form>` tag and thus it's easier to just render the entire form's HTML on the delivery side. However we still need to test and mimic forms on the definition side, which is why `testForm` property exists.
+`parDataForm` is a very simple block used as a "switch", with two properties: `testForm` is just standard sub-block JSON (properties, objects, arrays etc.) whereas `liveForm` will only contain raw HTML. This is because the backend may require direct control of the `<form>` tag and thus it's easier to just render the entire form's HTML on the delivery side. However we still need to test and mimic forms on the definition side, which is why `testForm` property exists.
 
 `parDataFormBuilder` meanwhile is more complex: it's a basic framework for what we believe most forms are structured like and covers most bases, while not overcomplicating things. We make use again of "anyOfTypes" and "anyOf" to link to our example form block of `parFormBuilder` to render our `parDataFormBuilder` data structure and also outline our selection of form element sub-blocks in a `parFormBuilderFields` schema.
 
