@@ -2,7 +2,7 @@
 
 Delivery in Yuzu is integrating releases from UI definition to deliver a site. Because delivery developers are abstracted from the details of the UI, only working against an interface, then the complexity of their role is greatly reduced. No need to worry about integrating any of the markup, only on mapping model data into the viewmodel definitions.
 
-On startup all the blocka and pages are precompiled into memory.
+On startup all the blocks and pages are precompiled into memory.
 
 At runtime template from definition are rendered server-side by delivery and sent to the client. 
 

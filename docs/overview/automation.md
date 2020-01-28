@@ -2,7 +2,7 @@
 
 When viewed from above the schema that defines the properties of and relationships between each block start to take the form of a map of the dynamicity of the site. For content-led sites this is the DNA of the site.
 
-Because the core to Yuzu is this site DNA we can use it to automate the generation of different parts of the process and accellerate production. 
+Because the core to Yuzu is this site DNA we can use it to automate the generation of different parts of the process and accelerate production. 
 
 Currently we have two areas of automation
 

@@ -26,7 +26,7 @@ npm install -g yuzu-definition-cli
 
 - schema to viewmodel generation 
     - converts json schema files (released from Definition) into to C# Poco viewmodels. 
-    - when used together with yuzu-delivery-import, assigns automapper attributes to all viewmodels.
+    - when used together with yuzu-delivery-import, assigns Automapper attributes to all viewmodels.
 
 Search in Visual Studio Extensions under 'yuzu delivery viewmodel generator' in VS 2019/7 extensions or 
 

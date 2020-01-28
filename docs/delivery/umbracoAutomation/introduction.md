@@ -5,7 +5,7 @@ We have created a commercial package called Yuzu Delivery Import that handles al
 - Viewmodel mapping : an overview of all the generated viewmodels and their inter relationships mapped to document type definitions.
 - Schema creation : creating document types and data types from the generated viewmodel definitions.
 - Content creation : using definition page states and images from the definition pattern library to create content in Umbraco.
-- Bespoke mapping : configuring mappings to route data into grouped or global document types to prevent deplication and reduce complexity of CMS schema.
+- Bespoke mapping : configuring mappings to route data into grouped or global document types to prevent duplication and reduce complexity of CMS schema.
 
 This package is licenced on a subscription per developer basis as part of the Yuzu Developer package. 
 
@@ -26,13 +26,13 @@ The dashboard for Yuzu Delivery Import is found in the **Settings** section of U
 | ImageLocations                 | Location of images for content import                     |
 | CustomConfigFileLocation       | Location of the custom mapping config file                | 
 
-* IsActive is always false when preoject compiled in Release mode
+* IsActive is always false when project compiled in Release mode
 
 ### Ignores
 
 Usually there are elements you want to ignored by the import tool. These config properties allow you to define what is ignored globally or per viewmodel. 
 
-Each config property below is collections of string or dictionaries of string and we have created an extension method to remove magic strings from configuration usings strongly types generics.
+Each config property below is collections of string or dictionaries of string and we have created an extension method to remove magic strings from configuration using strongly types generics.
 
 ``` c#
 config.IgnoreViewmodels.Add<vmPage_HomePage>();
@@ -49,7 +49,7 @@ config.IgnoreViewmodels.Add("vmPage_HomePage");
 | IgnoreViewmodels               | Ignore from viewmodel mapping and Umbraco generation      |
 | IgnorePropertiesInViewModels   | Ignore a named property in a viewmodel                    |
 | IgnoreProperties            	 | Ignore a named property in all viewmodels                 |
-| IgnoreUmbracoModelsForAutomap  | Turn off automapper attribute in viewmodel generation     |
+| IgnoreUmbracoModelsForAutomap  | Turn off Automapper attribute in viewmodel generation     |
 
 The property names `_ref` and `_modifiers` are always added to blocks and are ignore in import. 
 The property name `AdditionalProperty` is created during viewmodel generation and is ignore in import.

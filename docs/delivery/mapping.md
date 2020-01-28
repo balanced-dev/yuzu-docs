@@ -12,24 +12,24 @@ var output = new vmBlock_Contact
 }
 ```
 
-Manuaul mapping leads to a lot of replication, you are just mapping between properties that have the same or similar property names. Any changes that are released from definition will require the delivery developer to update the code to implement that changes. 
+Manual mapping leads to a lot of replication, you are just mapping between properties that have the same or similar property names. Any changes that are released from definition will require the delivery developer to update the code to implement that changes. 
 
-The obvious solution is to use an automapping solution, we use Automapper. By creating parallel lines between our Models and Viewmodels we can reduce the need for manual mapping and automate the mapping process as much as possible. This makes for a very lean solution that contains little or no code. 
+The obvious solution is to use an Automapping solution, we use Automapper. By creating parallel lines between our Models and Viewmodels we can reduce the need for manual mapping and automate the mapping process as much as possible. This makes for a very lean solution that contains little or no code. 
 
-Working this way, when a new property is added by definition all the delivery need do is create the new property in the CMS and as long as the property names match then the new property will be mapped. No need for any extra code. Of course, this is very dependant upon creating parallel lines (property names that match) betweem the definition and delivery sides of the application. We automate this process using our Umbraco import package.
+Working this way, when a new property is added by definition all the delivery need do is create the new property in the CMS and as long as the property names match then the new property will be mapped. No need for any extra code. Of course, this is very dependant upon creating parallel lines (property names that match) between the definition and delivery sides of the application. We automate this process using our Umbraco import package.
 
 But there are always occasions where automatic mapping is not possible. This is where we have found that use two types of mapping strategies in addition manual mapping. 
 
 ## Property Member mapping 
 
-The best of both worlds, here we create an automap for most of the properties but then apply manual maps to specific properties
+The best of both worlds, here we create an Automap for most of the properties but then apply manual maps to specific properties
 
 ``` c#
 CreateMap<SiteHeaderNavLink, vmSub_SiteHeaderNavLink>()
     .ForMember(x => x.IsActive, opt => opt.MapFrom(z => true));
 ```
 
-This will automap every property apart from IsActive where the output will always be mapped as true. 
+This will Automap every property apart from IsActive where the output will always be mapped as true. 
 
 The above example is OK for simple mappings. But as the code resolving the output gets more complex then we use a class that implements the IValueResolver to contain the code.
 
@@ -128,7 +128,7 @@ CreateMap<IPublishedContent, vmBlock_DataLink>()
         .ConvertUsing<LinkIPublishedContentConvertor>();
 ```
 
-You may ask if there is a difference between straight manual mapping and this method, yes, there is a big difference. In the example above this means that whenever automapper comes across a source of IPublishedContent and a destination of a link viewmodel then it will always apply this converter and we have only defined this once.
+You may ask if there is a difference between straight manual mapping and this method, yes, there is a big difference. In the example above this means that whenever Automapper comes across a source of IPublishedContent and a destination of a link viewmodel then it will always apply this converter and we have only defined this once.
 
 This greatly reduces the code required and follows closely the ideas of [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 

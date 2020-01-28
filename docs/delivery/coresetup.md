@@ -6,7 +6,7 @@ We recommend that you install Yuzu in a separate class library outside of the we
 npm install yuzu-definition-core
 ```
 
-Yuzu is initialised using a configuration object as follows (not a complete example)
+Yuzu is initialized using a configuration object as follows (not a complete example)
 
 ``` c#
 Yuzu.Initialize(new YuzuConfiguration()
@@ -45,7 +45,7 @@ Properties in bold are required
 | **GetRenderedHtmlCache**  	| function to get cached rendered content   |                           |
 | **SetRenderedHtmlCache**		| function to set cached rendered content   |                           |
 
-?> We have added the ability to change the prefix values for viewmodel naming but we havn't fully implemented this feature. Changing this will break everything!
+?> We have added the ability to change the prefix values for viewmodel naming but we haven't fully implemented this feature. Changing this will break everything!
 
 #### Templates locations
 

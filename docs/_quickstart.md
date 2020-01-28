@@ -44,7 +44,7 @@ A new implementation of Yuzu Delivery for Umbraco is now installed and ready for
 
 ### Integration
 
-As Yuzu sites are defined by the frontend this new site won't do anything until they create a realse for us to integrate. 
+As Yuzu sites are defined by the frontend this new site won't do anything until they create a release for us to integrate. 
 
 We have a pre-packaged release from our Lambda workshop available for you to download and integrate.
 
