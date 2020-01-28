@@ -44,7 +44,12 @@ A new implementation of Yuzu Delivery for Umbraco is now installed and ready for
 
 ### Integration
 
-As Yuzu sites are defined by the frontend this new site won't do anything until they create a release for us to integrate. 
+As Yuzu sites are defined by the frontend this new site won't do anything until definition push a new release for integration. 
 
-We have a pre-packaged release from our Lambda workshop available for you to download and integrate.
+Here is a list of our full working examples
 
+[Lambda (with workshop)](https://github.com/balanced-dev/yuzu-example-lambda) - A single page site example for Yuzu using a theme called Lambda. There is a workshop available on the workshop branch.   
+
+[Logistics](https://github.com/balanced-dev/yuzu-example-logistics) - A multiple page site example with bespoke mapping for Yuzu using a theme called Logistics.
+
+[One School](https://github.com/balanced-dev/yuzu-example-oneschool) - A multiple page site example with bespoke mapping for Yuzu using a theme called One School. Includes multiple grid types, four forms, bespoke mapping, stimulus js integration for ajax rendered partials and vue integration for more complect progressive js.with   
