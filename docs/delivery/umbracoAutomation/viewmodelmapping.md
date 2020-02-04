@@ -10,8 +10,8 @@ The purpose of viewmodel mapping is to make this complex map of data and relatio
 
 In the Yuzu Import dashboard the initially there is a global view of all the viewmodels that have been generated with pages first and then blocks alphabetically. Mapped document types (if any) are shown next to each viewmodel and a tick or cross shows if all properties on the viewmodel **and its children** are mapped in Umbraco. 
 
-![alt text](/images/viewmodel_mapping_viewmodels.jpg "Viewmodel Global")
+![alt text](/images/viewmodel_mapping_viewmodels_.jpg "Viewmodel Global")
 
 Clicking on a viewmodel takes us to the viewmodel properties view. This shows all the properties of the viewmodel, how they map to document type properties in the document types and the umbraco property types used.
 
-![alt text](/images/Viewmodel_properties.jpg "Viewmodel Properties")
+![alt text](/images/Viewmodel_properties_.jpg "Viewmodel Properties")

@@ -12,13 +12,13 @@ Through the viewmodel mapping dashboards the name of document type, their proper
 
 When creating viewmodel schemas sometimes it makes sense to split down similar properties into sub object. By default in Yuzu Import these sub objects would be added as a new child document type link to the parent using a nested content datatype. By grouping these sub blocks into Umbraco groups (tabs) we can reduce the number of document types and data types that are created and make it easier for the content author to understand the scope of the sub clock data.
 
-![alt text](/images/bespoke_mapping_grouped.jpg "Grouped bespoke mapping")
+![alt text](/images/bespoke_mapping_grouped_.jpg "Grouped bespoke mapping")
 
 ## Global content
 
 Content that is shared between UI blocks should be stored globally as a external content resource that can be used anywhere in the site. Where the content from different UI blocks isn't exactly the same the properties are matched on properties names. 
 
-![alt text](/images/bespoke_mapping_global.jpg "Grouped bespoke mapping")
+![alt text](/images/bespoke_mapping_global_.jpg "Grouped bespoke mapping")
 
 ## Config file
 
