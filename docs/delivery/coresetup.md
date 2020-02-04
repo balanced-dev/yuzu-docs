@@ -33,6 +33,7 @@ Properties in bold are required
 | Property    			    	| Purpose 			                        | Default Value             |
 | ----------------------------- | ------------------------------------------|---------------------------|
 | **ViewModelAssemblies**		| Assemblies that contain viewmodels        |                           |
+| **CMSModels**	            	| Models used in the CMS                    |                           |
 | **TemplateLocations**			| Locations for hbs templates               |                           |
 | **SchemaMetaLocations**     	| Locations for schema meta files           |                           |
 | BlockPrefix               	| Block prefix for generated viewmodels     | vmBlock_                  |

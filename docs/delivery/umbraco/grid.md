@@ -209,4 +209,18 @@ There are a few static helper methods we use to make working with AutomaticGridC
 | HasContentType (DTGE)     	| Does the current cell item use the content type     |
 | IsContentType (DTGE)        	| Is this cell items of content type                  |
 
-AutomaticGridConfig is just one of the ways that we manipulate viewmodel data as it moves through the system. By understanding where we can make these changes and creating external services to implement only the required change then we can easily create complex or specific updates to the ViewModel data whilst upholding Single Responsibility.  
+AutomaticGridConfig is just one of the ways that we manipulate viewmodel data as it moves through the system. By understanding where we can make these changes and creating external services to implement only the required change then we can easily create complex or specific updates to the ViewModel data whilst upholding Single Responsibility.
+
+## Skybrud.Umbraco.GridData and DocTypeGridEditor
+
+In this package we use Skybrud.Umbraco.GridData to easily convert the json data created by the Grid Umbraco property into a strongly typed model. 
+
+We have included part of an unreleased add-on package for GridData called Skybrud.Umbraco.GridData.Dtge. It converts data saved by DocTypeGridEditor in the grid into a strongly typed object.
+
+These strongly types models can then be mapped to the viemodels as normal.
+
+``` c#
+using Skybrud.Umbraco.GridData.Dtge;
+
+((GridControl)control).GetValue<GridControlDtgeValue>();
+```
