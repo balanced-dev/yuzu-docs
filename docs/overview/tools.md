@@ -21,7 +21,7 @@ npm install yuzu-definition-ui
 ```
 npm install -g yuzu-definition-cli
 ```
-[docs](definition/cli) - 
+[docs](/definition/cli) - 
 [source](https://github.com/balanced-dev/yuzu-definition-cli)
 
 ---
@@ -34,5 +34,5 @@ npm install -g yuzu-definition-cli
 
 Search in Visual Studio Extensions under 'yuzu delivery viewmodel generator' in VS 2019/7 extensions or 
 
-[vs marketplace](https://marketplace.visualstudio.com/items?itemName=BalancedDev.yuzudeliveryviewmodelgenerator) - [docs]() - 
+[vs marketplace](https://marketplace.visualstudio.com/items?itemName=BalancedDev.yuzudeliveryviewmodelgenerator) - [docs](/delivery/viewmodelGeneration) - 
 [source](https://github.com/balanced-dev/yuzudelivery.viewmodelgenerator)

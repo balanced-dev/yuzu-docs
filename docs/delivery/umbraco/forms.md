@@ -10,7 +10,14 @@ Integration into Umbraco using a standardised package allows developers to autom
 
 | Property    			    	| Purpose 			                                                    |
 | ----------------------------- | ----------------------------------------------------------------------|
-| **FormElementAssemblies**		| Assemblies that contaion bespoke field types mappers or preprocessors |
+| **FormElementAssemblies**		| Assemblies that contain bespoke field types mappers or preprocessors |
+
+
+## Umbraco Import Config
+
+Ignore the form, form builder and all form elements from IgnoreViewmodels and ExcludeViewmodelsAtGeneration.
+
+Also globally ignores all properties named Form and FormElement.
 
 ## Mapping
 
@@ -48,7 +55,7 @@ Definition includes default viewmodels for the following form elements that mirr
 - Input (text, date, url, email)
 - TextArea
 - Recaptcha 2
-- Title and Descrition
+- Title and Description
 
 Because these form field types are available globally within the pattern library their use is not  limited to Umbraco Forms, they can be used anywhere within Umbraco. For example, we use these same form field definitions in our Members package. 
 

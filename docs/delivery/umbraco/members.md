@@ -28,7 +28,7 @@ Using Yuzu membership doesn't preclude for all the other tricks that Umbraco can
 
 # Configuration
 
-An interface to change the membership controller settings, they standardise properties whilst making the contoller as adapatble without needing a new controller. 
+An interface to change the membership controller settings, they standardize properties whilst making the controller as adaptable without needing a new controller. 
 
 | Property    			    	| Purpose 			        |Default 			        |
 | ----------------------------- | --------------------------|---------------------------|
@@ -94,7 +94,7 @@ This requires a new property with alias `forgottenPasswordExpiry` and data type 
 
 ## Implementation
 
-Initialising the config for Yuzu Membership should happen at Startup and it can be tricky to get access to the content then. The code below shows a way that we have found using an Umbraco IComponent.
+Initializing the config for Yuzu Membership should happen at Startup and it can be tricky to get access to the content then. The code below shows a way that we have found using an Umbraco IComponent.
 
 ``` c#
 public class YuzuMemberSetupComponent : IComponent

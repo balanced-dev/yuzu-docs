@@ -20,7 +20,7 @@ Yuzu is actually two separate production environments, one for each of definitio
     ```
     npm install yuzu-definition-core
     ```
-    [docs]() - 
+    [docs](/definition/overview.md) - 
     [source](https://github.com/balanced-dev/yuzu-definition-core)
 
 ---
@@ -36,7 +36,7 @@ Yuzu is actually two separate production environments, one for each of definitio
     ```
     PM> Install-Package YuzuDelivery.Core
     ```
-    [docs]() - 
+    [docs](/delivery/overview.md) - 
     [source](https://github.com/balanced-dev/yuzu-definition-core)
 
 In conclusion this solution allows UI Definition developers to work in isolation creating self-contained, interlinking blocks whilst generating a managed interface that is synonymous to the DNA of the content led site.

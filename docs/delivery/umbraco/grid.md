@@ -14,6 +14,10 @@ Coupled with our Umbraco Import package we automate the creation of Umbraco Grid
 | ----------------------------- | ------------------------------------------|
 | **UmbracoModelsAssembly**		| Assemblies that contain Umbraco Models    |
 
+## Umbraco Import Config
+
+Ignore the DataGridRows and DataGridRowsColumns from IgnoreViewmodels.
+
 ## Mapping
 
 There are two data structures for grids, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns (row only grids and grids with rows and columns). Both structures can include config objects for both rows and columns, but they are not mandatory.
@@ -88,7 +92,7 @@ public class TeacherProfilesGridItem : IGridItem
     }
 ```
 
-The above code uses a data respository to get teacher profiles instead of mapping Umbraco model data directly.
+The above code uses a data repository to get teacher profiles instead of mapping Umbraco model data directly.
 
 Register your own grid items in a composer during Umbraco bootup.
 
@@ -132,7 +136,7 @@ To add styling we create a backoffice stylesheet during the definition dist proc
 
 ## Grid manipulation
 
-Occasionally we have found we need an extra level of control changing how a setting or config item are applied to a cell or row in the grid. Below are a few exmaples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
+Occasionally we have found we need an extra level of control changing how a setting or config item are applied to a cell or row in the grid. Below are a few examples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
 
 ```c#
 public class BackgroundRowImageGridConfig : IAutomaticGridConfig
@@ -199,10 +203,24 @@ There are a few static helper methods we use to make working with AutomaticGridC
 | ----------------------------- | ----------------------------------------------------|
 | CurrentIndex          		| Finds the index of the current cell in all cells    |
 | OtherAreas              		| Gets all other cells in the row except the current  |
-| Settings               		| Safe wato to get settings from rows and cells       |
+| Settings               		| Safe to get settings from rows and cells            |
 | HasEditor               		| Does the current cell use the editor                |
 | IsEditor               		| Is this sell item of editor type                    |
 | HasContentType (DTGE)     	| Does the current cell item use the content type     |
 | IsContentType (DTGE)        	| Is this cell items of content type                  |
 
-AutomaticGridConfig is just one of the ways that we manipulate viewmodel data as it moves through the system. By understanding where we can make these changes and creating extrenal services to implement only the required change then we can easily create complex or specifc updates to the ViewModel data whilst upholding Single Responsibility.  
+AutomaticGridConfig is just one of the ways that we manipulate viewmodel data as it moves through the system. By understanding where we can make these changes and creating external services to implement only the required change then we can easily create complex or specific updates to the ViewModel data whilst upholding Single Responsibility.
+
+## Skybrud.Umbraco.GridData and DocTypeGridEditor
+
+In this package we use Skybrud.Umbraco.GridData to easily convert the json data created by the Grid Umbraco property into a strongly typed model. 
+
+We have included part of an unreleased add-on package for GridData called Skybrud.Umbraco.GridData.Dtge. It converts data saved by DocTypeGridEditor in the grid into a strongly typed object.
+
+These strongly types models can then be mapped to the viemodels as normal.
+
+``` c#
+using Skybrud.Umbraco.GridData.Dtge;
+
+((GridControl)control).GetValue<GridControlDtgeValue>();
+```
