@@ -1,10 +1,22 @@
 # Getting Started
 
-The quickest way to get Yuzu up and running is to run our quick-start setup. We will make assumptions about the install that you can tweak to your own preferences as you gain confidence. As we'll see later on Yuzu is made up of many modules that can be swapped out or removed completey. This quickstart installs all the standard and automation modules, especially in the Umbraco implementation.
+The quickest way to get Yuzu up and running is to run our quick-start setup. We will make assumptions about the install that you can tweak to your own preferences as you gain confidence. As we'll see later on Yuzu is made up of many modules that can be swapped out or removed completely. This quickstart installs all the standard and automation modules, especially in the Umbraco implementation.
 
-## Definition (Frontend)
+---
 
-## Umbraco Delivery (Backend)
+# Definition (Frontend)
+We've tried to make getting up and running with your definition solution as quick and easy as possible: rather than manually having to create your directory structure and populate it manually with a basic, standardised setup yourself, we've automated this scaffolding in our [Yuzu Definition CLI](definition/cli).
+
+1.  If you haven't done so already, install the CLI
+2.  Open up your terminal in the root directory of your project
+3.  Run the `yuzudef create "<Project name here>"` command
+4.  Navigate to the newly created "definition.src" folder in your terminal
+5.  Run the `npm install` command
+6.  After the packages are installed, use the `npm run serve` or `gulp ui` command to build & run the solution
+
+---
+
+# Umbraco Delivery (Backend)
 
 In this section we'll assume that you have some experience of Visual Studio, installing nuget packages and Umbraco. 
 
@@ -44,7 +56,7 @@ A new implementation of Yuzu Delivery for Umbraco is now installed and ready for
 
 ### Integration
 
-As Yuzu sites are defined by the frontend this new site won't do anything until they create a realse for us to integrate. 
+As Yuzu sites are defined by the frontend this new site won't do anything until they create a release for us to integrate. 
 
 We have a pre-packaged release from our Lambda workshop available for you to download and integrate.
 

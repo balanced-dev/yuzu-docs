@@ -12,7 +12,7 @@ var output = new vmBlock_Contact
 }
 ```
 
-Manuaul mapping leads to a lot of replication, you are just mapping between properties that have the same or similar property names. Any changes that are released from definition will require the delivery developer to update the code to implement that changes. 
+Manual mapping leads to a lot of replication, you are just mapping between properties that have the same or similar property names. Any changes that are released from definition will require the delivery developer to update the code to implement that changes. 
 
 The obvious solution is to use an automapping solution, we use Automapper. By creating parallel lines between our Models and Viewmodels we can reduce the need for manual mapping and automate the mapping process as much as possible. This makes for a very lean solution that contains little or no code. 
 
@@ -73,7 +73,7 @@ By passing the MVC HtmlHelper service in as a mapping context item we can render
 
 We also use this method for passing in context model data from the page into the mapping resolver.
 
-### Dependancy injection
+### Dependency injection
 
 Unfortunately we've not worked out how we can use additional services from an IOC container with these resolvers. As a result we end up doing this. 
 

@@ -29,10 +29,10 @@ For "ofType" to work we need 3 things:
 Now that's a lot to digest so, before going on further, we'll give a totally abstract example (but hopefully one that will make it make more sense!).
 
 <!-- tabs:start -->
-#### **parDataFarm.schema (generic)**
+#### **dataFarm.schema (generic)**
 ```json
 {
-	"id": "/parDataFarm",
+	"id": "/dataFarm",
     "$schema": "http://json-schema.org/schema#",
 	"type": "object",
     "anyOfTypes": ["parDairy", "parPoultry", "parMeat", "parArable", "parMixed"],
@@ -183,7 +183,7 @@ Now that's a lot to digest so, before going on further, we'll give a totally abs
                         "type": "string"
                     },
                     "details": {
-                        "$ref": "/parDataFarm",
+                        "$ref": "/dataFarm",
                         "anyOfType": "parMixed"
                     }
                 }
@@ -239,7 +239,7 @@ Now that's a lot to digest so, before going on further, we'll give a totally abs
 ```
 <!-- tabs:end -->
 
-Although this is a bit of a contrived/abstract example, it quite nicely illustrates and reinforces what was explained before: `parDataFarm` has multiple sub-schemas which are picked depending on what "type" of schema it is (in our example we showed a `parMixed` version of the generic `parDataFarm`, therefore using `parMixedAnimals` & `parMixedCrops` specific schemas for the `animals` and `crops` properties respectively). It also showed the `parMixed` markup would be used to render the combined generic and specific schema and also the use of the specific schema being used by a parent schema (the `mixedFarms` page).
+Although this is a bit of a contrived/abstract example, it quite nicely illustrates and reinforces what was explained before: `dataFarm` has multiple sub-schemas which are picked depending on what "type" of schema it is (in our example we showed a `parMixed` version of the generic `dataFarm`, therefore using `parMixedAnimals` & `parMixedCrops` specific schemas for the `animals` and `crops` properties respectively). It also showed the `parMixed` markup would be used to render the combined generic and specific schema and also the use of the specific schema being used by a parent schema (the `mixedFarms` page).
 
 In the example we haven't even touched on `parDairy`, `parPoultry`, `parMeat`, `parArable` farms which would all have their own, different "generic" schemas to `parMixed`, all using their own markup. These different versions allow for flexible use of a common data structure across projects, with potentially multiple implementations within the same project.
 

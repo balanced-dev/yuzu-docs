@@ -36,7 +36,7 @@ PM> Install-Package YuzuDelivery.Umbraco.Forms
 
 ## Members 
 
-integration and controllers for working with Umbraco Membership, extending core Umbraco functionallity. Easily add simpple Login, Forgotten Password, Register, Change Password and Change name/email
+integration and controllers for working with Umbraco Membership, extending core Umbraco functionallity. Easily add simple Login, Forgotten Password, Register, Change Password and Change name/email
 
 ```
 PM> Install-Package YuzuDelivery.Umbraco.Members

@@ -1480,7 +1480,7 @@ A layout is basically a wrapper around pages, generally containing common compon
 
 It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included. As these are obviously purely for developers when working on the definition side, they can be removed on the delivery side so it's not included in the final output.
 
-Within your project you should have at the very least two layouts, one for blocks (`_block.hbs`) and one for pages (`_page.hbs`), contained within (`_dev/_templates/src/_layouts` directory). `_block.hbs` and `_page.hbs` are the default layout for blocks and pages respectively (unsurprisingly!).
+Within your project you should have at the very least two layouts, one for blocks (`_block.hbs`) and one for pages (`_page.hbs`), contained within (`_dev/_templates/_layouts` directory). `_block.hbs` and `_page.hbs` are the default layout for blocks and pages respectively (unsurprisingly!).
 
 Below is a simple page layout illustrating what we've discussed so far:
 <!-- tabs:start -->
@@ -1568,7 +1568,3 @@ So for example, say if you had a state from the previous `_page` example called 
 }
 ```
 <!-- tabs:end -->
-
----
-
-# Best Practices

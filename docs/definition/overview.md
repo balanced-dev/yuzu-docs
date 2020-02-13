@@ -153,11 +153,11 @@ project-root
 ```
 
 Within the `_dev` folder is:
-- `_client`: stores all compiled CSS & JS and any media files, font files etc. copied from the `_source` folder, within their own sub-directories. There's no real need to ever go into this directory when developing
+- `_client`: stores all compiled HTML, CSS & JS and any media files, font files etc. copied from the `_source` & `_templates` folders , within their own sub-directories. There's no real need to ever go into this directory when developing
 - `_source`: contains all the global .scss files, JS files, fonts, images etc. within separate sub-directories
-- `_templates`: where the majority of developers' time will be spent as it contains all the block and page markup, data, schemas and styling
+- `_templates`: where the majority of developers' time will be spent as it contains all the block and page markup, data, schemas and local styling
 - `yuzu-def-ui`: holds the Yuzu User Interface app which allows in-browser navigation around the project, editing/creating new states etc.
-- `templates.html`: basically the index page for the front-end solution. Just injects the Yuzu Definition UI into the page
+- `templates.html`: basically the index page for the front-end solution. Just injects the Yuzu Definition UI into the page as well as providing links to documentation and other 
 ```
 project-root
 └── definition.src
@@ -173,24 +173,8 @@ project-root
 		└── templates.html
 ```
 
-Within the `_templates` folder is:
-- `html`: which just stores all the compiled HTML from the Handlebars files in `src` combined with the relevant data
-- `src`: which holds all source files for the blocks, layouts and pages with their relevant handlebars, schemas, data and styling
-
-```
-project-root
-└── definition.src
-    └── _dev
-		└── _source
-			└── _templates
-				├── html
-				|	└── ...
-				└── src
-					└── ...
-			
-```
-
-The `src` directory contains the real bulk of the definition side as it holds:
+The `_templates` directory contains the real bulk of the definition side as it holds:
+- `_dataStructures`: schema files containing common/recurring data patterns 
 - `_layouts`: contain the possible layouts a page (or block when viewed in isolation) can use, with a layout effectively being a wrapper for page content (header, footer, site nav as well as the html head and body tags, links to compiled stylesheets etc.)
 - `blocks`: hold all the components which a page can use- grids, forms, layout blocks like site header, footer and navigation, as well as just general content blocks
 - `pages`: combine blocks and layouts to generate fully formed webpages
@@ -199,21 +183,21 @@ The `src` directory contains the real bulk of the definition side as it holds:
 project-root
 └── definition.src
     └── _dev
-		└── _source
-			└── _templates
-				└── src				
-					├── _layouts
-					|	└── ...
-					├── blocks
-					|	└── ...
-					└── pages
-						└── ...
+		└── _templates			
+			├── _dataStructures
+			|	└── ...
+			├── _layouts
+			|	└── ...
+			├── blocks
+			|	└── ...
+			└── pages
+				└── ...
 			
 ``` 
 
----
+<!-- ---
 
-# Block Areas
+# Block Areas -->
 
 
 ---
@@ -262,20 +246,5 @@ project-root
 | gulp dist			| npm run dist		|						|
 | gulp showPaths	| 					|						|
 
----
-
-# When to block?
-
----
-
-# Overlay
-
-## Blocks
-
-## States
-
-## Data
-
-## Editing state
-
-## Saving state
+<!-- ---
+# When to block? -->

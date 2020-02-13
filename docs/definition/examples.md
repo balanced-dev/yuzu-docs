@@ -11,10 +11,10 @@ In this example, we'll build a simple "row only" grid, with no columns for simpl
 Speaking of data structures, let's begin by writing one for the rows to be used in all of our grids.
 
 <!-- tabs:start -->
-#### **parDataGridRows.schema**
+#### **dataGridRows.schema**
 ```json
 {
-    "id": "/parDataGridRows",
+    "id": "/dataGridRows",
     "type": "object",
     "additionalProperties": false,
     "anyOfTypes": [
@@ -49,7 +49,7 @@ Speaking of data structures, let's begin by writing one for the rows to be used 
 ```
 <!-- tabs:end -->
 
-By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their own Handlebars rendering, configuration settings and blocks allowed in them. In `parDataGridRows` we've already set it up to connect to a sub-block of `parSectionGrid` so we'll create this now:
+By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their own Handlebars rendering, configuration settings and blocks allowed in them. In `dataGridRows` we've already set it up to connect to a sub-block of `parSectionGrid` so we'll create this now:
 
 <!-- tabs:start -->
 #### **parSectionGrid.hbs**
@@ -163,7 +163,7 @@ Let's do it now by adding it to our home page
     "additionalProperties": false,
     "properties": {
         "content": {
-            "$ref": "/parDataGridRows",
+            "$ref": "/dataGridRows",
             "anyOfType": "parSectionGrid"
         }
     }
@@ -207,10 +207,10 @@ Like grids, we found standardisation through using data structures helps to keep
 
 We begin with 2 data structures:
 <!-- tabs:start -->
-#### **parDataForm.schema**
+#### **dataForm.schema**
 ```json
 {
-    "id": "/parDataForm",
+    "id": "/dataForm",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "object",
@@ -219,7 +219,7 @@ We begin with 2 data structures:
         "testForm": {
             "anyOf": [
                 {
-                    "$ref": "/parDataFormBuilder"
+                    "$ref": "/dataFormBuilder"
                 }
             ]
         },
@@ -229,10 +229,10 @@ We begin with 2 data structures:
     }
 }
 ```
-#### **parDataFormBuilder.schema**
+#### **dataFormBuilder.schema**
 ```json
 {
-    "id": "/parDataFormBuilder",
+    "id": "/dataFormBuilder",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "object",
@@ -287,16 +287,16 @@ We begin with 2 data structures:
         "actionLinks": {
             "type": "array",
             "items": {
-                "$ref": "/parDataLink"
+                "$ref": "/dataLink"
             }
         }
     }
 }
 ```
 <!-- tabs:end -->
-`parDataForm` is a very simple block used as a "switch", with two properties: `testForm` is just standard sub-block JSON (properties, objects, arrays etc.) whereas `liveForm` will only contain raw HTML. This is because the backend may require direct control of the `<form>` tag and thus it's easier to just render the entire form's HTML on the delivery side. However we still need to test and mimic forms on the definition side, which is why `testForm` property exists.
+`dataForm` is a very simple block used as a "switch", with two properties: `testForm` is just standard sub-block JSON (properties, objects, arrays etc.) whereas `liveForm` will only contain raw HTML. This is because the backend may require direct control of the `<form>` tag and thus it's easier to just render the entire form's HTML on the delivery side. However we still need to test and mimic forms on the definition side, which is why `testForm` property exists.
 
-`parDataFormBuilder` meanwhile is more complex: it's a basic framework for what we believe most forms are structured like and covers most bases, while not overcomplicating things. We make use again of "anyOfTypes" and "anyOf" to link to our example form block of `parFormBuilder` to render our `parDataFormBuilder` data structure and also outline our selection of form element sub-blocks in a `parFormBuilderFields` schema.
+`dataFormBuilder` meanwhile is more complex: it's a basic framework for what we believe most forms are structured like and covers most bases, while not overcomplicating things. We make use again of "anyOfTypes" and "anyOf" to link to our example form block of `parFormBuilder` to render our `dataFormBuilder` data structure and also outline our selection of form element sub-blocks in a `parFormBuilderFields` schema.
 
 So, to give the delivery side the ability to render forms and thus access to the `<form>` tag, all forms should be rendered by a "schema-less" block: a basic Handlebars partial like the one below.
 
@@ -428,7 +428,7 @@ From there, we can define our form element blocks and then go on to use all of w
     "additionalProperties": false,
     "properties": {
         "form": {
-            "$ref": "/parDataForm",
+            "$ref": "/dataForm",
             "anyOfType": "parFormBuilder"
         }
     }

@@ -51,7 +51,7 @@ Within the global SCSS styles (`/definition.src/_dev/_source/scss`) we personall
 - 	main.scss:<br>
 	Imports all the setup SCSS files (containing mixins, variables etc.)
 -	frontend.scss:<br>
-	Imports main.scss and also mass imports all block/page SCSS stylesheets (`/definition.src/_templates/src/**/*.scss`) using `gulp-sass-glob`. Used for generating the final CSS file to be used on the live site
+	Imports main.scss and also mass imports all block/page SCSS stylesheets (`/definition.src/_templates/**/*.scss`) using `gulp-sass-glob`. Used for generating the final CSS file to be used on the live site
 -	backoffice.scss:<br>
 	Basically the same as frontend.scss but nests the imports in the class `.yuzu-back-office` to be used to style the previews in the Umbraco backoffice
 	

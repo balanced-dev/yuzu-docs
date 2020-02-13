@@ -209,10 +209,10 @@ However, what if there is a common data or structure pattern that emerges, that 
 Take for example a link: it has three main properties: it needs an href, a title and some textural content (a label). Therefore a schema for this data structure could look something like this:
 
 <!-- tabs:start -->
-#### **parDataLink.schema **
+#### **dataLink.schema **
 ```json
 {
-	"id": "/parDataLink",
+	"id": "/dataLink",
     "$schema": "http://json-schema.org/schema#",
 	"type": "object",
 	"additionalProperties": false,
@@ -231,7 +231,7 @@ Take for example a link: it has three main properties: it needs an href, a title
 ```
 <!-- tabs:end -->
 
-You can then reference `parDataLink` from the parent block's/page's schema. For example, say if both a navigation block (`parSiteNav`) and a product listing block (`parProductListing`) both use `parDataLink`. Their schemas may look something like this:
+You can then reference `dataLink` from the parent block's/page's schema. For example, say if both a navigation block (`parSiteNav`) and a product listing block (`parProductListing`) both use `dataLink`. Their schemas may look something like this:
 
 <!-- tabs:start -->
 #### ** parSiteNav.schema **
@@ -245,7 +245,7 @@ You can then reference `parDataLink` from the parent block's/page's schema. For 
 		"links": {
 			"type": "array",
 			"items": {
-				"$ref": "/parDataLink"
+				"$ref": "/dataLink"
 			}
 		}
 	}
@@ -266,7 +266,7 @@ You can then reference `parDataLink` from the parent block's/page's schema. For 
 				"additionalProperties": false,
 				"properties": {
 					"link": {
-						"$ref": "/parDataLink"
+						"$ref": "/dataLink"
 					},
 					"image": {
 						"type": "object",
@@ -293,7 +293,7 @@ You can then reference `parDataLink` from the parent block's/page's schema. For 
 
 One of the huge advantages of doing this is for the delivery side: if multiple blocks reply on a single, centralised data structure schema then it means that automated processes can occur.
 
-For example, we've used a link in the above example. But, imagine we've centralised all images instead with all other schemas relying on `parDataImage` when an image is required. It allows us to automatically set the data type in Umbraco of images within blocks to be a media picker becuase of the standardisation we've achieved by using this data structure concept.
+For example, we've used a link in the above example. But, imagine we've centralised all images instead with all other schemas relying on `dataImage` when an image is required. It allows us to automatically set the data type in Umbraco of images within blocks to be a media picker becuase of the standardisation we've achieved by using this data structure concept.
 
 ---
 
@@ -304,7 +304,7 @@ All of our example schemas thus far have been of the the `object` type at their 
 #### **parContentPage.schema **
 ```json
 {
-	"id": "/parDataLink",
+	"id": "/dataLink",
     "$schema": "http://json-schema.org/schema#",
 	"type": "object",
 	"additionalProperties": false,

@@ -16,7 +16,7 @@ As of the time of writing, our API only has one endpoint (`getResolved`). It ret
 
 `{state file name}` is just the name of your JSON file for a block/page state without the `.json` extention. Directory structure is irrelevant.
 
-For example if we had a file located at `_dev/_templates/src/blocks/_homepage/carousel/data/carousel_no-slides.json`, to retrieve the HTML and JSON purely for that state we'd call `/api/getResolved/carousel_no-slides`
+For example if we had a file located at `_dev/_templates/blocks/_homepage/carousel/data/carousel_no-slides.json`, to retrieve the HTML and JSON purely for that state we'd call `/api/getResolved/carousel_no-slides`
 
 For the HTML we'd use the response object's `text` property, whereas for the data we'd use `json`. 
 

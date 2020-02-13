@@ -1,4 +1,4 @@
-# Markup and Style Focused
+<!-- # Markup and Style Focused
 
 > An awesome project 2.
 
@@ -41,4 +41,4 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 
 * Unordered list can use asterisks
 - Or minuses
-+ Or pluses
++ Or pluses -->

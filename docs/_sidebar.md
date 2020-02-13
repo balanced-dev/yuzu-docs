@@ -8,6 +8,8 @@
 
 - Definition
   - [Overview](/definition/overview.md)
+  - [CLI](/definition/cli.md)
+  <!-- - [Overlay](/definition/overlay.md) -->
   - [Markup](/definition/markup.md)
   - [Style](/definition/style.md)
   - [Data/States](/definition/data.md)
@@ -15,7 +17,6 @@
   - [Javascript Interactions](/definition/javascript.md)
   - [Dynamic Blocks](/definition/dynamicBlocks.md)
   - [Examples](/definition/examples.md)
-  - [CLI](/definition/cli.md)
 
 - Delivery
   - [Overview](/delivery/overview.md)
