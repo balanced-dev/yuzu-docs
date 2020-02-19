@@ -1,6 +1,6 @@
 # Template rendering
 
-In Yuzu there are three ways to render templates, in a razor view, output from a controller or a new view engine (coming soon).
+In Yuzu there are two ways of rendering templates; in a razor view or output from a controller.
 
 The option we use the most is rendering in a razor view. This is because it's easy to implement, understand and doesn't require a rebuild after a change. We have created a couple of Html helpers for this purpose. 
 
@@ -17,7 +17,7 @@ Html.RenderFETemplate<vmPage_Home>(new RenderSettings()
 
 The above method uses AutoMapper to hydrate the Viewmodel vmPage_Home from the Model data context and renders the definition template called home. We are also passing in the Html as a mapping context item as shown above. 
 
-The ShowJson property will print out a copy of the json used at the bottom of the page. Useful for debugging when something isn't working.
+The ShowJson property will display the json used to at the bottom of the page. Useful for debugging when something isn't working.
 
 ``` c#
 Html.RenderFETemplate(new RenderSettings()
@@ -48,7 +48,3 @@ new RenderSettings()
 }, 
 null);
 ```
-
-## View Engine
-
-Coming Soon

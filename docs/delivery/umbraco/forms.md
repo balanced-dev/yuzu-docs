@@ -6,14 +6,7 @@ By completely separating form element UI definitions, treating each form element
 
 Integration into Umbraco using a standardised package allows developers to automatically integrate with Umbraco Forms writing no code. For anything bespoke we have added extensions points to append or replace logic that maps Umbraco Forms data to ViewModels.   
 
-## Config
-
-| Property    			    	| Purpose 			                                                    |
-| ----------------------------- | ----------------------------------------------------------------------|
-| **FormElementAssemblies**		| Assemblies that contain bespoke field types mappers or preprocessors |
-
-
-## Umbraco Import Config
+## Umbraco Config
 
 Ignore the form, form builder and all form elements from IgnoreViewmodels and ExcludeViewmodelsAtGeneration.
 
@@ -26,9 +19,9 @@ There are two data structures for forms, vmBlock_DataForm and vmBlock_DataFormBu
 - `vmBlock_DataForm` : a necessary switch between rendering the form in the pattern library and production site. .Net needs to generate it's own form, adding hidden form elements to prevent cross site scripting attacks. On the production site a prerendered form is added as the LiveForm property.
 - `vmBlock_DataFormBuilder` : the actual form structure.
 
-We have created some mapping wrapper classes that make it easier to work with forms in Yuzu. Which one is used depends on how the other properties in the same Viewmodel are mapped.
-
 ### Form
+
+We have created some mapping wrapper classes that make it easier to work with forms in Yuzu. Which one used depends on how the other properties in the same Viewmodel are mapped.
 
 When only the form mapping is needed for a viewmodel the command is very simple
 
@@ -57,19 +50,19 @@ Definition includes default viewmodels for the following form elements that mirr
 - Recaptcha 2
 - Title and Description
 
-Because these form field types are available globally within the pattern library their use is not  limited to Umbraco Forms, they can be used anywhere within Umbraco. For example, we use these same form field definitions in our Members package. 
+Because these form field types are available globally within the pattern library their use is not limited to Umbraco Forms, they can be used anywhere within Umbraco. For example, we use these same form field definitions in our Members package. 
 
-The Yuzu viewmodels are mapped and combined to create the markup for Umbraco Forms but because there is no direct translation between the two sets of data we have created a manual mapping file for each Umbraco Form Field types. These mapping files are used when the form is rendered (in the form builder) looping over each the form fields (and fieldsets) in the Umbraco form and rendering the correct Yuzu form block.
+Yuzu viewmodels are mapped and combined to create the markup for Umbraco Forms but because there is no direct translation between the two sets of data we have created manual mappings for each Umbraco Form Field types. These mapping files are used when the form is rendered (in the form builder) looping over each the form fields (and fieldsets) in the Umbraco form and rendering the correct Yuzu form block.
 
 ## Extending Field Types
 
-Each form type viewmodel includes a special property named Config with a property type of object. We use this to hold properties that are non standard, because it's an object it will accept any type, including Yuzu viewmodels and anonymous types.
+Each form type viewmodel includes a special property named Config with a property type of object. We use this to hold properties that are non standard, because it's an object it will accept any type, including other Yuzu blocks and anonymous types.
 
-We have added two ways to change Form Field mapping;
+We have added two ways to change the way Form Fields are mapped;
 
 #### Replacing the default manual
 
-To override default mapping add a new class that implements the interface `IFormFieldMappings` and setting the IsValid check to match the Umbraco Form Field type name. Add the bespoke code in the Apply method. 
+To override default mapping, add a new class that implements the interface `IFormFieldMappings` and set the IsValid check to evaluate matching the Umbraco Form Field type name. Add the bespoke code in the Apply method. 
 
 ``` c#
 
@@ -101,7 +94,7 @@ public class BespokeShortAnswerFieldMapping : IFormFieldMappings
 
 ```
 
-?> In manual mappings like this its important to send the _ref property as above this will define the block rendered.
+?> In manual mappings like this its important to send the _ref property, this will define which block is rendered.
 
 #### Adding a Postprocessor
 
@@ -159,7 +152,7 @@ This code adds a tooltip to the config object of all Field Type viewmodels.
 
 A bespoke partial (Partials/Forms/YuzuForm.cs) is used to render the Umbraco Form, it handles, rendering form fields, return state changes, validation summaries and form completion states. 
 
-This form partial is dynamic on the Yuzu template that is used to render the form. In the normal flow of Yuzu the ofType added in the definition defines what form template is used, this gives definition to control which form templates at used where. 
+This form partial dynamically selected the Yuzu template that is used to render the form. In the normal flow of Yuzu the ofType added in the definition defines what form template is used, this gives definition to control which form templates at used where. 
 
 But when the form is rendered on its own then the template must be passed in the AutoMapper options, as seen below.
 

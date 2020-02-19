@@ -7,9 +7,9 @@ We have created a commercial package called Yuzu Delivery Import that handles al
 - Content creation : using definition page states and images from the definition pattern library to create content in Umbraco.
 - Bespoke mapping : configuring mappings to route data into grouped or global document types to prevent duplication and reduce complexity of CMS schema.
 
-This package is licenced on a subscription per developer basis as part of the Yuzu Developer package. 
+There are two versions of this package, lite and pro. The lite package only allows global mapping using the Map All Viewmodels button in the footer. The pro version is licensed on a subscription per developer basis as part of the Yuzu Developer package. More information can be found at [Balanced.dev](http://balanced.dev)
 
-The dashboard for Yuzu Delivery Import is found in the **Settings** section of Umbraco under the **Yuzu Import** dashboard.
+The dashboard for Yuzu Delivery Import is found in the **Settings** section of Umbraco under the **User Interface Integration** group.
 
 ## Configuration
 
@@ -18,7 +18,6 @@ The dashboard for Yuzu Delivery Import is found in the **Settings** section of U
 | Property    			    	 | Purpose 			                 			             |
 | -------------------------------| ----------------------------------------------------------|
 | IsActive		                 | Turns off Yuzu Import*                                    |
-| DocumentTypeAssemblies         | Define assembly to find Umbraco models                    |
 | ViewModelQualifiedTypeName	 |                                                           |
 | UmbracoModelsQualifiedTypeName |                                                           |
 | DataTypeFolder		         | Umbraco data type folder that new data types are added to |
@@ -30,9 +29,9 @@ The dashboard for Yuzu Delivery Import is found in the **Settings** section of U
 
 ### Ignores
 
-Usually there are elements you want to ignored by the import tool. These config properties allow you to define what is ignored globally or per viewmodel. 
+Usually there are elements you want to be ignored by the import tool. These config properties allow you to define what is ignored globally or per viewmodel. 
 
-Each config property below is collections of string or dictionaries of string and we have created an extension method to remove magic strings from configuration using strongly types generics.
+Each config property is a collection of string or dictionary of string, we have created an extension method so we can use generics of strongly types to add ignore.
 
 ``` c#
 config.IgnoreViewmodels.Add<vmPage_HomePage>();
@@ -55,6 +54,8 @@ The property names `_ref` and `_modifiers` are always added to blocks and are ig
 The property name `AdditionalProperty` is created during viewmodel generation and is ignore in import.
 
 By default any data structures from definition should be defined in an external library. For example, the viewmodel from vmBlock_DataImage is defined in the YuzuDelivery.Umbraco.Blocks package. These definitions are set as ignored during the startup of each specific definition package. i.e The forms package adds the form builder and form elements to the IgnoreViewModels.
+
+Adding these ignores is usually linked to a manual mapping strategy. As all mapping profiles, resolvers and types have access to the container we can add ignores at the same time as adding new mapping strategies by injecting the IYuzuDeliveryImportConfiguration config file.
 
 ### Umbraco
 

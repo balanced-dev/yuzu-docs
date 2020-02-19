@@ -8,6 +8,11 @@ The quickest way to get Yuzu up and running is to run our quick-start setup. We 
 We've tried to make getting up and running with your definition solution as quick and easy as possible: rather than manually having to create your directory structure and populate it manually with a basic, standardised setup yourself, we've automated this scaffolding in our [Yuzu Definition CLI](definition/cli).
 
 1.  If you haven't done so already, install the CLI
+
+```
+npm install -g yuzu-definition-cli
+```
+
 2.  Open up your terminal in the root directory of your project
 3.  Run the `yuzudef create "<Project name here>"` command
 4.  Navigate to the newly created "definition.src" folder in your terminal
@@ -21,6 +26,20 @@ We've tried to make getting up and running with your definition solution as quic
 In this section we'll assume that you have some experience of Visual Studio, installing nuget packages and Umbraco. 
 
 ### Visual Studio
+
+There are 2 ways of setting up Yuzu in Visual Studio; as a standalone or two separate projects (web and core)
+
+#### Standalone
+
+In Visual Studio create a new ASP.NET Web Application (.Net Framework) solution using using .NET framework 4.72
+
+```
+npm Install-Package YuzuDelivery.Umbraco.QuickStart
+```
+
+This will install a Yuzu directory in the project that contains the startup config. Manual mapping profiles can also be added here. 
+
+#### Separated
 
 In Visual Studio create a new solution that has 2 projects both using using .NET framework 4.72
 
@@ -42,13 +61,11 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Core
 
 ### Umbraco
 
-Build the project and run Debugging > Start without debugging to run the site, then install Umbraco without a starter kit.
+Build the project and run Debugging > Start without debugging to run the site, then install Umbraco **without a starter kit**.
 
-### Models builders
+### Viewmodels builders and Import
 
-Install the visual studio extensions Umbraco ModelsBuilder Custom Tool and Yuzu Delivery ViewModel Generator. 
-
-Both of these extensions are configured from Tools > Options (Yuzu and Umbraco) and require a login to the Umbraco website created earlier.
+All Yuzu tools are found in the User Interface Integration group of the Settings section in Umbraco.
 
 That's it! 
 
@@ -56,11 +73,47 @@ A new implementation of Yuzu Delivery for Umbraco is now installed and ready for
 
 ### Integration
 
-As Yuzu sites are defined by the frontend this new site won't do anything until definition push a new release for integration. 
+As Yuzu sites are defined by the frontend this new site won't do anything until definition push a new release for integration. To show you how it works we have created a standalone example that uses the Lambda definition from the Lambda example below.
+
+```
+npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
+```
+
+### Setup process
+
+1. Install Umbraco without a starter kit.
+2. In Umbraco, go to Settings > Yuzu Viewmodels builder > Generate models
+3. In Visual Studio add AppData/Viewmodels folder (show all files) to the solution and rebuild
+4. In Umbraco, go to Yuzu Import and click Map All Viewmodels
+5. Go to settings > Models builder and generate models
+6. In Visual Studio add AppData/Models to the solution and rebuild
+7. Im Umbraco, add 2 new templates, one called master and a child of master called home
+8. Assign the home template to the home document type and allow this document type node at root 
+9. Add a new content root node of Home
+10. In Visual Studio add the following code in Yuzu/Startup.cs and rebuild the solution
+
+``` c#
+
+    public class GridProfile : Profile
+    {
+        public GridProfile(IYuzuDeliveryImportConfiguration config)
+        {
+            config.IgnoreUmbracoModelsForAutomap.Add<Home>();
+
+            this.AddGridWithRows<Home, vmPage_Home>(x => x.Grid, y => y.Grid);
+        }
+    }
+
+```
+
+11. In Umbraco, go to settings > Yuzu Viewmodels builder > Generate models and rebuild
+12. Go to Yuzu Import and import content on the Home node 
+
+### Further examples
 
 Here is a list of our full working examples
 
-[Lambda (with workshop)](https://github.com/balanced-dev/yuzu-example-lambda) - A single page site example for Yuzu using a theme called Lambda. There is a workshop available on the workshop branch.   
+[Lambda](https://github.com/balanced-dev/yuzu-example-lambda) - A single page site example for Yuzu using a theme called Lambda.  
 
 [Logistics](https://github.com/balanced-dev/yuzu-example-logistics) - A multiple page site example with bespoke mapping for Yuzu using a theme called Logistics.
 

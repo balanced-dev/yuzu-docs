@@ -1,8 +1,8 @@
 # Membership
 
-Simple membership solutions are hard to get right, there are so many elements and getting one wrong could lead have security implications or cause UX issues. We intend to solve this problem by creating a simple, adaptable solution for adding membership funationality to Yuzu enabled Umbraco sites. In this solution defintion have complete control of the UI and delivery can change the Viewmodels data before render and also choose when and where forms are rendered.
+Simple membership solutions are hard to get right, there are so many moving parts. We have created a simple, adaptable solution for adding membership functionality to Yuzu enabled Umbraco sites. Definition have complete control of the UI and delivery can change Viewmodel data before render and choose when and where there forms are delivered and rendered.
 
-It's is not intended to be the solution to creating membership forms on all sites, but as a quick solution for smaller sites that don't need overly complex solutions it works well. It also demonstrates how we are working with Yuzu; by separating out the UI and CMS integration we can create packages that are very adaptable with minimum code implementation.
+It's not intended as a cure all solution, but as a quick approach for smaller sites that don't need overly complex logic and it works well. It also demonstrates how we are working with Yuzu; by separating out the UI and CMS integration we can create packages that are very adaptable with minimum code implementation.
 
 The following forms are included
 
@@ -16,19 +16,19 @@ For form fields we use the standard Viewmodels using in Yuzu forms.
 
 # Viewmodel
 
-All members forms use the same Viewmodel, `vmBlock_AccountForm`, it contains all the elements common to any form; form fields, error messages, submitButtonText etc and includes a some that we have added specifically; actionLinks (navigation through the forms). 
+All members forms use the same Viewmodel, `vmBlock_DataFormBuilder` from the Forms package, it contains all the elements common to any form; form fields, error messages, submitButtonText etc and includes some that we have added specifically; actionLinks (navigation through the forms). 
 
-By using the same Viewmodel we can standardise membership forms through the site, becoming eaiser to maintain and change in the future.
+By using the same Viewmodel we can standardise membership forms through the site, making it easier to reuse, maintain and change in the future.
 
 # Umbraco Membership Integration
 
 Umbraco itself comes with some basic membership integration in the form of controllers. These handle login, logout, register and profile changes. We have used the login and register controllers here. 
 
-Using Yuzu membership doesn't preclude for all the other tricks that Umbraco can perform out if the box. For example, need to send an email on user registration, use a member service event.
+Using Yuzu membership doesn't stop you from using all the other extension points that Umbraco includes. For example, use a member service event to send an email on user registration.
 
 # Configuration
 
-An interface to change the membership controller settings, they standardize properties whilst making the controller as adaptable without needing a new controller. 
+An interface to change the membership controller settings, they standardize properties whilst making the controller as adaptable without needing new controllers. 
 
 | Property    			    	| Purpose 			        |Default 			        |
 | ----------------------------- | --------------------------|---------------------------|

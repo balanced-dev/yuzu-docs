@@ -6,21 +6,15 @@ Hooking into the Yuzu pattern library makes it easy for definition developers to
 
 All mapping is routed through our GridItemMapping service that utilizes data structures specific to the grid. This service can be overridden in the container to implement your own mapping instance.
 
-Coupled with our Umbraco Import package we automate the creation of Umbraco Grid data types, including the creation of items in the Doc Type Grid Editor config file. We can also import grid config settings defined within the pattern library into the Grid property editor definition.
-
-## Config
-
-| Property    			    	| Purpose 			                        |
-| ----------------------------- | ------------------------------------------|
-| **UmbracoModelsAssembly**		| Assemblies that contain Umbraco Models    |
+Coupled with our Umbraco Import package automates the creation of Umbraco Grid data types, including the creation of items in the Doc Type Grid Editor config file. We can also import grid config settings defined within the pattern library into the Grid property editor definition.
 
 ## Umbraco Import Config
 
-Ignore the DataGridRows and DataGridRowsColumns from IgnoreViewmodels.
+Ignore the DataRows and DataGrid from IgnoreViewmodels.
 
 ## Mapping
 
-There are two data structures for grids, vmBlock_DataGridRows and vmBlock_DataGridRowsColumns (row only grids and grids with rows and columns). Both structures can include config objects for both rows and columns, but they are not mandatory.
+There are two data structures for grids, vmBlock_DataRows and vmBlock_DataGrid (rows only and grids with rows and columns). Both structures can include config objects for both rows and columns, they are optional.
 
 ### Grids
 
@@ -49,7 +43,7 @@ This `DefaultGridItem` class has three method
 - `CreateVM` : hydrates the viewmodel from the model using Automapper. Also used to generate the Umbraco back office preview. 
 - `Apply` : Used by the grid builder in production to get the data from the grid and run the CreateVM above
 
-There are many situations where the direct nature of generic class is not suitable. To add bespoke logic it is possible to either inherit this class and override its methods or implement your own class that implements the IGridItem interface. When doing so, it's important to follow the pattern above where Apply calls the CreateVm method, previews in the backoffice will then reflect the production site.
+There are many situations where the direct nature of generic class is not suitable. To add bespoke logic it is possible to either inherit this class and override its methods or implement your own class that implements the IGridItem interface. When doing so, it's important to follow the pattern above where Apply calls the CreateVm method, previews in the back-office will then reflect the production site.
 
 here's an example taken from our One School demo site
 

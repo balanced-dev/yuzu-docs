@@ -6,7 +6,7 @@ We often find that Definition developers create example pages to demonstrates bl
 
 ## How does it work
 
-- add a new content item for the document type / viewmodel that is going to be imported
+- add a new content item for the document type / viewmodel that is being imported
 - in the Yuzu Import dashboard click the `Content` for the viewmodel 
 - choose the added content item and the definition data file 
 
