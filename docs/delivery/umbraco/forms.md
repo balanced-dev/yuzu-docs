@@ -32,8 +32,8 @@ cfg.AddGridWithRows<Contact, vmBlock_Contact>(src => src.Form, dest => dest.Form
 When other viewmodel properties require manual mapping then it's a little more complex.
 
 ```c#
-CreateMap<Contact, vmBlock_Contact>()
-    .ForMember(x => x.Form, opt => opt.MapFrom<FormMemberValueResolver<Contact, vmBlock_Contact>(y => y.Form));
+CreateMap<GridForm, vmBlock_GridForm>()
+    .ForMember(x => x.Form, opt => opt.MapFrom<FormMemberValueResolver<GridForm, vmBlock_GridForm>, object>(x => x.Form));
 ```
 
 ## Form Field Types
