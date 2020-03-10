@@ -6,7 +6,7 @@ Within this section we'll be taking the the idea of centralising & standardising
 ---
 
 # ofType
-"ofType" structures, as we call them, is a strategy which allows us to create data structures that are rigid and generic where possible, but allow for variation where necessary (via mutliple uses of `anyOf`).
+"ofType" structures, as we call them, is a strategy which allows us to create data structures that are rigid and generic where possible, but still permits variation where necessary (via mutliple uses of `anyOf`).
 
 That probably doesn't make a whole lot of sense initially and it may be easier to break this down a bit and then give a very simple example.
 
@@ -18,7 +18,7 @@ For "ofType" to work we need 3 things:
 
     It also uses an additional, custom property called `anyOfTypes` to register the sub-block option(s) which rely on the generic schema and will do the rendering 
 2.  **The specific schema(s) & markup**:
-    This is basically a block, oddly enough, that doesn't have a it's own specific schema, but does contain markup and can contain styling.
+    This is basically a block, oddly enough, that doesn't have a its own specific schema, but does contain markup and can contain styling.
 
     What it will also contain is the sub-schema(s) for any variable (`anyOf`) properties in the generic schema, which it relies on.
 

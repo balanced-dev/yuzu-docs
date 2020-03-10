@@ -165,7 +165,7 @@ As a property:
 ```
 <!-- tabs:end -->
 
-Or as an array:
+Or within an array:
 <!-- tabs:start -->
 #### **parGallery.schema **
 ```json
@@ -293,7 +293,7 @@ You can then reference `dataLink` from the parent block's/page's schema. For exa
 
 One of the huge advantages of doing this is for the delivery side: if multiple blocks reply on a single, centralised data structure schema then it means that automated processes can occur.
 
-For example, we've used a link in the above example. But, imagine we've centralised all images instead with all other schemas relying on `dataImage` when an image is required. It allows us to automatically set the data type in Umbraco of images within blocks to be a media picker becuase of the standardisation we've achieved by using this data structure concept.
+For example, we've used a link in the above example. But, imagine we've centralised all images instead with all other schemas relying on `dataImage` when an image is required. It allows us to automatically set the data type in Umbraco of images within blocks to be a media picker because of the standardisation we've achieved by using this data structure concept.
 
 ---
 

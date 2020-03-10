@@ -46,7 +46,7 @@ Each block is made up of 4 key components:
 2.  [**Data (JSON)-** ](definition/data "Read more about data")<br>
 	Contained in JSON files, data allows the creation of states, enabling blocks to be tested with different/extreme data situations (e.g. the absence of a property, a long string in a property, different numbers of items in an array) without a backend solution. 
 
-	This allows for potential issues that data could create in the design to be raised and worked-around prior to integration.
+	This allows for potential issues that varying data scenarios could create in the design to be raised and worked-around prior to integration.
 
 	<!-- tabs:start -->
 	#### ** parPerson_no-photos.json**
@@ -95,7 +95,7 @@ Each block is made up of 4 key components:
 4. [**Markup (Handlebars)-** ](definition/markup "Read more about markup")<br>
 	We use Handlebars as it uses simple syntax to render our data and covers most of the scenarios we've encountered. Where we have found it wanting we've added a very small selection of helpers to help bridge the gap.
 
-	One of our beliefs is that the front-end to projects should be as lightweight as possible and shouldn't doing any heavy-lifting. Handlebars is purely for rendering data and should not be seen as anything more. By not being "intelligent" (unable to do calculations, complex conditions etc.) it forces the markup to be simple and easy for even fledgling developers to understand and follow!
+	One of our beliefs is that the front-end to projects should be as lightweight as possible and shouldn't doing any heavy-lifting. Handlebars is purely for rendering data and should not be seen as anything more. By not being "intelligent" (unable to do calculations, complex conditions etc.) it forces the markup to be simple and easy for even fledgling developers to understand, follow and write!
 
 	<!-- tabs:start -->
 	#### **parPerson.hbs**
@@ -153,10 +153,10 @@ project-root
 ```
 
 Within the `_dev` folder is:
-- `_client`: stores all compiled HTML, CSS & JS and any media files, font files etc. copied from the `_source` & `_templates` folders , within their own sub-directories. There's no real need to ever go into this directory when developing
+- `_client`: stores all compiled HTML, CSS & JS and any media files, font files etc. copied from the `_source` & `_templates` folders, within their own sub-directories. There's no real need to ever go into this directory when developing
 - `_source`: contains all the global .scss files, JS files, fonts, images etc. within separate sub-directories
 - `_templates`: where the majority of developers' time will be spent as it contains all the block and page markup, data, schemas and local styling
-- `yuzu-def-ui`: holds the Yuzu User Interface app which allows in-browser navigation around the project, editing/creating new states etc.
+- `yuzu-def-ui`: holds the Yuzu Definition User Interface app which allows in-browser navigation around the project, editing/creating new states etc.
 - `templates.html`: basically the index page for the front-end solution. Just injects the Yuzu Definition UI into the page as well as providing links to documentation and other 
 ```
 project-root

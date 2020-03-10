@@ -832,8 +832,8 @@ It allows for named references to be used anywhere within the helper, reducing t
 
 For example:
 - `#each {array-value-here} as |{context-name-here}|` allows you to name the context within the `#each`
-- `#each {array-value-here} as |{context-name-here} {index-name-here}|` allows you to not only name the context and the index
-- `#each {object-value-here} as |{context-name-here} {key-name-here}|` similarly allows the naming of the context and they key
+- `#each {array-value-here} as |{context-name-here} {index-name-here}|` allows you to not only name the context, but also the index
+- `#each {object-value-here} as |{context-name-here} {key-name-here}|` similarly allows the naming of the context and the key
 
 Basically it allows aliases for the `@key`, `@index` and `this` values within `#each` and, so long as there are no naming clashes, removes the need for using `../` to access ancestor properties.
 
@@ -886,7 +886,7 @@ These properties are used in a select few of the following helpers and will be d
 ## #ifCond
 This helper basically just adds a wider range of possibilites for conditional rendering. Where `#if` and `#unless` fall down is that you can only evaluate a singular value and not a condition.
 
-It's limited to 3 parameters to form the most simple of condtions, `value-1`, `operator`, `value-2` in that order.
+It's limited to 3 parameters to form the simplest of conditions, `value-1`, `operator`, `value-2` in that order.
 
 The values can be a variable or just a string, integer etc. while the operator is limited to a string representation of a collection of comparison/logical operators listed below:
 
@@ -1263,7 +1263,7 @@ Solution 2 however is viable even when styling the titles independently, succeed
 
 But again this solution is not without its issues. What happens when another block (say `parPersonProfile`) is added which also needs to use `parSectionHeading` and it too has a dark background like `parBlog`. Do you change the selector within the sectionHeading SCSS file to `.person-profile &, .blog &`?
 
-Perhaps now you may evolve it to be more of a generic class and move away from using the outer blocks' classes as selectors within the `_parSectionHeading` stylesheet. Something like `.black-background` or maybe to cover both instances to avoid having to add to a selector everytime a block needs to use `parSectionHeading`.
+Perhaps now you may evolve it to be more of a generic class and move away from using the outer blocks' classes as selectors within the `_parSectionHeading` stylesheet. Something like `.black-background` maybe to cover both instances, avoiding having to add to a selector everytime a block needs to use `parSectionHeading`?
 
 But where would you put it? At the root of the parent block? No, that wouldn't make sense as it purely relates to `parSectionHeading`. Introducing a new element to wrap `parSectionHeading` like so would surely be cleanest?:
 <!-- tabs:start -->
@@ -1325,15 +1325,15 @@ This enables us to cleanly separate styling as much as possible, without having 
 
 ?> Please note that as `modPartial` returns HTML it is necessary to not escape the helper's output (i.e. use triple braces: `{{{}}}`)
 
-?> The eagle-eyed among you may have realised that there is very little difference between the two helpers `dynPartial` and `modPartial`: after all they both take a string parameter of the name of the partial they render, the data context and return the compiled template in HTML. While it's true that they basically do the same thing (apart from `modPartial` pushing classes into the `_modifiers` property) and could be easily combined, we believe that having two separate helpers is better: it better illustrates intent, with one being purely for rendering the correct partial given a context (`dynPartial`) while the other should just be used when adding contextual classes to the partial (`modPartial`).
+?> The eagle-eyed among you may have realised that there is very little difference between the two helpers `dynPartial` and `modPartial`: after all they both take a string parameter of the name of the partial they render, the data context and return the compiled template in HTML. While it's true that they basically do the same thing (apart from `modPartial` pushing classes into the `_modifiers` property) and could be easily combined, we believe that having two separate helpers is beneficial: it better illustrates intent, with one being purely for rendering the correct partial given a context (`dynPartial`) while the other should just be used when adding contextual classes to the partial (`modPartial`).
 
 ## pictureSource
 !> Only designed to work with [ImageProcessor](https://imageprocessor.org/)
 
-The `pictureSource` helper was borne out of frustration of maintaining `<picture>` element contents.
+The `pictureSource` helper was born out of frustration of maintaining `<picture>` element contents.
 
 While building sites we'd often try to optimise our images for all screen sizes, using the picture element and source tags in combination with ImageProcessor. We started using only the basic functionality of ImageProcessor and the `<picture>` element until we started getting comfortable with both and digging deeper and finding more strategies and patterns we could take advantage of to really reduce the file sizes of image-heavy pages:
-- media queries to serve different sized images for different devices
+- media queries to serve different sized images for different screen sizes
 - requesting double sized images at a lower quality for higher density displays (e.g. retina), which produced smaller file sizes, with no percieved quality loss
 - using WebP with a fallback source for those browsers where WebP is unsupported
 
@@ -1480,7 +1480,7 @@ A layout is basically a wrapper around pages, generally containing common compon
 
 It is also important to note that if you want to use the Yuzu Definition UI that you must attach some classes within your layout document to indicate where they root of the layout content (either the `<body>` itself or nested within `<body>`) and the root of the content is (nested within the `<body>`) by using the `.yuzu-layout-root` and `.yuzu-content-root` classes respectively. The Yuzu Definition UI script should also be included. As these are obviously purely for developers when working on the definition side, they can be removed on the delivery side so it's not included in the final output.
 
-Within your project you should have at the very least two layouts, one for blocks (`_block.hbs`) and one for pages (`_page.hbs`), contained within (`_dev/_templates/_layouts` directory). `_block.hbs` and `_page.hbs` are the default layout for blocks and pages respectively (unsurprisingly!).
+Within your project you should have at the very least two layouts, one for blocks (`_block.hbs`) and one for pages (`_page.hbs`), contained within (`/_dev/_templates/_layouts` directory). `_block.hbs` and `_page.hbs` are the default layout for blocks and pages respectively (unsurprisingly!).
 
 Below is a simple page layout illustrating what we've discussed so far:
 <!-- tabs:start -->

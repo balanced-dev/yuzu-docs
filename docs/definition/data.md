@@ -1,18 +1,18 @@
 # Data/States
-Data is a big part of the definition side of Yuzu projects: while it's true that you could get by with only creating schemas, markup, styling and Javascript creating states are a big part of the Yuzu process.
+Data is a big part of the definition side of Yuzu projects: while it's true that you could get by with only creating schemas, markup, styling and Javascript, creating states is often a critical component of the Yuzu process.
 
-They enable the front-end developers to work in complete isolation, without the need for the delivery side to check the flexibility of the UI. It allows the Handlebars partials to be rigorously tested and styling decisions to be made using extreme data, as well as allowing initial data to be lifted from the designs and imported into the CMS when being integrated.
+They enable the front-end developers to work in complete isolation, without the need for the delivery side, to check the flexibility of the UI with different data situations. It allows the Handlebars partials to be rigorously tested and styling decisions to be made using extreme data, as well as allowing initial content data to be lifted from the designs and used to hydrate the CMS when being integrated.
 
 ---
 
 # What is a state?
-A state is quite simply a JSON file for a specific block/page which complies to its schema and usually uses a specific/extreme set of property values to test one/multiple of the block/page's:
+A state is quite simply a JSON file for a specific block/page which validates against its schema. It usually uses a specific/extreme set of property values to test one/multiple of the block/page's:
 
 1.  **Handlebars partial**:<br>
     By changing values from truthy to falsy and vice versa, all avenues of the Handlebars conditions outlined in the block/page partial can be explored using multiple states. The includes boolean properties and the absence/presence of data (e.g. empty vs populated array)
 
 2.  **Styling (SCSS/CSS)**:<br> 
-    Different amounts and/or combinations of data conditions can cause designs/layouts to break. For example with a string value you could test the extremes over several states: a long sentence, a very long word, a little amount of text etc. to see how it holds up. You can also test layouts: for example if there are two bullet point lists which are equal height in the design, you would purposefully umbalance them by assigning more items to one list than the other in a new state. Designers often use perfect or duplicated data sets when creating their designs, authors/users however are not likely to input the same and so your solution should be flexible enough to cope.
+    Different amounts and/or combinations of data conditions can cause designs/layouts to break. For example with a string value you could test the extremes over several states: a long sentence, a very long word, a little amount of text etc. to see how it responds across all screen sizes. You can also test layouts: for example if there are two bullet point lists which are equal height in the design, you would purposefully umbalance them by assigning more items to one list than the other in a new state. Designers often use perfect or duplicated dummy data (e.g. Lorem Ipsum fragments) when creating their designs. Authors or users however are not likely to do the same and so your solution should be flexible enough to cope.
 
 3.  **Javascript**:<br>
     States can be useful for when settings are being passed to your scripts via data properties in the markup: for example passing latitude and longitude values into a Google map. It can also be useful when mimicking backend responses: e.g. rendered HTML from the delivery side in AJAX requests ([see Javascript section's API explanation](definition/javascript?id=API)).
@@ -86,7 +86,7 @@ We'll have to copy the social link data into the parent profile block like so:
 
 In this example, this doesn't seem too bad: what's the harm in quickly duplicating one state and adding it to another wrapping block's state. It allows for states to be viewed in isolation doesn't it?
 
-Well yes, but this quickly gets out of hand: imagine a page with multiple blocks: that alone could result in JSON files hundreds of lines long to create a state for it if they were complex blocks. Even worse, those blocks could contain sub-blocks and even those sub-blocks could contain nested blocks of their own. What happens if multiple blocks/pages relied on the same block/sub-block state when testing different aspects of that block/page?
+Well yes, but this quickly gets out of hand: imagine a page with multiple blocks: that alone could result in JSON files hundreds of lines long to create a single page state it if included complex underlying blocks. Even worse, those blocks could contain sub-blocks and even those sub-blocks could contain nested blocks of their own. What happens if multiple blocks/pages relied on the same block/sub-block state when testing different aspects of that block/page?
 
 All this unnecessary duplication of data can be avoided by using `$ref`. It allows for the referencing of other blocks' states to form page/wrapping block states. It effectively does the exact same thing when rendering the markup, but is obviously far cleaner and allows for smaller, more understandable states.
 
@@ -112,4 +112,4 @@ An extreme example would be, say, a `parLink` block, used for all the links in t
 
 Inline data (nesting sub-block states within ancestor states), without using `$ref` therefore has its place, but should mainly be limited to simple blocks, which will not bloat the JSON too much. Another thing to consider is that inline data does detract from the self-contained aspect of blocks: now a block's state can be spread throughout your solution which needs to be considered if updating the block's schema (e.g. removing/renaming/restructuring properties). Common sense and an appreciation for balance is required.
 
-A good example in our projects would be form element blocks: while they are blocked and thus have a global schema and markup (as it can be used as a sub-block within many other blocks), their states are virtually all inline within their parent/ancestor blocks. If it was not done this way each form element could end up with a lot of unnecessary JSON files, with the only difference being label changes.
+A good example in our projects would be form element blocks: while they are blocked and thus have a global schema and markup (as it can be used as a sub-block within many other blocks), their states are virtually all inline within their parent/ancestor blocks. If it was not done this way each form element could end up with a lot of unnecessary JSON files, with the only difference being label/placeholder changes.

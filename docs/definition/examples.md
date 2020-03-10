@@ -6,19 +6,19 @@ Building key, repeating structures in a way similar to the below examples will h
 ---
 
 # Building a grid
-In this example, we'll build a simple "row only" grid, with no columns for simplicity's sake: each block is effectively a row. This can easily be changed by just creating a new data structure with a slightly different schema to incorporate the idea of columns.
+In this example, we'll build a simple "row only" grid, with no columns for simplicity's sake: each block is in essence a row. This can easily be changed by just creating a new data structure with a slightly different schema to incorporate the idea of columns.
 
 Speaking of data structures, let's begin by writing one for the rows to be used in all of our grids.
 
 <!-- tabs:start -->
-#### **dataGridRows.schema**
+#### **dataRows.schema**
 ```json
 {
-    "id": "/dataGridRows",
+    "id": "/dataRows",
     "type": "object",
     "additionalProperties": false,
     "anyOfTypes": [
-        "parSectionGrid"
+        "parRowBuilder"
     ],
     "properties": {
         "rows": {
@@ -30,14 +30,14 @@ Speaking of data structures, let's begin by writing one for the rows to be used 
                     "config": {
                         "anyOf": [
                             {
-                                "$ref": "/parSectionGridConfig"
+                                "$ref": "/parRowBuilderConfig"
                             }
                         ]
                     },
                     "items": {
                         "anyOf": [
                             {
-                                "$ref": "/parSectionGridItems"
+                                "$ref": "/parRowBuilderItems"
                             }
                         ]
                     }
@@ -49,12 +49,12 @@ Speaking of data structures, let's begin by writing one for the rows to be used 
 ```
 <!-- tabs:end -->
 
-By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their own Handlebars rendering, configuration settings and blocks allowed in them. In `dataGridRows` we've already set it up to connect to a sub-block of `parSectionGrid` so we'll create this now:
+By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their own Handlebars rendering, configuration settings and blocks allowed in them. In `dataRows` we've already set it up to connect to a sub-block of `parRowBuilder` so we'll create this now:
 
 <!-- tabs:start -->
-#### **parSectionGrid.hbs**
+#### **parRowBuilder.hbs**
 ```handlebars
-<div class="section-grid">
+<div class="row-builder">
 {{#each rows}}
     {{#each items}}
         {{{ dynPartial _ref this }}}
@@ -62,10 +62,10 @@ By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their ow
 {{/each}}
 </div>
 ```
-#### **parSectionGridConfig.schema**
+#### **parRowBuilderConfig.schema**
 ```json
 {
-    "id": "/parSectionGridConfig",
+    "id": "/parRowBuilderConfig",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "object",
@@ -73,10 +73,10 @@ By leveraging "anyOfTypes" and "anyOf" we can have seperate grids, with their ow
     "properties": {}
 }
 ```
-#### **parSectionGridItems.schema**
+#### **parRowBuilderItems.schema**
 ```json
 {
-    "id": "/parSectionGridItems",
+    "id": "/parRowBuilderItems",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "array",
@@ -91,21 +91,21 @@ At the moment though these schemas are empty- let's populate the config and add 
 
 Adding a background colour to the rows (in the markup & config)
 <!-- tabs:start -->
-#### **parSectionGrid.hbs**
+#### **parRowBuilder.hbs**
 ```handlebars
-<div class="section-grid">
+<div class="row-builder">
 {{#each rows}}
-    <section class="section-grid__row{{#if config.backgroundColour}} section-grid__row--{{config.backgroundColour}}{{/if}}">
+    <section class="row-builder__row{{#if config.backgroundColour}} row-builder__row--{{config.backgroundColour}}{{/if}}">
     {{#each items}}
         {{{ dynPartial _ref this }}}
     {{/each}}
 {{/each}}
 </div>
 ```
-#### **parSectionGridConfig.schema**
+#### **parRowBuilderConfig.schema**
 ```json
 {
-    "id": "/parSectionGridConfig",
+    "id": "/parRowBuilderConfig",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "object",
@@ -122,10 +122,10 @@ Adding a background colour to the rows (in the markup & config)
 
 And now to add a few examples sub-blocks into our grid items schema:
 <!-- tabs:start -->
-#### **parSectionGridItems.schema**
+#### **parRowBuilderItems.schema**
 ```json
 {
-    "id": "/parSectionGridItems",
+    "id": "/parRowBuilderItems",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "",
     "type": "array",
@@ -143,14 +143,14 @@ And now to add a few examples sub-blocks into our grid items schema:
 ```
 <!-- tabs:end -->
 
-We're then free to use the "section grid" block in a parent block/page.
+We're then free to use the "row builder" block in a parent block/page.
 
 Let's do it now by adding it to our home page
 <!-- tabs:start -->
 #### **home.hbs**
 ```handlebars
 {{#if content}}
-    {{> parSectionGrid content }}
+    {{> parRowBuilder content }}
 {{/if}}
 ```
 #### **home.schema**
@@ -163,8 +163,8 @@ Let's do it now by adding it to our home page
     "additionalProperties": false,
     "properties": {
         "content": {
-            "$ref": "/dataGridRows",
-            "anyOfType": "parSectionGrid"
+            "$ref": "/dataRows",
+            "anyOfType": "parRowBuilder"
         }
     }
 }

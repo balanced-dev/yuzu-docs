@@ -1,11 +1,11 @@
 # Javascript Interactions
 Javascript is the area in which Yuzu is the least prescriptive- it's often where frontend developers need to make the decision themselves on what the best way of approaching this is.
 
-For example, many brochure sites don't require much in the way of JS- maybe some very basic, framework-less scripts to just toggle some classes will suffice. Perhaps no Javascript is needed at all or maybe, despite it being considered 'outdated' by many, jQuery would be best so you can leverage some of the vast array of plugins available (e.g. a carousel).
+For example, many brochure sites don't require much in the way of JS- maybe some very basic, framework-less scripts to just toggle some classes will suffice. Perhaps no Javascript is needed at all or maybe, despite it being considered 'outdated' by many, jQuery would be best so you can leverage some of the vast selection of plugins available (e.g. a carousel).
 
-We are not against using Angular, Vue or any other framework as we have occasionally used them on some sites to fulfil specific roles in specific areas. It's about choosing the right tool for the job.
+We are not against using Angular, Vue, Svelte or any other framework as we have occasionally used them on some sites to fulfil specific roles in specific areas. It's about choosing the right tool for the job.
 
-Despite this, we have a basic API and have provided a few examples of a few ways of writing JS in a Yuzu environment to help you get stated 
+Despite this, we have a basic API and have provided a few examples of a few ways of writing JS in a Yuzu environment to help you get started.
 
 ---
 
@@ -16,14 +16,14 @@ As of the time of writing, our API only has one endpoint (`getResolved`). It ret
 
 `{state file name}` is just the name of your JSON file for a block/page state without the `.json` extention. Directory structure is irrelevant.
 
-For example if we had a file located at `_dev/_templates/blocks/_homepage/carousel/data/carousel_no-slides.json`, to retrieve the HTML and JSON purely for that state we'd call `/api/getResolved/carousel_no-slides`
+For example if we had a file located at `/_dev/_templates/blocks/_homepage/carousel/data/carousel_no-slides.json`, to retrieve the HTML and JSON purely for that state we'd call `/api/getResolved/carousel_no-slides`
 
 For the HTML we'd use the response object's `text` property, whereas for the data we'd use `json`. 
 
 ---
 
 # Our preferences
--   We prefer to use data attributes over JS prefixed classes as they're more obvious in the markup, more flexible if data as you can assign values to them and keeps classes for styling only
+-   We prefer to use data attributes over JS prefixed classes as they're more obvious while scanning the markup
 -   We tend to pass most variables into the JS via a JSON object being passed through a data attribute, picked up and used in our scripts
 
     For example:
@@ -308,7 +308,7 @@ var teacherProfiles = new Vue({
 ```
 <!-- tabs:end -->
 
-This very simple example simply loads the next batch or page of photos, with the next endpoint being updated after every call (new URL with a query string to get pagination working on backend) until the endpoint URL is falsy (i.e. there are no more photos), whilst updating the "load more" button's text.
+This very simple example just loads the next batch or page of photos, with the next endpoint being updated after every call (new URL with a query string to get pagination working on backend) until the endpoint URL is falsy (i.e. there are no more photos), whilst updating the "load more" button's text.
 
 Alternatively we could, instead of putting the markup within the JS, embedded it in the Handlebars file to keep the Vue app cleaner.
 
