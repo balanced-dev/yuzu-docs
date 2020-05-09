@@ -1,6 +1,6 @@
 # Viewmodel Generation
 
-Generation of c# pocos using schema released from definition. The core logic can be run independently or integrated into a CMS as we have done with Umbraco.
+Generation of C# pocos uses the schema sent from definition during a release. The core logic can be run independently or integrated into a CMS as we have done with Umbraco.
 
 Setup of the Viewmodel generation again is very similar to the way that Models Builder works for Umbraco in DataApp mode. 
 

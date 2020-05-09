@@ -84,7 +84,7 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 1. Install Umbraco without a starter kit.
 2. In Umbraco, go to Settings > Yuzu Viewmodels builder > Generate models
 3. In Visual Studio add AppData/Viewmodels folder (show all files) to the solution and rebuild
-4. In Umbraco, go to Yuzu Import and click Map All Viewmodels
+4. In Umbraco, go to Yuzu Integrate and click Map All Viewmodels
 5. Go to settings > Models builder and generate models
 6. In Visual Studio add AppData/Models to the solution and rebuild
 7. Im Umbraco, add 2 new templates, one called master and a child of master called home

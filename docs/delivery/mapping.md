@@ -1,8 +1,6 @@
-# Mapping strategies
+# Manual Mapping
 
-Taking model data from one or more sources and hydrating viewmodels look to be a simple process, but, we have found that deciding which mapping strategy to use in any particular circumstance takes a little skill and experience. With practice this nuanced approach allows several types of mapping creating code that is minimal, descriptive, maintainable and testable. 
-
-The simplest solution would be to manually create instances of the viewmodels, but we quickly found that this became verbose and hard to maintain.  
+The simplest mapping solution is to manually create instances of viewmodels, but we quickly found that this became too verbose, hard to maintain and we had difficultly reusing mappings.
 
 ``` c#
 var output = new vmBlock_Contact
@@ -13,13 +11,129 @@ var output = new vmBlock_Contact
 }
 ```
 
-Manual mapping leads to lots of replication, you are just mapping between properties that have the same or similar property names. Any changes that are released from definition requires the delivery developer to know what has changed and update the code correctly. 
+Manual mapping this way leads to replication, especially when we are mapping between properties that have the same or similar property names. Any changes that are released from definition require the delivery developer to understand what has changed and update the code correctly. 
 
-The solution was to use an auto mapping solution, we use Automapper. By creating parallel lines between our Models and Viewmodels we can reduce the need for manual mapping and automate the mapping process as much as possible. This makes for a very lean solution that contains little or no code. 
+One solution is to use automatic mapping e.g. Automapper, we use this package in Yuzu (it can be swapped out for any other solution). By creating parallel lines between our Models and Viewmodels we can reduce the need for manual mapping and automate the mapping process as much as possible. This makes for a very lean solution that contains little or no code. 
 
-With automapping, when a new property is added by definition all the delivery need do is create the new property in the CMS and as long as the property names match then the new property will be mapped. No need for any extra code. Of course, this is very dependant upon creating parallel lines (property names that match) between the definition and delivery sides of the application. We have automated this process using our Umbraco Import package.
+With automapping, when definition add a property to the viewmodel schema, delivery only need create the new property in the CMS and, as long as the property names match, then the new content will be filled from the CMS. No need for any extra code. Of course, this is very dependant upon creating parallel lines (property names that match) between the definition and delivery sides of the application. We have automated this process using our Import package.
 
-But there are always occasions where automatic mapping is not possible. This is where we have found that use two types of mapping strategies in addition manual mapping. 
+But there are always occasions where automatic mapping is not possible due to complexity or integrating an external data source.
+
+### Yuzu Mapping Api
+
+We see a website as a cloud of interconnecting UI blocks that are combined to create the pages of the site. Each of these UI blocks has at least one corresponding viewmodel defining its dynamicity. In turn each of these viewmodels can be mapped to CMS objects that supply the content. Most content will be filled from the CMS source. 
+
+Our mapping API allows the developer to replace, amend or ignore this mapping, before rendering of any viewmodel or viewmodel property at any point in this cloud of UI blocks. The Yuzu mapping API simplifies mapping definitions into single lines of code per mapping.
+
+All mapping definitions are created in objects that inherit from *YuzuMappingConfig*, they are added using extension methods on the ManualMaps property. 
+
+``` c#
+public class ManualMapping : YuzuMappingConfig
+{
+    public Test()
+    {
+        ManualMaps.AddPropertyReplace<SiteHeaderNavMemberResolver, vmBlock_SiteHeader>(x => x.Nav);
+    }
+}
+```
+
+Above assigns the resolver `SiteHeaderNavMemberResolver` to the `SiteHeader` block's Nav property. When the `SiteHeader` viewmodel is hyrdated, for the property `Nav`, instead of mapping from the CMS this resolver is used instead. This gives us fine control over which content is displayed for the site at any point. 
+
+Below is the Member resolver from the above example.
+
+``` c#
+public class SiteHeaderNavMemberResolver : IYuzuPropertyReplaceResolver<Template, vmBlock_SiteNav>
+{
+    public vmBlock_SiteNav Resolve(Template source, UmbracoMappingContext context)
+    {
+        
+    }
+}
+```
+
+Implementing the `IYuzuPropertyReplaceResolver` interface that requires two generic properties of the Source (`Template` DocumentType) and Destination Member Type (`vmBlock_SiteNav` viewmodel). The `Resolve` method returns the viewmodel, we are free to define how the CMS source is used to create the viewmodel. 
+
+In the `Resolve` method a context object parameter is passed that contains the following data.
+
+## Mapping Context
+
+| Property    			    	| Details 			                                  |
+| ----------------------------- | ----------------------------------------------------|
+| Model          		        | The in context root CMS object                      |
+| Html              		    | The current HtmlHelper                              |
+| HttpContext               	| The current HttpContext                             |
+| Items                    		| Any other items passed from the root view           |
+
+A new item is passed into the mapping context as below
+
+``` c#
+@(Html.RenderYuzu<vmBlock_SiteHeader>(Model, false, 
+    new Dictionary<string, object>() { 
+        { "item", "test" } 
+    }))
+```
+
+### Resolvers, Convertors and Factories
+
+Manual mapping can be assigned to Viewmodels or Viewmodels properties in three different ways
+
+- Replace : overrides the default mapping and passes the CMS source. Ties the resolver to the CMS source type.
+- After : allows the Viewmodel data to be changed after is has been mapped but before rendering.
+- Factory : plain creation of the Viewmodel without any reference to the CMS. Can be reused anywhere where the destination viewmodel is used. 
+
+There are 6 interfaces for Viewmodels and their properties
+
+| Interface    			    	| Generic properties 			|
+| ----------------------------- | ------------------------------|
+| IYuzuPropertyReplaceResolver  | Source, Dest Member Type      |
+| IYuzuPropertyAfterResolver    | Source, Dest Member Type      |
+| IYuzuTypeConvertor            | Source, Dest                  |
+| IYuzuTypeAfterConvertor       | Source, Dest                  |
+| IYuzuTypeFactory              | Dest                          |
+
+### Dependency injection
+
+All of these interfaces are automatically added to the IOC container at startup making dependency injection available.
+
+``` c#
+public class SiteHeaderNavMemberResolver : IYuzuPropertyReplaceResolver<Template, vmBlock_SiteNav>
+{
+    private readonly IMapper mapper;
+
+    public SiteHeaderNavMemberResolver(IMapper mapper)
+    {
+        this.mapper = mapper;
+    }
+
+    public vmBlock_SiteNav Resolve(Template source, UmbracoMappingContext context)
+    {
+
+    }
+}
+```
+
+### Import Plugin Integration
+
+Using the Import CMS plugin makes it easier to create, assign and visualize these resolvers.  
+
+## Automapper Profiles
+
+Sometimes we have more complex mapping needs, for this this we can fall back on the full Automapper API using profiles. However, the process becomes a little more manual, e.g we have to manage which maps are ignore from automapping.
+
+``` c#
+
+    public class CommentsProfile : Profile
+    {
+        public CommentsProfile(IYuzuDeliveryImportConfiguration config)
+        {
+            config.IgnoreUmbracoModelsForAutomap.Add<Comments>();
+
+            CreateMap<Comments, vmBlock_Comments>()
+                .ForMember(x => x.Endpoints, opt => opt.MapFrom<CommentsEndpointResolver>());
+        }
+    }
+
+```
 
 ### Dependency injection
 
@@ -45,59 +159,9 @@ public class ContactFormResolver : IValueResolver<IPublishedContent, vmPage_Sect
 }
 ```
 
-## Profiles
-
-Profiles in Automapper allow us to create modules of mapping definitions. 
-
-``` c#
-
-    public class GridProfile : Profile
-    {
-        public GridProfile(IYuzuDeliveryImportConfiguration config)
-        {
-            config.IgnoreUmbracoModelsForAutomap.Add<Home>();
-            this.AddGridWithRows<Home, vmPage_Home>(x => x.Body, y => y.Body);
-        }
-    }
-
-```
-
-## Property Member mapping 
-
-The best of both worlds, we create an Automap for the majority of properties but then apply manual mapping to specific properties
-
-``` c#
-CreateMap<SiteHeaderNavLink, vmSub_SiteHeaderNavLink>()
-    .ForMember(source => source.IsActive, opt => opt.MapFrom(dest => true));
-```
-
-This will Automap every property apart from IsActive where the output will always be mapped as true. 
-
-The above example is OK for simple mappings. But as the code required to generate the output gets more complex we use a class that implements the IValueResolver. This class contains just the code for this one mapping logic.
-
-``` c#
-public class CommentsEndpointResolver : IValueResolver<Comments, vmBlock_Comments, vmSub_CommentsEndpoints>
-{
-    public vmSub_CommentsEndpoints Resolve(Comments source, vmBlock_Comments destination, vmSub_CommentsEndpoints destMember, ResolutionContext context)
-    {
-        return new vmSub_CommentsEndpoints()
-        {
-            CommentFormUrl = "?alttemplate=commentsform"
-        };
-    }
-}
-```
-
-And implementing in the map as follows
-
-``` c#
-CreateMap<Comments, vmBlock_Comments>()
-    .ForMember(x => x.Endpoints, opt => opt.MapFrom<CommentsEndpointResolver>());
-```
-
 ### Resolution Context
 
-As part of the IValueResolver interface a ResolutionContext object is included. This object includes context items that are passed from the parent mapping context allowing us to do some interesting things. 
+As part of the IValueResolver interface a ResolutionContext object is included. This object includes context items that are passed from the parent mapping context in the same way as items in the Yuzu mapping API. 
 
 ``` c#
 public class LogoutFormResolver : IValueResolver<AccountNav, vmBlock_AccountNav, string>
@@ -114,40 +178,3 @@ public class LogoutFormResolver : IValueResolver<AccountNav, vmBlock_AccountNav,
 By passing the MVC HtmlHelper service in as a mapping context item we can render a partial into an HTML string to be injected into the block. We use this when ASP.net MVC needs to add extra elements to the form, which it does quite a lot!
 
 We also use this method for passing in-context Model data from the page into the mapping resolver.
-
-## Bespoke mapping
-
-This is where we use a class that implements ITypeConvertor to manually create the Viewmodel using one or more source of data. 
-
-``` c#
-public class LinkIPublishedContentConvertor : ITypeConverter<IPublishedContent, vmBlock_DataLink>
-{
-    public vmBlock_DataLink Convert(IPublishedContent link, vmBlock_DataLink destination, ResolutionContext context)
-    {
-        if (link != null)
-        {
-            return new vmBlock_DataLink()
-            {
-                Title = link.Name,
-                Label = link.Name,
-                Href = link.Url,
-            };
-        }
-        else
-            return null;
-    }
-}
-```
-
-And this would be implemented in the map by
-
-``` c#
-CreateMap<IPublishedContent, vmBlock_DataLink>()
-        .ConvertUsing<LinkIPublishedContentConvertor>();
-```
-
-You are right to ask if there is any difference between straight manual mapping and this method. Yes, there is a big difference. In the example shown, whenever Automapper comes across a source of IPublishedContent and a destination of a link viewmodel then it will always apply this converter and we have only defined this once.
-
-This greatly reduces the code required and follows closely the ideas of [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
-
-By using Automapper we create a collection of mapping definitions that are in a container. It doesn't matter how they link together, or if that changes over time, it will always just work. In the same way that IOC containers work. It is very efficient. 

@@ -6,8 +6,9 @@ We have created a commercial package called Yuzu Delivery Import that handles al
 - Schema creation : creating document types and data types from the generated viewmodel definitions.
 - Content creation : using definition page states and images from the definition pattern library to create content in Umbraco.
 - Bespoke mapping : configuring mappings to route data into grouped or global document types to prevent duplication and reduce complexity of CMS schema.
+- Manual mapping : replace default mapping on any viewmodel type or property to handle complex mappings and use external data.
 
-There are two versions of this package, lite and pro. The lite package only allows global mapping using the Map All Viewmodels button in the footer. The pro version is licensed on a subscription per developer basis as part of the Yuzu Developer package. More information can be found at [Balanced.dev](http://balanced.dev)
+There are two versions of this package, lite and pro. The lite package only allows global mapping for a number of times using the Map All Viewmodels button in the footer. The pro version is licensed on a subscription per developer basis as part of the Yuzu Developer package. More information can be found at [Balanced.dev](http://balanced.dev)
 
 The dashboard for Yuzu Delivery Import is found in the **Settings** section of Umbraco under the **User Interface Integration** group.
 

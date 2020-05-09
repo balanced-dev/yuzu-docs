@@ -22,7 +22,7 @@
   - [Overview](/delivery/overview.md)
   - [Core Setup](/delivery/coresetup.md)
   - [Viewmodel Generation](/delivery/viewmodelGeneration.md)
-  - [Mapping Strategies](/delivery/mapping.md)
+  - [Manual Mapping](/delivery/mapping.md)
   - [Rendering Templates](/delivery/rendering.md)
   - [Definition Release Structure](/delivery/definitionRelease.md)
   - Umbraco

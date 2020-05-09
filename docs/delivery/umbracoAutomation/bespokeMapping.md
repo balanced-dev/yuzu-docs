@@ -1,8 +1,8 @@
 # Bespoke mapping
 
-As we have discovered. It's naive to think that direct mapping between the UI blocks and CMS content definition will be enough for anything but the simplest of sites. Bespoke mapping elevates Yuzu Import's potential use by giving the Delivery developer the tools to mold the schema as it is parsed into create the CMS schema. 
+We have discovered that it's naive to think that direct mapping between the UI blocks and CMS content definition will be enough for anything but the simplest of sites. Bespoke mapping elevates Yuzu Import's potential use by giving the Delivery developer the tools to mold the schema as it is parsed into create the CMS schema. 
 
-There are three way that mapping can be changed.
+There are two way that mapping can be molded.
 
 ## Name and property type changes
 
@@ -10,22 +10,9 @@ Through the viewmodel mapping dashboards the name of document type, their proper
 
 ## Grouped 
 
-When creating viewmodel schemas sometimes it makes sense to split down similar properties into sub objects. By default in Yuzu Import these sub objects would be added as a new child document type link to the parent using a nested content datatype. By adding these sub blocks into Umbraco groups (tabs) we can reduce the number of document types and data types that are created and make it easier for the content author to understand the scope of the sub clock data.
+When creating viewmodel schemas sometimes it makes sense to split down similar properties into sub objects. By default in Yuzu Import these sub objects would be added as a new child document type link to the parent using a nested content datatype. By adding these sub blocks into Umbraco groups (tabs) we can reduce the number of document types and data types that are created and make it easier for the content author to understand the scope of the subBlock data.
 
 ![alt text](/images/bespoke_mapping_grouped_.jpg "Grouped bespoke mapping")
-
-Manual mapping it needed to map the grouped viewmodel to the Umbraco group. Here's an example of how this is done.
-
-``` c# 
-
-//push the parent umbraco model into the subobject viewmodel 
-CreateMap<AboutUs, vmBlock_AboutUs>()
-    .ForMember(x => x.Video, opt => opt.MapFrom(y => y));
-
-RecognizePrefixes("Video");
-CreateMap<AboutUs, vmSub_AboutUsVideo>();
-
-```
 
 ## Global content
 

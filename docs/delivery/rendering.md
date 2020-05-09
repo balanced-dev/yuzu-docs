@@ -1,4 +1,4 @@
-# Template rendering
+# Rendering Template
 
 In Yuzu there are two ways of rendering templates; in a razor view or output from a controller.
 
@@ -7,20 +7,30 @@ The option we use the most is rendering in a razor view. This is because it's ea
 ## RenderFETemplate Html Helpers
 
 ``` c#
-Html.RenderFETemplate<vmPage_Home>(new RenderSettings()
-    {
-        Template = "home",
-        MapFrom = Model,
-        ShowJson = false
-    }, new Dictionary<string, object>() { { "HtmlHelper", Html } })
+Html.RenderYuzu<vmPage_Home>(Model)
 ```
 
-The above method uses AutoMapper to hydrate the Viewmodel vmPage_Home from the Model data context and renders the definition template called home. We are also passing in the Html as a mapping context item as shown above. 
+The above method uses AutoMapper to hydrate the Viewmodel vmPage_Home from the Model data context and renders the definition template called home.
 
 The ShowJson property will display the json used to at the bottom of the page. Useful for debugging when something isn't working.
 
 ``` c#
-Html.RenderFETemplate(new RenderSettings()
+Html.RenderYuzu<vmPage_Home>(true)
+```
+
+Passing items into the mapping context
+
+``` c#
+@(Html.RenderYuzu<vmPage_Home>(Model, false, 
+    new Dictionary<string, object>() { 
+        { "item", "test" } 
+    }))
+```
+
+This is a different method that we use when we need more granular control.
+
+``` c#
+Html.RenderYuzu(new RenderSettings()
     {
         Template = "home",
         Data = () => {
@@ -30,8 +40,6 @@ Html.RenderFETemplate(new RenderSettings()
         ShowJson = false,
     })
 ```
-
-This is a different method that we use for manual mapping.
 
 Both methods also come with some basic caching using the properties CacheName and CacheExpiry. This will cache the html output after it has been rendered using the cache rendering configured in setup. 
 

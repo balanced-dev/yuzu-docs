@@ -64,13 +64,13 @@ Properties in bold are required
 
 ## Caching setup
 
-The core setup to Yuzu allows you to specify how and where caching takes place. We have done this to give you full control of how this works and to make the core implementation CMS agnostic. 
+The core setup for Yuzu allows you to specify how and where caching takes place. We have done this to give you full control of how this works and to make the core implementation CMS agnostic. 
 
 ### Compiled definition templates
 
-On startup the Yuzu will reads all the templates from the specified locations, pre-compiles and stores them in a cache. This slightly affects boot-up time but significantly improves the speed of pages at runtime. 
+On startup Yuzu reads all the templates from the specified locations, pre-compiles and stores them in a cache. This slightly affects boot-up time but significantly improves the speed of pages at runtime. 
 
-The location and expiry length of that cache is up to you. 
+The location and expiry length of that cache is down to you. 
 
 ### Html cache
 
@@ -81,10 +81,11 @@ As part of the rendering process we have a simple caching mechanism setup to cac
 This is a store of common string we use throughout the framework
 
 | Property    			    	| Purpose 			                        | Default Value             |
+|-------------------------------|-------------------------------------------|---------------------------|
 | BlockPrefix               	| Block prefix for generated viewmodels     | vmBlock_                  |
 | SubPrefix                 	| SubBlock prefix for generated viewmodels  | vmSub_                    |
 | PagePrefix                	| Page prefix for generated viewmodels      | vmPage_                   |
 | BlockRefPrefix                | how blocks are defined in definition      | /par_                     |
 | TemplateFileExtension       	| file extension used                       | .hbs                      |
 
-We have added the ability to change the prefix values for viewmodel naming but we haven't fully implemented this feature. Currently, changing this will break everything!
+We have added the ability to change the prefix values for viewmodel naming but we haven't fully tidied up their use as yet. Currently, changing this will break everything!

@@ -2,36 +2,15 @@
 
 This package brings together Umbraco Grid, [Doc Type Grid Editor](https://our.umbraco.com/packages/backoffice-extensions/doc-type-grid-editor/), [SkyBrud Umbraco GridData](https://github.com/skybrud/Skybrud.Umbraco.GridData) and Yuzu to create a powerful out of the box, config ready grid solution. It's the quickest and simplest way that we have found to implement the grid in Umbraco. 
 
-Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks for content editors to add to grids and control live previews within the Umbraco back office. 
+Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks that content editors can add to grids with live previews within the Umbraco back office. 
 
 All mapping is routed through our GridItemMapping service that utilizes data structures specific to the grid. This service can be overridden in the container to implement your own mapping instance.
 
 Coupled with our Umbraco Import package automates the creation of Umbraco Grid data types, including the creation of items in the Doc Type Grid Editor config file. We can also import grid config settings defined within the pattern library into the Grid property editor definition.
 
-## Umbraco Import Config
-
-Ignore the DataRows and DataGrid from IgnoreViewmodels.
-
-## Mapping
+## Data Structures
 
 There are two data structures for grids, vmBlock_DataRows and vmBlock_DataGrid (rows only and grids with rows and columns). Both structures can include config objects for both rows and columns, they are optional.
-
-### Grids
-
-We have created some mapping wrapper classes that make it easier to work with grids in Yuzu. Which one is used depends on how the other properties in the same Viewmodel are mapped.
-
-When only the grid mapping is needed for a viewmodel the command is very simple
-
-```c#
-cfg.AddGridWithRows<HomePage, vmPage_HomePage>(src => src.GridContent, dest => dest.GridContent);
-```
-
-When other viewmodel properties require manual mapping then it's a little more complex.
-
-```c#
-CreateMap<HomePage, vmPage_HomePage>()
-    .ForMember(x => x.Content, opt => opt.MapFrom<GridRowConvertor<HomePage, vmPage_HomePage, vmBlock_GridConfig>, GridDataModel>(y => y.GridContent));
-```
 
 ### Grid Items
 
@@ -130,7 +109,7 @@ To add styling we create a backoffice stylesheet during the definition dist proc
 
 ## Grid manipulation
 
-Occasionally we have found we need an extra level of control changing how a setting or config item are applied to a cell or row in the grid. Below are a few examples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
+Occasionally we have found that we need an extra level of control in changing how a setting or config item are applied to a cell or row in the grid. Below are a few examples of how we can use Yuzu to make these changes using the IAutomaticGridConfig interface. 
 
 ```c#
 public class BackgroundRowImageGridConfig : IAutomaticGridConfig
