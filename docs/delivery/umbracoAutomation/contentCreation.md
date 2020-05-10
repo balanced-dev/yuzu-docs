@@ -2,7 +2,7 @@
 
 Creation of Umbraco content using page data states produced in Definition. 
 
-We often find that Definition developers create example pages to demonstrates blocks working together. Commonly these use production content and assets. Rather than duplicate work and create the pages in Definition and Delivery this tool imports page data into Umbraco. 
+We often find that Definition developers create example pages to demonstrate blocks working together. Commonly these use production content and assets. Rather than duplicate work and create the pages in Definition and Delivery this tool imports page data into Umbraco. 
 
 ## How does it work
 

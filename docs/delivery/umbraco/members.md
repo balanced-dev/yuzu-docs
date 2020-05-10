@@ -16,7 +16,7 @@ For form fields we use the standard Viewmodels using in Yuzu forms.
 
 # Viewmodel
 
-All members forms use the same Viewmodel, `vmBlock_DataFormBuilder` from the Forms package, it contains all the elements common to any form; form fields, error messages, submitButtonText etc and includes some that we have added specifically; actionLinks (navigation through the forms). 
+All members forms use the same Viewmodel, `vmBlock_DataFormBuilder`, `FormBuilderFactory` and `YuzuFormViewModel` from the Forms package. It also uses the YuzuForms partial view.
 
 By using the same Viewmodel we can standardise membership forms through the site, making it easier to reuse, maintain and change in the future.
 
@@ -34,57 +34,17 @@ An interface to change the membership controller settings, they standardize prop
 | ----------------------------- | --------------------------|---------------------------|
 | **HomeUrl**		            |                           |                           |
 | **ForgottenPasswordUrl**      |                           |                           |
-| **LoginUrl**		            |                           |                           |
-| **RegisterUrl**		        |                           |                           |
 | **ChangePasswordUrl**		    |                           |                           |
 | ForgottenPasswordLabel        | Button Label              | Forgotten Password?       |
-| RegisterLabel                 | Button Label              | Register                  |
-| BackLabel                     | Button Label              | Back                      |
-| CancelLabel                   | Button Label              | Cancel                    |
 | EmailNotFoundErrorMessage     |                           | Email address not found   |
 | MemberNotFoundErrorMessage    |                           | Member not found          |
 | ForgottenPasswordEmailAction  |                           |                           |
 
-The `ForgottenPasswordEmailAction` is used for you to add your own code to the send the forgotten password link. It is passed the email address, name and a link to change the password.
+The `ForgottenPasswordEmailAction` is to add your own code to the send the forgotten password link. It is passed the email address, name and a link to change the password.
 
-But these settings can only go so far, outside of the controller we can change the contents of the Viewmodel before its rendered in the partial view. Here is an example of a register form that overrides the Success Message.
+## Controllers
 
-```c# 
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<vmBlock_AccountForm>
-
-@using System.Web.Mvc.Html
-@using Umbraco.Web
-@using Umbraco.Web.Controllers  
-@{
-    if (!Umbraco.MemberIsLoggedOn())
-    {
-        Func<object> vm = () =>
-        {
-            if (Html.ValidationSummary() != null)
-            {
-                Model.Errors = Html.ValidationSummary().ToString();
-            }
-
-            if (Model.IsSubmitted)
-            {
-                Model.SuccessMessage = "Account created successfully. Your request will be reviewed by MRC staff.";
-            }
-
-            return Model;
-        };
-
-        using (Html.BeginUmbracoForm<UmbRegisterController>("HandleRegisterMember", FormMethod.Post, new Dictionary<string, object>() { { "novalidate", "" } }))
-        {
-            @Html.RenderFETemplate(new RenderSettings() { Template = "parAccountForm", Data = vm })
-
-            <input type="hidden" name="registerModel.UsernameIsEmail" value="true" />
-            <input type="hidden" name="registerModel.LoginOnSuccess" value="false" />
-        }
-    }
-}
-```
-
-For forms actions that are more complex it's easy to create a new controller using the same patterns we use to implement your own controller. The viewmodel we have used should be valid for most instances we have com across, but if not its fine to create your own!
+We have split the initial state actions from the response handlers into 2 separate controller (`MemberFormController` and `MemberHandlerController`). We have found that when we create a new using this package the `MemberFormController` needs to be adapted more than the `MemberHandlerController`. Splitting them makes it easier for us to swap out the `MemberFormController` for a project specific implementation.
 
 ## Forgotten / Change Password
 
@@ -115,14 +75,12 @@ public class YuzuMemberSetupComponent : IComponent
             var root = reference.UmbracoContext.ContentCache.GetAtRoot().FirstOrDefault();
 
             var forgottenPasswordNode = root.Descendant<ForgotttenPassword>();
-            var registerNode = root.Descendant<Register>();
             var changePasswordNode = root.Descendant<ChangePassword>();
 
             YuzuDeliveryMembers.Initialize(new YuzuDeliveryMembersConfiguration()
             {
-                HomeUrl = accountHome.Url,
+                HomeUrl = root.Url,
                 ForgottenPasswordUrl = forgottenPasswordNode.Url,
-                RegisterUrl = registerNode.Url,
                 ChangePasswordUrl = changePasswordNode.Url,
                 ForgottenPasswordEmailAction = (string email, string name, string changePasswordLink) => {
                     emailService.SendEmail(

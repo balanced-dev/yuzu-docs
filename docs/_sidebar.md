@@ -25,6 +25,7 @@
   - [Manual Mapping](/delivery/mapping.md)
   - [Rendering Templates](/delivery/rendering.md)
   - [Definition Release Structure](/delivery/definitionRelease.md)
+  - [Site Creation Procedure](/delivery/procedure.md)
   - Umbraco
     - [Core](/delivery/umbraco/core.md)
     - [Grid](/delivery/umbraco/grid.md)
@@ -36,3 +37,4 @@
     - [Schema Creation](/delivery/umbracoAutomation/schemaCreation.md)
     - [Content Creation](/delivery/umbracoAutomation/contentCreation.md)
     - [Bespoke Mapping](/delivery/umbracoAutomation/bespokeMapping.md)
+    - [Manual Mapping](/delivery/umbracoAutomation/manualMapping.md)

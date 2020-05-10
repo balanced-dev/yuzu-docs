@@ -84,29 +84,13 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 1. Install Umbraco without a starter kit.
 2. In Umbraco, go to Settings > Yuzu Viewmodels builder > Generate models
 3. In Visual Studio add AppData/Viewmodels folder (show all files) to the solution and rebuild
-4. In Umbraco, go to Yuzu Integrate and click Map All Viewmodels
+4. In Umbraco, go to Yuzu Integrate and add all groups using `Map All Groups`
+4. Click `Map All Viewmodels`
 5. Go to settings > Models builder and generate models
 6. In Visual Studio add AppData/Models to the solution and rebuild
 7. Im Umbraco, add 2 new templates, one called master and a child of master called home
 8. Assign the home template to the home document type and allow this document type node at root 
 9. Add a new content root node of Home
-10. In Visual Studio add the following code in Yuzu/Startup.cs and rebuild the solution
-
-``` c#
-
-    public class GridProfile : Profile
-    {
-        public GridProfile(IYuzuDeliveryImportConfiguration config)
-        {
-            config.IgnoreUmbracoModelsForAutomap.Add<Home>();
-
-            this.AddGridWithRows<Home, vmPage_Home>(x => x.Grid, y => y.Grid);
-        }
-    }
-
-```
-
-11. In Umbraco, go to settings > Yuzu Viewmodels builder > Generate models and rebuild
 12. Go to Yuzu Import and import content on the Home node 
 
 ### Further examples
