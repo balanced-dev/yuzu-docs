@@ -2,6 +2,8 @@
 
 Whilst it is possible to create manual mapping in code, the Umbraco Import plugin is the perfect place to define where and how manual maps are applied to the system. The developer can add manual mapping to any viewmodel or property and it decides which mapping types are available given the context of the current item. 
 
+![alt text](/images/manual_mapping.jpg "Manual Mapping")
+
 ### Code generation
 
 The interfaces that define all the types of available manual maps are not that complex but it is difficult to see their context and understand what various parts are required to set up a manual map. We introduced manual map code generation to take the guess work out of this process. 

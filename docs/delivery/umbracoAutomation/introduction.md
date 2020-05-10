@@ -49,14 +49,11 @@ config.IgnoreViewmodels.Add("vmPage_HomePage");
 | IgnoreViewmodels               | Ignore from viewmodel mapping and Umbraco generation      |
 | IgnorePropertiesInViewModels   | Ignore a named property in a viewmodel                    |
 | IgnoreProperties            	 | Ignore a named property in all viewmodels                 |
-| IgnoreUmbracoModelsForAutomap  | Turn off Automapper attribute in viewmodel generation     |
 
-The property names `_ref` and `_modifiers` are always added to blocks and are ignore in import. 
+The property names `_ref` and `_modifiers` are always added to blocks and are ignored in import. 
 The property name `AdditionalProperty` is created during viewmodel generation and is ignore in import.
 
 By default any data structures from definition should be defined in an external library. For example, the viewmodel from vmBlock_DataImage is defined in the YuzuDelivery.Umbraco.Blocks package. These definitions are set as ignored during the startup of each specific definition package. i.e The forms package adds the form builder and form elements to the IgnoreViewModels.
-
-Adding these ignores is usually linked to a manual mapping strategy. As all mapping profiles, resolvers and types have access to the container we can add ignores at the same time as adding new mapping strategies by injecting the IYuzuDeliveryImportConfiguration config file.
 
 ### Umbraco
 
