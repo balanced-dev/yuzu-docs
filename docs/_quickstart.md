@@ -93,7 +93,9 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 9. Add a new content root node of Home
 12. Go to Yuzu Import and import content on the Home node 
 
-[![Yuzu Delivery Quickstart example](https://img.youtube.com/vi/neigJuG2gp8/0.jpg)](https://www.youtube.com/watch?v=neigJuG2gp8)
+<div class="video-embed">
+    <iframe src="https://www.youtube.com/embed/neigJuG2gp8?modestbranding=1&rel=0" width="720" height="405" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</div>
 
 ### Further examples
 
