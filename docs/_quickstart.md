@@ -93,6 +93,8 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 9. Add a new content root node of Home
 12. Go to Yuzu Import and import content on the Home node 
 
+[![Yuzu Delivery Quickstart example](https://img.youtube.com/vi/neigJuG2gp8/0.jpg)](https://www.youtube.com/watch?v=neigJuG2gp8)
+
 ### Further examples
 
 Here is a list of our full working examples
