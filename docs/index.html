@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="/css/docsify-tabs.css">
   <link rel="stylesheet" href="/css/overrides.css">
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
   <div id="app">Loading...</div>
@@ -30,6 +31,10 @@
         tabComments: true,      // default
         tabHeadings: true       // default
       },
+      search: {
+        placeholder: 'Search...',
+        noData: 'No results found',
+      },
     };
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
@@ -41,5 +46,8 @@
   <script src="//unpkg.com/prismjs/components/prism-scss.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-handlebars.min.js"></script>
+
+  <!-- Search -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
