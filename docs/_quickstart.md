@@ -94,7 +94,7 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 12. Go to Yuzu Import and import content on the Home node 
 
 <div class="video-embed">
-    <iframe src="https://www.youtube.com/embed/neigJuG2gp8?modestbranding=1&rel=0" width="720" height="405" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    <iframe src="https://www.youtube.com/embed/neigJuG2gp8?modestbranding=1&rel=0" width="720" height="405" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Further examples
