@@ -34,7 +34,7 @@ There are 2 ways of setting up Yuzu in Visual Studio; as a standalone or two sep
 In Visual Studio create a new ASP.NET Web Application (.Net Framework) solution using using .NET framework 4.72
 
 ```
-npm Install-Package YuzuDelivery.Umbraco.QuickStart
+pm> Install-Package YuzuDelivery.Umbraco.QuickStart
 ```
 
 This will install a Yuzu directory in the project that contains the startup config. Manual mapping profiles can also be added here. 
@@ -49,13 +49,13 @@ In Visual Studio create a new solution that has 2 projects both using using .NET
 For the web application project install this nuget package
 
 ```
-npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
+pm> Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 ```
 
 For the class library project install this nuget package
 
 ```
-npm Install-Package YuzuDelivery.Umbraco.QuickStart.Core
+pm> Install-Package YuzuDelivery.Umbraco.QuickStart.Core
 ```
 ?> **Make sure that the web project references the core project**!
 
@@ -73,10 +73,10 @@ A new implementation of Yuzu Delivery for Umbraco is now installed and ready for
 
 ### Integration
 
-As Yuzu sites are defined by the frontend this new site won't do anything until definition push a new release for integration. To show you how it works we have created a standalone example that uses the Lambda definition from the Lambda example below.
+As Yuzu sites are defined by the frontend this new site won't do anything until definition [push a new release for integration](/delivery/overview?id=release-from-definition). To show you how it works we have created a standalone example that uses the Lambda definition from the Lambda example below.
 
 ```
-npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
+pm> Install-Package YuzuDelivery.Umbraco.QuickStart.Example
 ```
 
 ### Setup process
@@ -85,13 +85,13 @@ npm Install-Package YuzuDelivery.Umbraco.QuickStart.Web
 2. In Umbraco, go to Settings > Yuzu Viewmodels builder > Generate models
 3. In Visual Studio add AppData/Viewmodels folder (show all files) to the solution and rebuild
 4. In Umbraco, go to Yuzu Integrate and add all groups using `Map All Groups`
-4. Click `Map All Viewmodels`
-5. Go to settings > Models builder and generate models
-6. In Visual Studio add AppData/Models to the solution and rebuild
-7. Im Umbraco, add 2 new templates, one called master and a child of master called home
-8. Assign the home template to the home document type and allow this document type node at root 
-9. Add a new content root node of Home
-12. Go to Yuzu Import and import content on the Home node 
+5. Click `Map All Viewmodels`
+6. Go to settings > Models builder and generate models
+7. In Visual Studio add AppData/Models to the solution and rebuild
+8. In Umbraco, add 2 new templates, one called master and a child of master called home
+9. Assign the home template to the home document type and allow this document type node at root 
+10. Add a new content root node of Home
+11. Go to Yuzu Import and import content on the Home node 
 
 [![Yuzu Delivery Quickstart example](https://img.youtube.com/vi/neigJuG2gp8/0.jpg)](https://www.youtube.com/watch?v=neigJuG2gp8)
 
