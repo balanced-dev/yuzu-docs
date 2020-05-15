@@ -5,13 +5,14 @@ After creating numerous sites using Yuzu we have developed a general procedure w
 Overall planning is the key, understanding how you want the site to integrate before making a move will save time later.
 
 + Generate all viewmodels, include these in the project and rebuild
-+ Ignore viewmodel and properties are not being stored in the CMS. Examples include breadcrumbs, navigation or anything that uses external data.  
-+ Define any global referenced data   
++ Ignore any viewmodel or properties are not being stored in the CMS. Examples of these include breadcrumbs, navigation or anything that uses external data.  
++ Define if global referenced data   
     - Generate any parent document types
     - Add global setting for each viewmodel
 + Add any groups from `Map All Groups`
 + Run `Map All Viewmodels`
 + Generate Umbraco Models, include models in the project and rebuild
 + Create and attach all Manual Mappings  
-+ Create the master template and templates for each page
++ Create the master and page templates and assign them to the correct document types
++ Add blank node structure in the content section
 + Import content for each page
