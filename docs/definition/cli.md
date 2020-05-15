@@ -1,5 +1,5 @@
 # CLI
-Our command line interface makes creating and edition projects' Yuzu Definitions far easier, and can be found here: [Yuzu Definition CLI repositiory](https://github.com/balanced-dev/yuzu-definition-cli)
+Our command line interface makes creating and editing Yuzu projects' blocks and pages far easier and can be found here: [Yuzu Definition CLI repositiory](https://github.com/balanced-dev/yuzu-definition-cli)
 
 ---
 

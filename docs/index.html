@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="/css/docsify-tabs.css">
   <link rel="stylesheet" href="/css/overrides.css">
   <link rel="stylesheet" href="/css/custom.css">
+
+  <link rel="icon" type="image/svg+xml" href="/media/yuzu-logo-simple.svg">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div id="app">Loading...</div>
@@ -35,6 +39,19 @@
         placeholder: 'Search...',
         noData: 'No results found',
       },
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function () {
+            var id = vm.route.query.id;
+            var element = id ? document.querySelector('[data-id="'+id+'"]') : undefined;
+            if(element) {
+              setTimeout(function() {
+                element.scrollIntoView();
+              }, 1000);
+            }
+          });
+        }
+      ]
     };
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
