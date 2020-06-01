@@ -12,12 +12,12 @@ Our command line interface makes creating and editing Yuzu projects' blocks and 
 ---
 
 # Commands
-| Command        				| Alias 			| Parameters    	                | Description                                                           | Example(s)                                                    |
-| ----------------------------- | -----------------	| --------------------------------- | ---------------------------------------------------------------------	| -------------------------------------------------------------	|
-| config                        |   				| <type>				            | Shows the current applied settings                                    |                                                               |
-| create                        | c					| <name>				            | Generate the definition side of a project with basic configuration    | `create "Example Project"`                                    |
-| add                           | a 				| <type> <name> [area]				| Add a new block or page (optionally to an existing directory)         | `add testBlock block contentBlocks`, `add examplePage page`   |
-| addState                      | as				| <type> <name> <state> [area]      | Add new data state for an existing block or page                      | `addState block formButton longTitle _forms/_formElements`    |
-| rename                        | r					| <type> <oldName> <newName> [area] | Rename a block or page                                                | `rename page hmoePage homePage`                               |
+| Command  | Alias | Parameters    	                                     | Description                                                                                                   | Example(s)                                                    |
+| -------- | ----- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| config   |       | &lt;type&gt;				                         | Shows the current applied settings                                                                            |                                                               |
+| create   | c	   | &lt;name&gt;				                         | Generate the definition side of a project with basic configuration                                            | `create "Example Project"`                                    |
+| add      | a     | &lt;type&gt; &lt;name&gt; [area]				     | Add a new block or page (optionally to an existing directory)                                                 | `add testBlock block contentBlocks`, `add examplePage page`   |
+| addState | as    | &lt;type&gt; &lt;name&gt; &lt;state&gt; [area]      | Add new data state for an existing block or page                                                              | `addState block formButton longTitle _forms/_formElements`    |
+| rename   | r	   | &lt;type&gt; &lt;oldName&gt; &lt;newName&gt; [area] | Rename a block or page                                                                                        | `rename page index homePage`                                  |
 
 !> All commands (apart from `config` and `create`) should be run in the `definition.src` directory of a project
