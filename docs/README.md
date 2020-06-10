@@ -2,9 +2,9 @@
 
 # What is it?
 
-Yuzu is a simple framework and complementary tools designed to solve the problem of separation and integration between the UI and CMS to the conclusion of automated CMS production.
+Yuzu is a simple framework and a set of complementary tools designed to solve the problem of separation and integration between the UI and a CMS.
 
-It's also effectively a generated pattern library composed of interlinking UI components that creates and integrates automatically with CMS solutions.
+It is a generated pattern library composed of interlinking UI components that can create then integrate automatically with CMS solutions.
 
 # Who is it for?
 
@@ -14,10 +14,10 @@ Yuzu is closely integrated with the Umbraco CMS, but the same principles will wo
 
 # Why?
 
-We felt that the current selection of design systems based upon client side frameworks (e.g storybook) are overly complicated, are configured in code and require a greater understanding of coding.
+We felt that the current selection of design systems based upon client side frameworks (e.g storybook) were overly complicated; they are configured in code and require a greater understanding of how to code.
 
-By using the UI schema (or DNA) of content led sites we are able to use simpler technologies to get the same results from systems that are easier to understand.
+By using the DNA of the UI and the dynamicity of content led sites we are able to use simpler technologies to get the same results using systems that are easier to understand and quicker to use.
 
 Because we focus on the HTML and CSS, we free up the Javascript layer to implement one (or more) of the progressive frameworks (angular/vue/stimulus etc).
 
-Yuzu also opens up other possibilities (bodyless websites) that wouldn't be possible using other solutions.
+Yuzu also opens up other possibilities that wouldn't be possible using other solutions.
