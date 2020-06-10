@@ -41,7 +41,7 @@ We'll have to copy the social link data into the parent profile block like so:
     "links": [
         {
             "logo": {
-                "src: "/images/logos/facebook.svg",
+                "src": "/images/logos/facebook.svg",
                 "alt": "Facebook Logo"
             },
             "link": {
@@ -61,7 +61,7 @@ We'll have to copy the social link data into the parent profile block like so:
         "links": [
             {
                 "logo": {
-                    "src: "/images/logos/facebook.svg",
+                    "src": "/images/logos/facebook.svg",
                     "alt": "Facebook Logo"
                 },
                 "link": {
