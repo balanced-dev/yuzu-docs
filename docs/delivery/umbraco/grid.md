@@ -41,7 +41,7 @@ public class TeacherProfilesGridItem : IGridItem
     public virtual bool IsValid(string name, GridControl control)
     {
         var content = control.GetValue<GridControlDtgeValue>();
-        if (content != null)
+        if (content != null && content.Content)
         {
             return content.Content.ContentType.Alias == "teacherProfiles";
         }
