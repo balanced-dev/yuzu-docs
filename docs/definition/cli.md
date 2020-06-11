@@ -19,5 +19,7 @@ Our command line interface makes creating and editing Yuzu projects' blocks and 
 | add      | a     | &lt;type&gt; &lt;name&gt; [area]				     | Add a new block or page (optionally to an existing directory)                                                 | `add block testBlock contentBlocks`, `add page examplePage`   |
 | addState | as    | &lt;type&gt; &lt;name&gt; &lt;state&gt; [area]      | Add new data state for an existing block or page                                                              | `addState block formButton longTitle _forms/_formElements`    |
 | rename   | r	   | &lt;type&gt; &lt;oldName&gt; &lt;newName&gt; [area] | Rename a block or page                                                                                        | `rename page index homePage`                                  |
+| import   | i	   |                                                     | Generate blocks/pages markup, json, schema and scss scaffold from a schema shorthand<br>(**Requires licence**)|                                                               |
+| updateKey| 	   |                                                     | Update/add Yuzu Pro key in your project config file to allow use of Yuzu Definition Import (`import` command) |                                                               |
 
 !> All commands (apart from `config` and `create`) should be run in the `definition.src` directory of a project
