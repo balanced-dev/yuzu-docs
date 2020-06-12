@@ -9,7 +9,7 @@
 - Definition
   - [Overview](/definition/overview.md)
   - [CLI](/definition/cli.md)
-  <!-- - [Import](/definition/import.md) -->
+  - [Import](/definition/import.md)
   <!-- - [Overlay](/definition/overlay.md) -->
   - [Markup](/definition/markup.md)
   - [Style](/definition/style.md)

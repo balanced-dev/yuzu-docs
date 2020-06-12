@@ -9,16 +9,18 @@ Using either individual Trello cards or .txt files for every block and/or page t
 
 ?> We may look to support sources other than Trello and local `.txt` files in future, but we have no definite plans currently
 
-It's important to note that while this tool can achieve a lot it is not by any means "perfect"- while it has it's limitations it's a great starting point.
+It's important to note that while this tool can achieve a lot it is not by any means "perfect"- while it has it's limitations it's still a great starting point as it allows you to get to the meat of the project far faster.
 
-For example some more complex schema strucutres are currently not possible to create via the shorthand (`anyOf`, `enums` etc.), the only markup element generated are `div`s, the BEM classes are not really standard and may get overly long/verbose. It basically requires manual fine-tuning after initially being run.
+For example, some more complex schema structures are currently not possible to create via the shorthand (`anyOf`, `enums` etc.), the only markup element generated are `div`s, the BEM classes are not really standard and may get overly long/verbose. It basically requires manual fine-tuning after initially being run.
+
+!> Before continuing, please be aware that you must have purchased a valid Yuzu licence to use this product
 
 ---
 
 # Installation
-!>  TODO
-    <br>
-    <br>    
+To install it globally, for use anywhere on your machine, run:
+
+```npm install -g yuzu-definition-cli```
 
 ---
 
@@ -30,6 +32,9 @@ For example some more complex schema strucutres are currently not possible to cr
 #### ** Using Trello Cards **
 ```json
 {
+    "yuzuPro": {
+        "key": "••••••-••••••-••••••-••••••-••••••-••••••"
+    },
     "trello": {
         "board" : "{TRELLO BOARD NAME}",
         "key": "••••••••••••••••••••••••••••••••",
@@ -38,12 +43,15 @@ For example some more complex schema strucutres are currently not possible to cr
     "generationSource": "trello"
 }
 ```
-?> Your developer api and secret keys are available here: [Trello App Keys](https://trello.com/app-key)
+?> Your developer api key and OAuth secret are available here: [Trello App Keys](https://trello.com/app-key)
 #### ** Using .txt files **
 1. Add another directory in the Definition root called `blockGeneration`. All `.txt` files will go here
 2. At a minimum, add the following to your `definition.src/config/default.json` file:
     ```json
     {
+        "yuzuPro": {
+            "key": "••••••-••••••-••••••-••••••-••••••-••••••"
+        },
         "generationSource": "localFiles"
     }
     ```
@@ -476,3 +484,48 @@ Schema:
 }
 ```
 <!-- tabs:end -->
+
+---
+
+# Advanced configuration
+Below is a complete representation of all the default options available to be overridden in your `config/default.json` file, used by the Definition Import tool. It allows you to tailor what's generated and from what source.
+
+We've not managed to expose all the settings we wanted to yet. If there are alterations to output of the tool you want to adjust, please get in touch.
+```json
+{
+    "markupSettings": {
+        "defaultMarkupTag": "div", // Element used for all data (apart from dataStructures)
+        "classNameDivider": "__", // Used in BEM class generation e.g. .test-block__property
+        "indentSize": 4, // Handlebars indentation size
+        "backupRefArrayChildClass": "item" // Fallback class name when one cannot be generated automatically e.g. .test-block__array__item
+    },
+    "prefixes": {
+        "block": {
+            "card": "Block - ", // What the Trello card title/.txt file name should begin with if it's a block e.g. "Block - testBlock"
+            "fileName": "par" // Prefix for block filenames e.g. "par" = "parTestBlock.hbs"
+        },
+        "page": {
+            "card": "Page - ", // What the Trello card title/.txt file name should begin with if it's a page e.g. "Page - aboutUs"
+            "fileName": "" // Prefix for block filenames e.g. "page" = "pageAboutUs.hbs"
+        },
+        "schema": {
+            "card": "Schema" // Indicates the beginning of schema shorthand in the description of Trello cards/contents of .txt files
+        },
+        "property": {
+            "card": "- " // What each property should begin with in the schema shorthand e.g. "- array+students"
+        }
+    },
+    "localFiles": {
+        "directoryPath": "./blockGeneration" // Relative path to the root of where your .txt files are stored from the definition directory
+    },
+    "generationSource": "", // Toggle between either "trello" or "localFiles"
+    "trello": {
+        "board" : "", // Name of the Trello board
+        "key": "", // Your Trello developer api key
+        "secret": "" // Your Trello OAuth secret
+    },
+    "yuzuPro": {
+        "key": "" // Your Yuzu licence for use with the Definition Import tool
+    }
+}
+```
