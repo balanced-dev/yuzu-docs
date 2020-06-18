@@ -59,6 +59,18 @@ To install it globally, for use anywhere on your machine, run:
 
 ---
 
+# Applying a license
+
+After we have sent you a license file, in the context of a project run the following command
+
+```yuzudef updateKey```
+
+After entering a valid license key the product will be fully activated.
+
+Note the license must be applied to each project, but you can have unlimited projects per computer.
+
+---
+
 # Card/File naming
 For every block/page you either create a card (Trello) or a `.txt` file, depending on the method you choose.
 
