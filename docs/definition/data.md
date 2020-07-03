@@ -56,7 +56,7 @@ We'll have to copy the social link data into the parent profile block like so:
 #### ** parProfile_long-name.json **
 ```json
 {
-    "name": "Apu Nahasapeemapetilon",
+    "personName": "Apu Nahasapeemapetilon",
     "social": {
         "links": [
             {
@@ -77,7 +77,7 @@ We'll have to copy the social link data into the parent profile block like so:
 #### ** parProfile.hbs **
 ```handlebars
 <div class="profile">
-    <h1>{{name}}</h1>
+    <h1>{{personName}}</h1>
     {{> parSocialLinks social}}
 </div>
 ```
@@ -94,7 +94,7 @@ The above example would become:
 `parProfile_long-name.json`:
 ```json
 {
-    "name": "Apu Nahasapeemapetilon",
+    "personName": "Apu Nahasapeemapetilon",
     "social": {
         "$ref": "/parSocialLinks_one-link"
     }

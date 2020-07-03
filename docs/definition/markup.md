@@ -23,14 +23,14 @@ To render a property from the current context:
 
 ``` json
 {
-    "name": "John Doe"
+    "fullname": "John Doe"
 }
 ```
 
 #### ** Handlebars **
 
 ``` handlebars
-<h1>{{name}}</h1>
+<h1>{{fullname}}</h1>
 ```
 
 #### ** HTML Output **
@@ -50,7 +50,7 @@ To render a property from the current context, nested in an object:
 ``` json
 {
     "person": {
-        "name": "John Doe"
+        "fullname": "John Doe"
     }
 }
 ```
@@ -58,7 +58,7 @@ To render a property from the current context, nested in an object:
 #### ** Handlebars **
 
 ``` handlebars
-<h1>{{person.name}}</h1>
+<h1>{{person.fullname}}</h1>
 ```
 
 #### ** HTML Output **
@@ -135,13 +135,13 @@ Mostly used to loop over arrays, but can also be used with objects.
 {
     "people": [
         {
-            "name": "Yohn Royce"
+            "personName": "Yohn Royce"
         },
         {
-            "name": "Rodrik Cassel"
+            "personName": "Rodrik Cassel"
         },
         {
-            "name": "Eddison Tollett"
+            "personName": "Eddison Tollett"
         }
     ],
     "places": [
@@ -157,7 +157,7 @@ Mostly used to loop over arrays, but can also be used with objects.
 <ul>
     {{#each people}}
         <li>
-            {{name}}
+            {{personName}}
         </li>
     {{/each}}
 </ul>
@@ -389,7 +389,7 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
 #### ** parPerson.json **
 ```json
 {
-    "name": "Henry Jones Jr.",
+    "personName": "Henry Jones Jr.",
     "image": {
         "src": "https://upload.wikimedia.org/wikipedia/en/8/8e/Indiana_Jones_in_Raiders_of_the_Lost_Ark.jpg",
         "alt": "Archeologist at work"
@@ -398,7 +398,7 @@ For example say you have 2 blocks `parPerson` and `parHeadshot` and you want to 
 ```
 #### ** parPerson.hbs **
 ```handlebars
-<h1>{{name}}</h1>
+<h1>{{personName}}</h1>
 {{> parHeadshot image }}
 ```
 #### ** parHeadshot.hbs **

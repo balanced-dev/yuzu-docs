@@ -15,6 +15,7 @@
   - [Style](/definition/style.md)
   - [Data/States](/definition/data.md)
   - [Schema](/definition/schema.md)
+  - [Integration Considerations](/definition/integration.md)
   - [Javascript Interactions](/definition/javascript.md)
   - [Dynamic Blocks](/definition/dynamicBlocks.md)
   - [Examples](/definition/examples.md)

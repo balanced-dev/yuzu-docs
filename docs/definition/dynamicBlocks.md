@@ -179,7 +179,7 @@ Now that's a lot to digest so, before going on further, we'll give a totally abs
                 "type": "object",
                 "additionalProperties": false,
                 "properties": {
-                    "name": {
+                    "farmName": {
                         "type": "string"
                     },
                     "details": {
@@ -198,7 +198,7 @@ Now that's a lot to digest so, before going on further, we'll give a totally abs
     <h1 class="mixed-farms__title">Mixed farms in the {{areaName}} area:</h1>
     {{#each farms}}
         <section class="mixed-farms__farm">
-            <h2 class="mixed-farms__farm-title">{{name}}</h2>
+            <h2 class="mixed-farms__farm-name">{{farmName}}</h2>
             {{> parMixed details}}
         </section>
     {{/each}}
@@ -210,7 +210,7 @@ Now that's a lot to digest so, before going on further, we'll give a totally abs
     "areaName": "Eastfarthing",
     "farms": [
         {
-            "name": "Bamfurlong",
+            "farmName": "Bamfurlong",
             "details": {
                 "address": "1 Maggot Lane, Marish, Eastfarthing, Shire",
                 "animals": [

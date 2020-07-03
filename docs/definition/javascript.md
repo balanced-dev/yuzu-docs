@@ -109,8 +109,8 @@ StimulusApp.register('comments', class extends Stimulus.Controller {
                 <img class="comments-list__comment-image" src="{{headshot.src}}" alt="{{headshot.alt}}"/>
             {{/if}}
             <div class="comments-list__comment-body">
-                {{#if name}}
-                    <h3 class="comments-list__comment-name">{{name}}</h3>
+                {{#if commenterName}}
+                    <h3 class="comments-list__comment-name">{{commenterName}}</h3>
                 {{/if}}
                 {{#if timestamp}}
                     <div class="comments-list__comment-datetime">{{timestamp}}</div>
@@ -132,7 +132,7 @@ StimulusApp.register('comments', class extends Stimulus.Controller {
                 "src": "/_client/images/person_1.jpg",
                 "alt": ""
             },
-            "name": "Jean Doe",
+            "commenterName": "Jean Doe",
             "timestamp": "January 9, 2018 at 2:21pm",
             "comment": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?"
         }

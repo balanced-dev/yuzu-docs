@@ -21,7 +21,7 @@ Each block is made up of 4 key components:
     	"$schema": "http://json-schema.org/draft-04/schema#",
 		"type": "object",
 		"properties": {
-			"name": {
+			"fullname": {
 				"type": "string"
 			},
 			"photos": {
@@ -52,7 +52,7 @@ Each block is made up of 4 key components:
 	#### ** parPerson_no-photos.json**
 	``` json
 	{
-		"name": "Guy Incognito",
+		"personName": "Guy Incognito",
 		"photos": []
 	}
 	```
@@ -60,7 +60,7 @@ Each block is made up of 4 key components:
 	#### ** parPerson_long-name.json**
 	``` json
 	{
-		"name": "Charles Philip Arthur George Mountbatten-Windsor",
+		"personName": "Charles Philip Arthur George Mountbatten-Windsor",
 		"photos": [
 			{
 				"src": "https://upload.wikimedia.org/wikipedia/commons/d/db/Charles_Prince_of_Wales.jpg",
@@ -80,7 +80,7 @@ Each block is made up of 4 key components:
 	``` scss
 	.person {
 
-		&__name {
+		&__person-name {
 			font-size: 1rem;
 		}
 
@@ -101,8 +101,8 @@ Each block is made up of 4 key components:
 	#### **parPerson.hbs**
 	``` handlebars
 	<div class="person">
-		{{#if name}}
-			<h2 class="person__name">{{name}}</h2>
+		{{#if personName}}
+			<h2 class="person__person-name">{{personName}}</h2>
 		{{/if}}
 		{{#each photos}}
 			<img class="person__image" src="{{src}}" alt="{{alt}}">

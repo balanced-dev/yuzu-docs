@@ -94,7 +94,7 @@ We'll start off by writing the shorthand for a simple block (parUser), with a fl
 #### ** Block - user (Schema shorthand) **
 ```
 Schema:
-- string+name
+- string+userName
 - integer+age
 - number+heightMetres
 - boolean+isAdmin
@@ -107,7 +107,7 @@ Schema:
     "description": "",
     "type": "object",
     "properties": {
-        "name": {
+        "userName": {
             "type": "string"
         },
         "age": {
@@ -131,9 +131,9 @@ Pretty straight forward isn't it? Remember, this simple shorthand will not only 
 ```handlebars
 <div class="user{{#each _modifiers}} user--{{this}}{{/each}}">
 
-    {{#if name}}
-        <div class="user__name">
-            {{name}}
+    {{#if userName}}
+        <div class="user__user-name">
+            {{userName}}
         </div>
     {{/if}}
     {{#if age}}
@@ -157,7 +157,7 @@ Pretty straight forward isn't it? Remember, this simple shorthand will not only 
 ```scss
 .user {
 
-    &__name {}
+    &__user-name {}
 
     &__age {}
 
@@ -169,7 +169,7 @@ Pretty straight forward isn't it? Remember, this simple shorthand will not only 
 #### ** parUser.json **
 ```json
 {
-    "name": "",
+    "userName": "",
     "age": 0,
     "heightMetres": 0,
     "isAdmin": false
@@ -189,7 +189,7 @@ To append properties to an array child object/object you must simply append the 
 Schema:
 - string+text
 - object+person
-- person+string+name
+- person+string+personName
 - person+string+jobTitle
 - person+string+company
 
@@ -209,7 +209,7 @@ Schema:
         "person": {
             "type": "object",
             "properties": {
-                "name": {
+                "personName": {
                     "type": "string"
                 },
                 "jobTitle": {
@@ -281,7 +281,7 @@ These are still possible via our shorthand language, however.
 ```
 Schema:
 - array+teams
-- teams+string+name
+- teams+string+teamName
 - teams+string+location
 - teams+string+stadiumName
 - teams+array+players
@@ -310,7 +310,7 @@ Schema:
             "items": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "teamName": {
                         "type": "string"
                     },
                     "location": {
@@ -324,7 +324,7 @@ Schema:
                         "items": {
                             "type": "object",
                             "properties": {
-                                "name": {
+                                "playerName": {
                                     "type": "string"
                                 },
                                 "age": {
