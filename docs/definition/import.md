@@ -515,9 +515,6 @@ We've not managed to expose all the settings we wanted to yet. If there are alte
         "board" : "", // Name of the Trello board
         "key": "", // Your Trello developer api key
         "secret": "" // Your Trello OAuth secret
-    },
-    "yuzuPro": {
-        "key": "" // Your Yuzu licence for use with the Definition Import tool
     }
 }
 ```
