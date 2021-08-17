@@ -12,6 +12,7 @@
   - [Import](/definition/import.md)
   <!-- - [Overlay](/definition/overlay.md) -->
   - [Markup](/definition/markup.md)
+  <!-- - [Vue](/definition/vue.md) -->
   - [Style](/definition/style.md)
   - [Data/States](/definition/data.md)
   - [Schema](/definition/schema.md)

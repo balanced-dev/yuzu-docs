@@ -13,8 +13,6 @@ It's important to note that while this tool can achieve a lot it is not by any m
 
 For example, some more complex schema structures are currently not possible to create via the shorthand (`anyOf`, `enums` etc.), the only markup element generated are `div`s, the BEM classes are not really standard and may get overly long/verbose. It basically requires manual fine-tuning after initially being run.
 
-!> Before continuing, please be aware that you must have purchased a valid Yuzu licence to use this product
-
 ---
 
 # Installation
@@ -32,9 +30,6 @@ To install it globally, for use anywhere on your machine, run:
 #### ** Using Trello Cards **
 ```json
 {
-    "yuzuPro": {
-        "key": "••••••-••••••-••••••-••••••-••••••-••••••"
-    },
     "trello": {
         "board" : "{TRELLO BOARD NAME}",
         "key": "••••••••••••••••••••••••••••••••",
@@ -49,25 +44,10 @@ To install it globally, for use anywhere on your machine, run:
 2. At a minimum, add the following to your `definition.src/config/default.json` file:
     ```json
     {
-        "yuzuPro": {
-            "key": "••••••-••••••-••••••-••••••-••••••-••••••"
-        },
         "generationSource": "localFiles"
     }
     ```
 <!-- tabs:end -->
-
----
-
-# Applying a license
-
-After we have sent you a license file, in the context of a project run the following command
-
-```yuzudef updateKey```
-
-After entering a valid license key the product will be fully activated.
-
-Note the license must be applied to each project, but you can have unlimited projects per computer.
 
 ---
 
