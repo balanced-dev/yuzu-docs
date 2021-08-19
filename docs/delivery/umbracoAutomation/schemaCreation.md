@@ -1,6 +1,6 @@
 # Schema creation
 
-Using the viewmodel definition to generate all the document types and datatypes required to store the content for the specific UI. Yuzu Import uses the standard Umbraco API's to do this, it's no different from manually creating document types and data types. It's just far quicker and, as a bonus, the result is standardized. 
+Using the viewmodel definition to generate all the document types and datatypes required to store the content for the specific UI. Yuzu Import uses the standard Umbraco API's to do this, it's no different from manually creating document types and data types. It's just far quicker and, as a bonus, the result is standardised. 
 
 ## How does it work
 
@@ -12,9 +12,9 @@ Whilst working through the tree, each document type and property is only created
 
 This process can be run from any point in the viewmodel structure. Our favorite button is the Map All Viewmodels which generates all viewmodels. 
 
-## Standardization
+## Standardisation
 
-Every type of element is always added in exactly the same way. Inline child property types such as Nested Content has given us great possibilities but is also open to different interpretation by different developers and over time. By removing this human element we have found that we have improved the quality of our Umbraco sites by standardizing how everything is created.
+Every type of element is always added in exactly the same way. Inline child property types such as Nested Content has given us great possibilities but is also open to different interpretation by different developers and over time. By removing this human element we have found that we have improved the quality of our Umbraco sites by standardising how everything is created.
 
 ## Mappings
 
@@ -49,7 +49,7 @@ We use Our.Umbraco.DocTypeGridEditor to define the blocks that are allowing in t
 
 ## Extending behaviour
 
-As part of our roadmap this year we want to add the ability for developers to swap out or add their own schema mappers. We want companies to be able to define and standardize how they create Document Types and Data Types to their style and needs.
+As part of our roadmap this year we want to add the ability for developers to swap out or add their own schema mappers. We want companies to be able to define and standardise how they create Document Types and Data Types to their style and needs.
 
 All objects in Yuzu Umbraco Import have been added to the Umbraco IOC controller and can be swapped out for your own implementation.
 

@@ -1,5 +1,5 @@
 # Overview
-One of Yuzu's core aims is to make creating websites as simple and therefore as maintainable as possible and effects the majority of decisions made while developing the "Definition" side of Yuzu. 
+One of Yuzu's core aims is to make creating websites as simple and therefore as maintainable as possible and affects the majority of decisions made while developing the "Definition" side of Yuzu. 
 
 It has organically grown and been refined over years of daily use while trying not to become a prescriptive, all-encompassing solution. This documentation will outline what we have found works for us and keeps headaches to a minimum when building anything from the humblest and most basic of CMS sites, to large, complex e-commerce websites.
 

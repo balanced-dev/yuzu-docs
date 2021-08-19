@@ -31,7 +31,7 @@ const parVue = new Vue({
 
 <!-- tabs:end -->
 
-The vue setup js file above initializes the Vue app at the Dom entry point and from here everything is Vue (including components). 
+The vue setup js file above initialises the Vue app at the Dom entry point and from here everything is Vue (including components). 
 
 The data property on the Vue options is an empty json data file that matches the top-level schema properties, Vue uses this as placeholder properties so it knows which properties to expect when rendering the app. Unfortunately, this is a duplication of properties from the schema and json files, there is no reliable way to pull this in, and if it doesn't match data may not render correctly. 
 
@@ -40,7 +40,7 @@ The data property on the Vue options is an empty json data file that matches the
 In the Vue function `mounted` above, the global function blockResolver is called, which hydrates the initial state of the Vue app at startup. There are two ways for Vue to get its initial state data. 
 
 - endpoint : the json state data has a property of _endpoint which points to an API endpoint. On server side render the data attribute `endpoint` is added to the block root element and the Vue app uses this to bootstrap the app with the data. 
-- context : the data context is passed from a parent, the data is written into a data attribute 'context' at the block root element. The vue app serializes this data to bootstrap the app. 
+- context : the data context is passed from a parent, the data is written into a data attribute 'context' at the block root element. The vue app serialises this data to bootstrap the app. 
 
 ## Transitioning from Hbs to Vue
 

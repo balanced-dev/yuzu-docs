@@ -1,6 +1,6 @@
 # Getting Started
 
-The quickest way to get Yuzu up and running is to run our quick-start setup. We will make assumptions about the install that you can tweak to your own preferences as you gain confidence. As we'll see later on Yuzu is made up of many modules that can be swapped out or removed completely. This quickstart installs all the standard and automation modules, especially in the Umbraco implementation.
+The quickest way to get Yuzu up and running is to run our quick-start setup. We will make assumptions about the install that you can tweak to your own preferences as you gain confidence. As we'll see later on, Yuzu is made up of many modules that can be swapped out or removed completely. This quickstart installs all the standard and automation modules, especially in the Umbraco implementation.
 
 ---
 
@@ -105,4 +105,4 @@ Here is a list of our full working examples
 
 [Logistics](https://github.com/balanced-dev/yuzu-example-logistics) - A multiple page site example with bespoke mapping for Yuzu using a theme called Logistics.
 
-[One School](https://github.com/balanced-dev/yuzu-example-oneschool) - A multiple page site example with bespoke mapping for Yuzu using a theme called One School. Includes multiple grid types, four forms, bespoke mapping, stimulus js integration for ajax rendered partials and vue integration for more complect progressive js.with   
+[One School](https://github.com/balanced-dev/yuzu-example-oneschool) - A multiple page site example with bespoke mapping for Yuzu using a theme called One School. Includes multiple grid types, four forms, bespoke mapping, stimulus js integration for ajax rendered partials and vue integration for more complex progressive js.

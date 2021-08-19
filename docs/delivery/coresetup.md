@@ -6,7 +6,7 @@ The core of Yuzu delivery is a CMS agnostic library that contains all common log
 PM> Install-Package YuzuDelivery.Core
 ```
 
-Yuzu is initialized using a default configuration object as follows (not a complete example)
+Yuzu is initialised using a default configuration object as follows (not a complete example)
 
 ``` c#
 Yuzu.Initialize(new YuzuConfiguration()

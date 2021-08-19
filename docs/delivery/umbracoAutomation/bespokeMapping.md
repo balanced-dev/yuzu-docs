@@ -1,8 +1,8 @@
 # Bespoke mapping
 
-We have discovered that it's naive to think that direct mapping between the UI blocks and CMS content definition will be enough for anything but the simplest of sites. Bespoke mapping elevates Yuzu Import's potential use by giving the Delivery developer the tools to mold the schema as it is parsed into create the CMS schema. 
+We have discovered that it's naive to think that direct mapping between the UI blocks and CMS content definition will be enough for anything but the simplest of sites. Bespoke mapping elevates Yuzu Import's potential use by giving the Delivery developer the tools to mould the schema as it is parsed into create the CMS schema. 
 
-There are two way that mapping can be molded.
+There are two way that mapping can be moulded.
 
 ## Name and property type changes
 

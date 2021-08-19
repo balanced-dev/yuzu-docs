@@ -54,4 +54,3 @@ When building Umbraco sites working with teh model builder it is common to end u
 content.ToModel<HomePage>();
 content.ToElement<CTA>();
 ```
-
