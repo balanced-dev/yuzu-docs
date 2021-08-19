@@ -54,7 +54,7 @@ This requires a new property with alias `forgottenPasswordExpiry` and data type 
 
 ## Implementation
 
-Initializing the config for Yuzu Membership should happen at Startup and it can be tricky to get access to the content then. The code below shows a way that we have found using an Umbraco IComponent.
+Initialising the config for Yuzu Membership should happen at Startup and it can be tricky to get access to the content then. The code below shows a way that we have found using an Umbraco IComponent.
 
 ``` c#
 public class YuzuMemberSetupComponent : IComponent

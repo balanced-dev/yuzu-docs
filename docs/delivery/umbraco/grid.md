@@ -4,7 +4,7 @@ This package brings together Umbraco Grid, [Doc Type Grid Editor](https://our.um
 
 Hooking into the Yuzu pattern library makes it easy for definition developers to add a selection of blocks that content editors can add to grids with live previews within the Umbraco back office. 
 
-All mapping is routed through our GridItemMapping service that utilizes data structures specific to the grid. This service can be overridden in the container to implement your own mapping instance.
+All mapping is routed through our GridItemMapping service that utilises data structures specific to the grid. This service can be overridden in the container to implement your own mapping instance.
 
 Coupled with our Umbraco Import package automates the creation of Umbraco Grid data types, including the creation of items in the Doc Type Grid Editor config file. We can also import grid config settings defined within the pattern library into the Grid property editor definition.
 

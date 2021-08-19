@@ -4,7 +4,7 @@ A collection of data structures, services and mapping helpers that make it easy 
 
 By completely separating form element UI definitions, treating each form element as a separate block, forms become much easier to understand, maintain and control.
 
-Integration into Umbraco using a standardized package allows developers to automatically integrate with Umbraco Forms writing no code. For anything bespoke we have added extensions points to append or replace logic that maps Umbraco Forms data to ViewModels. 
+Integration into Umbraco using a standardised package allows developers to automatically integrate with Umbraco Forms writing no code. For anything bespoke we have added extensions points to append or replace logic that maps Umbraco Forms data to ViewModels. 
 
 ## Data Structures
 
@@ -197,7 +197,7 @@ Each of these method calls return a `vmBlock_FormBuilder` viewmodel that describ
 
 ### YuzuForm ViewModel
 
-This class has a property for the `vmBlock_FormBuilder` viewmodel called `Form` and we use an extension method called `AddHandler` to link the controller action response handler. 
+This class has a property for the `vmBlock_FormBuilder` viewmodel called `Form` and we use an extension method called `AddHandler` to link the controller action response handler.
 
 ``` c#
 
