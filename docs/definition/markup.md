@@ -323,7 +323,7 @@ The `#unless` helper renders its contents if the argument is falsy (equal to `fa
 ### else
 When writing an `#if` or `#unless`, often you will want to output a section of your template if the condition evaluates to false, without writing another using the inverse helper (an `#unless` paired with an `#if` and vice versa). 
 
-Handlebars deals with this case by providing `else` functionality, which can also be chained with the conditionals to create `else if` or `else unless`.
+Handlebars deals with this case by providing `else` functionality.
 
 !> Elses are not limited to being paired with `#if` and `#unless`. Read the [block helpers advanced](definition/markup?id=block-helpers-advanced) section for more.
 
@@ -902,103 +902,71 @@ The values can be a variable or just a string, integer etc. while the operator i
 | `'&&'`    | And				        |
 | `'\|\|'`  | Or    			        |
 
-As with `#if` and `#unless` they can be paired with an `else` or even joined to create a `else ifCond`. It can even be mixed with `#if` and `#unless` and thus can create fairly complex chains of conditions:
+As with `#if` and `#unless` they can also be paired with an `else`.
 
 <!-- tabs:start -->
 #### ** Data (JSON) **
 ```json
 {
-    "engineeringProblemCount": 4,
-    "engineeringProblems": [
-        {
-            "isMoving": true,
-            "shouldBeMoving": false
-        },
-        {
-            "isMoving": false,
-            "shouldBeMoving": false
-        },
-        {
-            "isMoving": true,
-            "shouldBeMoving": true
-        },
-        {
-            "isMoving": false,
-            "shouldBeMoving": true
-        }
-    ]
+    "userAgeYears": 16,
+    "userRole": "standard"
 }
 ```
 #### ** Handlebars **
 ```handlebars
 <p>
-    {{#unless engineeringProblemCount}}
-        No questions?!? Why did you bother me?
-    {{else ifCond engineeringProblemCount '===' 1}}
-        Just the one question? Ok!
-    {{else ifCond engineeringProblemCount '<=' 3}}
-        Ok, let's see...
-    {{else ifCond engineeringProblemCount '>' 3}}
-        Wow! A lot of questions!
-    {{/unless}}
+    {{#ifCond userAgeYears '>=' 18}}
+        User is an adult
+    {{else}}
+        User classed as a minor
+    {{/ifCond}}
 </p>
-<ul>
-    {{#each engineeringProblems}}
-        <li>
-            Solution to problem {{@index}}:
-            {{#ifCond isMoving '&&' shouldBeMoving }}
-                There's nothing to fix! It's working perfectly as it should be moving and it is!
-            {{else ifCond isMoving '||' shouldBeMoving}}
-                {{#if isMoving}}
-                    Duct tape is your friend!
-                {{else}}
-                    Apply WD-40 generously.
-                {{/if}}
-            {{else}}
-                What are you worried about? It's not meant to be moving and it's not.
-            {{/ifCond}}
-        </li>
-    {{/each}}
-</ul>
+{{#ifCond userRole '!==' 'admim'}}
+    <button>Ban user</button>
+{{/ifCond}}
 ```
 
 #### ** HTML Output **
 ```html
 <p>
-        Wow! A lot of questions!
+        User classed as a minor
 </p>
-<ul>
-        <li>
-            Solution to problem 0:
-                    Duct tape is your friend!
-        </li>
-        <li>
-            Solution to problem 1:
-                What are you worried about? It's not meant to be moving and it's not.
-        </li>
-        <li>
-            Solution to problem 2:
-                There's nothing to fix! It's working perfectly as it should be moving and it is!
-        </li>
-        <li>
-            Solution to problem 3:
-                    Apply WD-40 generously
-        </li>
-</ul>
+    <button>Ban user</button>
 ```
-
 <!-- tabs:end -->
 
 `#ifCond`, although not perfect, can solve some more complex issues than purely using `#if` or `#unless` (namely when dealing with numerical values- `<`, `>`, etc. and string values `===`). It is flawed in the sense that you cannot invert boolean values in the condition (e.g. `{{#ifCond !value1 '&&' !value2}}`), it's also impossible to do complex conditions like `{{#ifCond value1 '&&' (value2 '||' value3)}}` etc. and have to resort to using nested conditions (as with the above example) to achieve the desired output.
 
-Rarely would such a complex set of conditions be used in the way they were when looping over the `engineeringProblems` array- if this was a proper project, the logic should be moved over to the delivery (back-end) side of the project with a string property being passed instead of a series of boolean values. This would either contain what type of message should be rendered (by using a series of `#ifCond`, `else ifCond`s to effectively form a switch statement) or just pass the actual message itself.
+Unfortunately, though it's possible on the definition side to effectively make switch statements using handlebars by combining helpers e.g. `else unless`, `else if`, `else ifCond`, this functionality is not currently possible on the delivery side using Handlebars.net. This means that conditions must either not use `else` and be "flat" one after another (while making sure that only one condition can be met) or alternatively be nested (which unfortunately leads to messier code)
+
+For example:
+<!-- tabs:start -->
+#### ** Handlebars (nesting) **
+```handlebars
+<p>
+    {{#ifCond diceRollResult '<' 1}}
+        Invalid dice roll (must be greater than 0)
+    {{else}}
+        {{#ifCond diceRollResult '<=' 6}}
+            Valid dice roll result
+        {{else}}
+            Invalid dice roll (must be smaller than 7)
+        {{/ifCond}}
+    {{/ifCond}}
+</p>
+```
+<!-- tabs:end -->
+
+Rarely should such a set of conditions appear in a real project: the logic should be moved over to the delivery (back-end) side of the project with a string property (for the correct message to be displayed) being passed instead of a value which requires the definition side to work it out. Other values may be required such as boolean flags to give the render more information (such as `isInvalid` in this example to style the message correctly if it is below 1 or greater than 6).
 
 In this way `#ifCond` is actually perfect- it does as much as it reasonably can within the constraints of Handlebars, while encouraging the more complex logic to be kept out of the the templates, thus making them easier to understand. It also allows the front-end team to concentrate on what actually matters: good markup, styling and Javascript interactions.
+
+The definition side already massively helps the delivery side by making integration far easier and removing any concern about markup- dealing with logic is its way of returning the favour and also causes it to become centralised rather than fragmented across both sides.
 
 ## dynPartial
 To explain the need for `dynPartial` (dynamic partial) it is best to describe the problem we were experiencing.
 
-When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement (using a string parameter and `#ifCond` & `else ifCond`) with all the blocks available to be rendered in a rows/column. If there were many options, it could quickly bloat the Handlebars file making it difficult to maintain. 
+When we were creating sites which used grids the same pattern kept emerging: we would effectively have to create a long switch statement (using a string parameter and `#ifCond`) with all the blocks available to be rendered in a rows/column. If there were many options, it could quickly bloat the Handlebars file making it difficult to maintain. 
 
 For example:
 <!-- tabs:start -->
@@ -1032,9 +1000,11 @@ For example:
 {{#each rows}}
     {{#ifCond blockName '===' 'image'}}
         {{> parImage data}}
-    {{else ifCond blockName '===' 'rte'}}
+    {{/ifCond}}
+    {{#ifCond blockName '===' 'rte'}}
         {{> parRichTextEditor data}}
-    {{else ifCond blockName '===' 'heading'}}
+    {{/ifCond}}
+    {{#ifCond blockName '===' 'heading'}}
         {{> parSectionHeading data}}
     {{/ifCond}}
 {{/each}}
