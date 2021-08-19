@@ -3,15 +3,17 @@ Yuzu Definition Import is a package designed to rapidly scaffold a project's blo
 
 Using either individual Trello cards or .txt files for every block and/or page to record schema definitions in a shorthand the tool creates for every component:
 1.  A fully fleshed out schema file
-2.  A pre-prepared handlebars file, complete with property rendering, conditions, loops and a rough BEM class for every property (by combining the block/page and property names)
-3.  Based on the generated handlebars markup, a SCSS file complete with class stubs
+2.  A markup file e.g. Handlebars/Vue (can be configured to support more types), complete with property rendering, conditions, loops and a rough BEM class for every property (by combining the block/page and property names)
+3.  Based on the generated markup, a SCSS file complete with class stubs
 4.  An empty, "clean" JSON block/page state
 
-?> We may look to support sources other than Trello and local `.txt` files in future, but we have no definite plans currently
+?> It is possible for Yuzu Definition Import to combine multiple elements (e.g. markup, schema and styling) into a single file (as seen in Javascript frameworks such as Vue) but for simplicity's sake, the following examples will generate them separately and only use Handlebars
 
 It's important to note that while this tool can achieve a lot it is not by any means "perfect"- while it has it's limitations it's still a great starting point as it allows you to get to the meat of the project far faster.
 
-For example, some more complex schema structures are currently not possible to create via the shorthand (`anyOf`, `enums` etc.), the only markup element generated are `div`s, the BEM classes are not really standard and may get overly long/verbose. It basically requires manual fine-tuning after initially being run.
+For example, some more complex schema structures are currently not possible to create via the shorthand (`anyOf`, `enums` etc.), the only markup element generated are `div`s, the BEM classes are not really standard and may get overly long/verbose. It basically requires manual fine-tuning after initially being run. That being said it gets 80% of the way there 
+
+?> We may look to support sources other than Trello and local `.txt` files in future, but we have no definite plans currently
 
 ---
 
@@ -24,30 +26,98 @@ To install it globally, for use anywhere on your machine, run:
 
 # Getting started
 1. Within the root of your Yuzu project's Definition directory (e.g. `definition.src`) you should add a new folder called `config`.
-2. Within `definition.src/config` create a `.json` file called `default.json`
+2. Within `definition.src/config` create a `.js` file called `yuzu.config.js`
 
 <!-- tabs:start -->
 #### ** Using Trello Cards **
-```json
-{
-    "trello": {
-        "board" : "{TRELLO BOARD NAME}",
-        "key": "••••••••••••••••••••••••••••••••",
-        "secret": "••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
-    },
-    "generationSource": "trello"
-}
+```js
+    module.exports = {
+        source: {
+            name: "trello",
+            settings: {
+                board: "{TRELLO BOARD NAME}",
+                key: "••••••••••••••••••••••••••••••••",
+                secret: "••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+            }
+        }
+        ...
+    }
 ```
 ?> Your developer api key and OAuth secret are available here: [Trello App Keys](https://trello.com/app-key)
 #### ** Using .txt files **
-1. Add another directory in the Definition root called `blockGeneration`. All `.txt` files will go here
+1. Add another directory within the Definition directory, wherever is most appropriate to you. Add this relative path (using the definition directory as the root), with each nested folder as an string array item within the directoryPath property. e.g. `definition.src/import/textFiles'` would equate to:
+```js 
+    directoryPath: [
+        "import", "textFiles"
+    ]
+``` 
+All `.txt` files should be placed within this chosen directory
 2. At a minimum, add the following to your `definition.src/config/default.json` file:
-    ```json
-    {
-        "generationSource": "localFiles"
+```js
+    module.exports = {
+        source: {
+            name: "localFiles",
+            settings: {
+                directoryPath: [
+                    "blockGeneration"
+                ]
+            }
+        }
+        ...
     }
-    ```
+```
 <!-- tabs:end -->
+
+### Adding modules
+After configuring the "source" object in your `yuzu.config.js` file you need to add the relevant modules to specify your desired output.
+
+#### Handlebars
+For example, to generate the separate files using Handlebars to render your markup, your modules might look something like this:
+```js
+    module.exports = {
+        source: {
+            ...
+        },
+        modules: [
+            'yuzu', 'schema', 'scss.bem', 'hbs.settings', 'hbs.prettier',
+        ]
+    }
+```
+- `yuzu` sets the directory structure of the block/page
+- `schema` causes the schema to be generated
+- `scss.bem` causes a file with the `.scss` extension to be created with some inital sass content and use BEM stubs
+- `hbs.settings` uses the default handlebars fragments to render things like arrays, sub-blocks and properties
+- `hbs.prettier` beautifies the handlebars output
+
+?> This is the module configuration that will be used in all the examples after this "Getting Started" section finishes
+
+#### Vue
+We also support Vue!
+
+A multi-file setup (schema, styling and markup separate) might look like this:
+```js
+    module.exports = {
+        source: {
+            ...
+        },
+        modules: [
+            'yuzu', 'schema', 'scss.bem', 'vue.settings', 'vue.prettier',
+        ]
+    }
+```
+While a single-file Vue setup (schema, styling and markup within a single `.vue` file)  would look more like this might look like this:
+```js
+    module.exports = {
+        source: {
+            ...
+        },
+        modules: [
+            'yuzu', 'schema', 'scss.bem', 'vue.settings', 'vue.single-file-component', 'vue.prettier',
+        ]
+    }
+```
+
+?> You can add your own modules to tweak or customise your output, even to make it work with languages or frameworks we don't support ourselves yet.
 
 ---
 
@@ -73,7 +143,7 @@ vs
 Regardless of which method you choose to use to record your block/page schema shorthand, the process of writing is near enough identical- the only difference is where it is written: with `.txt` files it's just in the content, with Trello it's just in the cards' descriptions.
 
 ## Rules
-1.  To be detected and parsed by the generator begin your schema shorthand with the word "Schema", followed by a colon (`Schema:`). If on Trello you're using the description for content other than your schema shorthand, begin writing at the end of the field.
+1.  To be detected and parsed by the generator begin your schema shorthand with the word "Schema", followed by a colon (`Schema:`).
 2.  We use a simple format: all properties should be preceded by a type (object/array/string/boolean/integer/number). Sub-blocks are more complicated however, and will be explained further later on
 3.  You can add properties in any order with one major caveat: you **MUST** first "initialise" arrays and objects before adding properties to them (in other words you must write the shorthand for the array/object before writing sub-properties for them)
 
@@ -262,6 +332,49 @@ Schema:
 ```
 <!-- tabs:end -->
 
+#### Array types:
+The most common types of arrays within projects will contain objects, but you can also define arrays that will contain a data type other than objects: strings, numbers and integers.
+<!-- tabs:start -->
+#### ** Block - arrayExamples **
+```
+Schema:
+- stringArray+names
+- numberArray+decimals
+- integerArray+wholeNumbers
+
+```
+#### ** Generated schema (parArrayExamples.schema) **
+```json
+{
+    "id": "/parArrayExamples",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "names": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "decimals": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            }
+        },
+        "wholeNumbers": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            }
+        }
+    },
+    "additionalProperties": false
+}
+```
+<!-- tabs:end -->
+
 #### Deep nesting
 Of course more all blocks/pages are not going to be so straightforward: they require a combination of both objects and arrays nested within another object or array.
 
@@ -374,8 +487,7 @@ There are two ways of writing shorthand for a sub-block:
 1.  As a property it has 3 components: `- subBlock+{blockName}+{propertyName}`  
     e.g. `- subBlock+parFootballTeams+teams`
 2.  As an array child item. For example, imagine the scenario where you have a `parProductGrid` block, which has an array called `products`. We can reference a block (`parProduct`) as a direct child in the schema of that array, without having to add it as a property, wrapped in an object within that array. All we simply have to do is to not append the property name to the end of the shorthand  
-    e.g. `- array+products`
-    `- products+subBlock+parProduct`
+    e.g. `- array+products`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`- products+subBlock+parProduct`
 
 
 #### As a property
@@ -480,41 +592,8 @@ Schema:
 ---
 
 # Advanced configuration
-Below is a complete representation of all the default options available to be overridden in your `config/default.json` file, used by the Definition Import tool. It allows you to tailor what's generated and from what source.
+We've not managed to cover all frameworks/templating engines we wanted to yet. 
 
-We've not managed to expose all the settings we wanted to yet. If there are alterations to output of the tool you want to adjust, please get in touch.
-```json
-{
-    "markupSettings": {
-        "defaultMarkupTag": "div", // Element used for all data (apart from dataStructures)
-        "classNameDivider": "__", // Used in BEM class generation e.g. .test-block__property
-        "indentSize": 4, // Handlebars indentation size
-        "backupRefArrayChildClass": "item" // Fallback class name when one cannot be generated automatically e.g. .test-block__array__item
-    },
-    "prefixes": {
-        "block": {
-            "card": "Block - ", // What the Trello card title/.txt file name should begin with if it's a block e.g. "Block - testBlock"
-            "fileName": "par" // Prefix for block filenames e.g. "par" = "parTestBlock.hbs"
-        },
-        "page": {
-            "card": "Page - ", // What the Trello card title/.txt file name should begin with if it's a page e.g. "Page - aboutUs"
-            "fileName": "" // Prefix for block filenames e.g. "page" = "pageAboutUs.hbs"
-        },
-        "schema": {
-            "card": "Schema" // Indicates the beginning of schema shorthand in the description of Trello cards/contents of .txt files
-        },
-        "property": {
-            "card": "- " // What each property should begin with in the schema shorthand e.g. "- array+students"
-        }
-    },
-    "localFiles": {
-        "directoryPath": "./blockGeneration" // Relative path to the root of where your .txt files are stored from the definition directory
-    },
-    "generationSource": "", // Toggle between either "trello" or "localFiles"
-    "trello": {
-        "board" : "", // Name of the Trello board
-        "key": "", // Your Trello developer api key
-        "secret": "" // Your Trello OAuth secret
-    }
-}
-```
+If the output for something we have covered doesn't meet your requirements, feel free to use our modules as a basis within your projects and using them instead of the predefined modules in your config files.
+
+If you need assistance with this, please get in touch.
