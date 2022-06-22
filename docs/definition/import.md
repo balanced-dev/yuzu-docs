@@ -26,7 +26,7 @@ To install it globally, for use anywhere on your machine, run:
 
 # Getting started
 1. Within the root of your Yuzu project's Definition directory (e.g. `definition.src`) you should add a new folder called `config`.
-2. Within `definition.src/config` create a `.js` file called `yuzu.config.js`
+2. Within `definition.src/config` create a `.js` file called `yuzu.import.config.js`
 
 <!-- tabs:start -->
 #### ** Using Trello Cards **
@@ -69,7 +69,7 @@ All `.txt` files should be placed within this chosen directory
 <!-- tabs:end -->
 
 ### Adding modules
-After configuring the "source" object in your `yuzu.config.js` file you need to add the relevant modules to specify your desired output.
+After configuring the "source" object in your `yuzu.import.config.js` file you need to add the relevant modules to specify your desired output.
 
 #### Handlebars
 For example, to generate the separate files using Handlebars to render your markup, your modules might look something like this:
