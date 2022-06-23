@@ -17,7 +17,7 @@ npm install -g yuzu-definition-cli
 3.  Run the `yuzudef create "<Project name here>"` command
 4.  Navigate to the newly created "definition.src" folder in your terminal
 5.  Run the `npm install` command
-6.  After the packages are installed, use the `npm run serve` or `gulp ui` command to build & run the solution
+6.  After the packages are installed, use the `npm run serve` command to build & run the solution
 
 ---
 
@@ -60,8 +60,8 @@ pm> Install-Package YuzuDelivery.Umbraco.QuickStart.Core
 ```
 ?> **Make sure that the web project references the core project**!
 
-## .Net 5 and above
-For .Net 5 and above you will need to install the project templates.
+## .Net 6
+For .Net 6 you will need to install the project templates. This will install the Umbraco 10 version of Yuzu.
 ```
 dotnet new --install YuzuDelivery.Umbraco.Templates
 ```
@@ -69,7 +69,7 @@ There are 2 ways of setting up Yuzu; as a standalone or two separate projects (w
 
 #### Standalone
 
-In Visual Studio create a new ASP.NET Web Application (.Net Framework) solution using using .NET 5 or higher
+In Visual Studio create a new ASP.NET Core Web App solution using using .NET 6 or higher
 
 ```
 dotnet new yuzu-delivery
@@ -77,7 +77,7 @@ dotnet new yuzu-delivery
 
 #### Separated
 
-In Visual Studio create a new solution that has 2 projects both using using .NET 5 or higher
+In Visual Studio create a new solution that has 2 projects both using using .NET 6 or higher
 ```
 dotnet new yuzu-delivery-core
 ```
@@ -87,7 +87,7 @@ dotnet new yuzu-delivery-web
 
 ### Umbraco
 
-Build the project and run Debugging > Start without debugging to run the site, then install Umbraco **without a starter kit**.
+Build the project and run Debugging > Start without debugging to run the site, then install Umbraco **without a starter kit** (Umbraco 8 and below).
 
 ### Viewmodels builders and Import
 
