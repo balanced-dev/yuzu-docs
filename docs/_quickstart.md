@@ -22,8 +22,9 @@ npm install -g yuzu-definition-cli
 ---
 
 # Umbraco Delivery (Backend)
-
 In this section we'll assume that you have some experience of Visual Studio, installing nuget packages and Umbraco. 
+
+## .Net framework
 
 ### Visual Studio
 
@@ -58,6 +59,31 @@ For the class library project install this nuget package
 pm> Install-Package YuzuDelivery.Umbraco.QuickStart.Core
 ```
 ?> **Make sure that the web project references the core project**!
+
+## .Net 5 and above
+For .Net 5 and above you will need to install the project templates.
+```
+dotnet new --install YuzuDelivery.Umbraco.Templates
+```
+There are 2 ways of setting up Yuzu; as a standalone or two separate projects (web and core)
+
+#### Standalone
+
+In Visual Studio create a new ASP.NET Web Application (.Net Framework) solution using using .NET 5 or higher
+
+```
+dotnet new yuzu-delivery
+```
+
+#### Separated
+
+In Visual Studio create a new solution that has 2 projects both using using .NET 5 or higher
+```
+dotnet new yuzu-delivery-core
+```
+```
+dotnet new yuzu-delivery-web
+```
 
 ### Umbraco
 
